@@ -137,13 +137,20 @@
             height: 16px;
         }
 
+        /* Two Column Layout */
+        .models-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
         /* Models Grid */
         .models-section {
             background: var(--color-white);
             border-radius: var(--radius-xl);
             border: 1px solid var(--color-gray-200);
             padding: 2.5rem;
-            margin-bottom: 2rem;
         }
 
         .section-title {
@@ -360,6 +367,10 @@
             .models-grid {
                 grid-template-columns: 1fr;
             }
+
+            .models-row {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -409,10 +420,10 @@
                     支持主流 SOTA 模型
                 </div>
                 <h1 class="sota-title">
-                    兼容 <span class="highlight">顶尖大语言模型</span>
+                    支持 <span class="highlight">顶尖大语言模型</span>
                 </h1>
                 <p class="sota-subtitle">
-                    MeFlow Agent 支持全球领先的 SOTA 大模型，包括 Claude、GPT-4、Gemini、DeepSeek、Qwen 等，为不同业务场景提供最优推理引擎选择
+                    MeFlow Agent 支持全球领先的 SOTA 大模型，包括 DeepSeek、GLM、Kimi、Qwen 等，为不同业务场景提供最优推理引擎选择
                 </p>
 
                 <!-- Provider Logos -->
@@ -436,152 +447,158 @@
                 </div>
             </header>
 
-            <!-- DeepSeek Models -->
-            <div class="models-section">
-                <h2 class="section-title">
-                    <img src="deepseek-logo.png" alt="DeepSeek" class="section-logo">
-                    DeepSeek 系列
-                </h2>
-                <div class="models-grid">
-                    <div class="model-card recommended">
-                        <div class="model-header">
-                            <span class="model-name">DeepSeek-3.2</span>
-                            <span class="model-badge featured">推荐</span>
+            <!-- Row 1: DeepSeek & GLM -->
+            <div class="models-row">
+                <!-- DeepSeek Models -->
+                <div class="models-section">
+                    <h2 class="section-title">
+                        <img src="deepseek-logo.png" alt="DeepSeek" class="section-logo">
+                        DeepSeek 系列
+                    </h2>
+                    <div class="models-grid">
+                        <div class="model-card recommended">
+                            <div class="model-header">
+                                <span class="model-name">DeepSeek-3.2</span>
+                                <span class="model-badge featured">推荐</span>
+                            </div>
+                            <p class="model-desc">新一代推理能力强大的开源模型，在代码生成和复杂推理任务上表现优异</p>
+                            <div class="model-features">
+                                <span class="feature-tag">推理优化</span>
+                                <span class="feature-tag">代码生成</span>
+                            </div>
                         </div>
-                        <p class="model-desc">新一代推理能力强大的开源模型，在代码生成和复杂推理任务上表现优异</p>
-                        <div class="model-features">
-                            <span class="feature-tag">推理优化</span>
-                            <span class="feature-tag">代码生成</span>
+                        <div class="model-card">
+                            <div class="model-header">
+                                <span class="model-name">DeepSeek-3.2-Thinking</span>
+                                <span class="model-badge new">New</span>
+                            </div>
+                            <p class="model-desc">增强思维链推理能力，适合需要复杂逻辑分析的场景</p>
+                            <div class="model-features">
+                                <span class="feature-tag">思维链</span>
+                                <span class="feature-tag">逻辑推理</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="model-card">
-                        <div class="model-header">
-                            <span class="model-name">DeepSeek-3.2-Thinking</span>
-                            <span class="model-badge new">New</span>
+                </div>
+
+                <!-- GLM Models -->
+                <div class="models-section">
+                    <h2 class="section-title">
+                        <img src="智谱AI-logo.png" alt="智谱AI" class="section-logo">
+                        GLM 系列 · 智谱AI
+                    </h2>
+                    <div class="models-grid">
+                        <div class="model-card recommended">
+                            <div class="model-header">
+                                <span class="model-name">GLM-4.7</span>
+                                <span class="model-badge featured">推荐</span>
+                            </div>
+                            <p class="model-desc">智谱 AI 旗舰模型，在中文场景表现出色，支持多轮对话和复杂推理</p>
+                            <div class="model-features">
+                                <span class="feature-tag">中文优化</span>
+                                <span class="feature-tag">多轮对话</span>
+                            </div>
                         </div>
-                        <p class="model-desc">增强思维链推理能力，适合需要复杂逻辑分析的场景</p>
-                        <div class="model-features">
-                            <span class="feature-tag">思维链</span>
-                            <span class="feature-tag">逻辑推理</span>
+                        <div class="model-card">
+                            <div class="model-header">
+                                <span class="model-name">GLM-4.6</span>
+                            </div>
+                            <p class="model-desc">高效平衡型模型，适合日常业务场景</p>
+                            <div class="model-features">
+                                <span class="feature-tag">高效</span>
+                                <span class="feature-tag">平衡性能</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- GLM Models -->
-            <div class="models-section">
-                <h2 class="section-title">
-                    <img src="智谱AI-logo.png" alt="智谱AI" class="section-logo">
-                    GLM 系列 · 智谱AI
-                </h2>
-                <div class="models-grid">
-                    <div class="model-card recommended">
-                        <div class="model-header">
-                            <span class="model-name">GLM-4.7</span>
-                            <span class="model-badge featured">推荐</span>
+            <!-- Row 2: Kimi & Qwen -->
+            <div class="models-row">
+                <!-- Kimi Models -->
+                <div class="models-section">
+                    <h2 class="section-title">
+                        <img src="kimi-logo.png" alt="Moonshot AI" class="section-logo">
+                        Kimi 系列 · Moonshot AI
+                    </h2>
+                    <div class="models-grid">
+                        <div class="model-card recommended">
+                            <div class="model-header">
+                                <span class="model-name">Kimi-K2</span>
+                                <span class="model-badge featured">推荐</span>
+                            </div>
+                            <p class="model-desc">Moonshot AI 最新旗舰模型，长文本处理能力卓越，支持 20 万字上下文</p>
+                            <div class="model-features">
+                                <span class="feature-tag">长文本</span>
+                                <span class="feature-tag">高精度</span>
+                            </div>
                         </div>
-                        <p class="model-desc">智谱 AI 旗舰模型，在中文场景表现出色，支持多轮对话和复杂推理</p>
-                        <div class="model-features">
-                            <span class="feature-tag">中文优化</span>
-                            <span class="feature-tag">多轮对话</span>
-                        </div>
-                    </div>
-                    <div class="model-card">
-                        <div class="model-header">
-                            <span class="model-name">GLM-4.6</span>
-                        </div>
-                        <p class="model-desc">高效平衡型模型，适合日常业务场景</p>
-                        <div class="model-features">
-                            <span class="feature-tag">高效</span>
-                            <span class="feature-tag">平衡性能</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Kimi Models -->
-            <div class="models-section">
-                <h2 class="section-title">
-                    <img src="kimi-logo.png" alt="Moonshot AI" class="section-logo">
-                    Kimi 系列 · Moonshot AI
-                </h2>
-                <div class="models-grid">
-                    <div class="model-card recommended">
-                        <div class="model-header">
-                            <span class="model-name">Kimi-K2</span>
-                            <span class="model-badge featured">推荐</span>
-                        </div>
-                        <p class="model-desc">Moonshot AI 最新旗舰模型，长文本处理能力卓越，支持 20 万字上下文</p>
-                        <div class="model-features">
-                            <span class="feature-tag">长文本</span>
-                            <span class="feature-tag">高精度</span>
-                        </div>
-                    </div>
-                    <div class="model-card">
-                        <div class="model-header">
-                            <span class="model-name">Kimi-K2-Thinking</span>
-                        </div>
-                        <p class="model-desc">增强推理版本，适合复杂分析任务</p>
-                        <div class="model-features">
-                            <span class="feature-tag">思维链</span>
-                            <span class="feature-tag">深度分析</span>
+                        <div class="model-card">
+                            <div class="model-header">
+                                <span class="model-name">Kimi-K2-Thinking</span>
+                            </div>
+                            <p class="model-desc">增强推理版本，适合复杂分析任务</p>
+                            <div class="model-features">
+                                <span class="feature-tag">思维链</span>
+                                <span class="feature-tag">深度分析</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Qwen Models -->
-            <div class="models-section">
-                <h2 class="section-title">
-                    <img src="qwen-logo.png" alt="Qwen" class="section-logo">
-                    Qwen 系列 · 阿里云
-                </h2>
-                <div class="models-grid">
-                    <div class="model-card recommended">
-                        <div class="model-header">
-                            <span class="model-name">Qwen3-Max</span>
-                            <span class="model-badge featured">推荐</span>
+                <!-- Qwen Models -->
+                <div class="models-section">
+                    <h2 class="section-title">
+                        <img src="qwen-logo.png" alt="Qwen" class="section-logo">
+                        Qwen 系列 · 阿里云
+                    </h2>
+                    <div class="models-grid">
+                        <div class="model-card recommended">
+                            <div class="model-header">
+                                <span class="model-name">Qwen3-Max</span>
+                                <span class="model-badge featured">推荐</span>
+                            </div>
+                            <p class="model-desc">阿里最强大模型，综合能力全面，适合多种复杂业务场景</p>
+                            <div class="model-features">
+                                <span class="feature-tag">全能型</span>
+                                <span class="feature-tag">高性能</span>
+                            </div>
                         </div>
-                        <p class="model-desc">阿里最强大模型，综合能力全面，适合多种复杂业务场景</p>
-                        <div class="model-features">
-                            <span class="feature-tag">全能型</span>
-                            <span class="feature-tag">高性能</span>
+                        <div class="model-card">
+                            <div class="model-header">
+                                <span class="model-name">Qwen3-Next-80b-Instruct</span>
+                            </div>
+                            <p class="model-desc">800亿参数指令优化模型，指令遵循能力强</p>
+                            <div class="model-features">
+                                <span class="feature-tag">指令优化</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="model-card">
-                        <div class="model-header">
-                            <span class="model-name">Qwen3-Next-80b-Instruct</span>
+                        <div class="model-card">
+                            <div class="model-header">
+                                <span class="model-name">Qwen3-Next-80b-Thinking</span>
+                            </div>
+                            <p class="model-desc">思维链增强版本，适合复杂推理任务</p>
+                            <div class="model-features">
+                                <span class="feature-tag">思维链</span>
+                            </div>
                         </div>
-                        <p class="model-desc">800亿参数指令优化模型，指令遵循能力强</p>
-                        <div class="model-features">
-                            <span class="feature-tag">指令优化</span>
+                        <div class="model-card">
+                            <div class="model-header">
+                                <span class="model-name">Qwen3-32b</span>
+                            </div>
+                            <p class="model-desc">高性价比中型模型，平衡性能与成本</p>
+                            <div class="model-features">
+                                <span class="feature-tag">高性价比</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="model-card">
-                        <div class="model-header">
-                            <span class="model-name">Qwen3-Next-80b-Thinking</span>
-                        </div>
-                        <p class="model-desc">思维链增强版本，适合复杂推理任务</p>
-                        <div class="model-features">
-                            <span class="feature-tag">思维链</span>
-                        </div>
-                    </div>
-                    <div class="model-card">
-                        <div class="model-header">
-                            <span class="model-name">Qwen3-32b</span>
-                        </div>
-                        <p class="model-desc">高性价比中型模型，平衡性能与成本</p>
-                        <div class="model-features">
-                            <span class="feature-tag">高性价比</span>
-                        </div>
-                    </div>
-                    <div class="model-card">
-                        <div class="model-header">
-                            <span class="model-name">Qwen3-30b-thinking</span>
-                        </div>
-                        <p class="model-desc">300亿参数思维链模型</p>
-                        <div class="model-features">
-                            <span class="feature-tag">推理优化</span>
+                        <div class="model-card">
+                            <div class="model-header">
+                                <span class="model-name">Qwen3-30b-thinking</span>
+                            </div>
+                            <p class="model-desc">300亿参数思维链模型</p>
+                            <div class="model-features">
+                                <span class="feature-tag">推理优化</span>
+                            </div>
                         </div>
                     </div>
                 </div>
