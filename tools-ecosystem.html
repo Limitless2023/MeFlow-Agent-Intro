@@ -156,7 +156,7 @@
         .feature-list {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .feature-item {
@@ -191,8 +191,8 @@
         }
 
         .quote-block {
-            margin: 1.5rem 0;
-            padding: 1.5rem;
+            margin: 1rem 0;
+            padding: 1.25rem;
             background: var(--color-olive-bg);
             border-left: 4px solid var(--color-olive);
             border-radius: var(--radius-md);
@@ -344,8 +344,15 @@
             border-radius: var(--radius-lg);
             padding: 1.5rem;
             box-shadow: var(--shadow-lg);
-            animation: card-appear 3s ease-in-out infinite;
+            opacity: 0;
+            animation: card-appear 15s ease-in-out infinite;
         }
+
+        .tool-card:nth-child(2) { animation-delay: 0s; }
+        .tool-card:nth-child(3) { animation-delay: 3s; }
+        .tool-card:nth-child(4) { animation-delay: 6s; }
+        .tool-card:nth-child(5) { animation-delay: 9s; }
+        .tool-card:nth-child(6) { animation-delay: 12s; }
 
         .tool-card-title {
             font-weight: 600;
@@ -401,9 +408,9 @@
         }
 
         @keyframes card-appear {
-            0%, 20% { opacity: 0; transform: translateX(-50%) translateY(20px); }
-            30%, 70% { opacity: 1; transform: translateX(-50%) translateY(0); }
-            80%, 100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+            0%, 4% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            6%, 14% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            16%, 100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
         }
 
         @keyframes scanner-pulse {
@@ -473,14 +480,16 @@
         }
 
         /* Position tool bubbles in a circle */
-        .tool-bubble:nth-child(2) { left: 50%; top: 10%; transform: translateX(-50%); animation-delay: 0s; }
-        .tool-bubble:nth-child(3) { right: 10%; top: 25%; animation-delay: 0.5s; }
-        .tool-bubble:nth-child(4) { right: 5%; top: 50%; transform: translateY(-50%); animation-delay: 1s; }
-        .tool-bubble:nth-child(5) { right: 10%; bottom: 25%; animation-delay: 1.5s; }
-        .tool-bubble:nth-child(6) { left: 50%; bottom: 10%; transform: translateX(-50%); animation-delay: 2s; }
-        .tool-bubble:nth-child(7) { left: 10%; bottom: 25%; animation-delay: 2.5s; }
-        .tool-bubble:nth-child(8) { left: 5%; top: 50%; transform: translateY(-50%); animation-delay: 3s; }
-        .tool-bubble:nth-child(9) { left: 10%; top: 25%; animation-delay: 3.5s; }
+        .tool-bubble:nth-child(2) { left: 50%; top: 8%; transform: translateX(-50%); animation-delay: 0s; }
+        .tool-bubble:nth-child(3) { right: 15%; top: 20%; animation-delay: 0.4s; }
+        .tool-bubble:nth-child(4) { right: 8%; top: 40%; animation-delay: 0.8s; }
+        .tool-bubble:nth-child(5) { right: 8%; top: 60%; animation-delay: 1.2s; }
+        .tool-bubble:nth-child(6) { right: 15%; bottom: 20%; animation-delay: 1.6s; }
+        .tool-bubble:nth-child(7) { left: 50%; bottom: 8%; transform: translateX(-50%); animation-delay: 2s; }
+        .tool-bubble:nth-child(8) { left: 15%; bottom: 20%; animation-delay: 2.4s; }
+        .tool-bubble:nth-child(9) { left: 8%; top: 60%; animation-delay: 2.8s; }
+        .tool-bubble:nth-child(10) { left: 8%; top: 40%; animation-delay: 3.2s; }
+        .tool-bubble:nth-child(11) { left: 15%; top: 20%; animation-delay: 3.6s; }
 
         .connection-pulse {
             position: absolute;
@@ -589,7 +598,7 @@
                     <span class="highlight">丰富且友好的工具</span>
                 </h1>
                 <p class="tools-subtitle">
-                    40+专业工具，不仅为人类设计，更为大模型设计。通过丰富的上下文和清晰的分类，让 Agent 能够理解、选择并精准调用工具，完成复杂的业务任务。
+                    围绕合同全流程管理场景，将系统能力和业务操作封装为 40+专业工具。通过丰富的上下文和清晰的分类，让 MeFlow Agent 能够理解、选择并精准调用，完成复杂的合同管理任务。
                 </p>
             </header>
 
@@ -613,10 +622,10 @@
                             </div>
                         </div>
                         <div class="feature-item">
-                            <div class="feature-item-title">插件化设计</div>
+                            <div class="feature-item-title">双重服务理念</div>
                             <div class="feature-item-desc">
-                                40+专业工具，覆盖数据管理、文件处理、表单操作等12大类场景<br>
-                                工具不仅为人类服务，更为大模型服务 — 这是 AI 原生系统的核心特征
+                                工具不仅为人类服务，更为大模型服务 — 这是 AI 原生系统的核心特征<br>
+                                每个工具都经过精心设计，确保大模型能够理解其功能、参数和使用场景
                             </div>
                         </div>
                     </div>
@@ -707,13 +716,49 @@
                         <!-- Understanding Line -->
                         <div class="understanding-line"></div>
 
-                        <!-- Tool Card -->
+                        <!-- Tool Cards (5 cards rotating) -->
                         <div class="tool-card">
                             <div class="tool-card-title">SearchDataItemInses</div>
                             <div class="tool-card-desc">搜索和查询数据项实例，支持多条件筛选和排序</div>
                             <div class="tool-card-params">
                                 params: data_item_id, page_no,<br>
                                 page_size, filters, sort_fields
+                            </div>
+                        </div>
+
+                        <div class="tool-card">
+                            <div class="tool-card-title">GetFileContent-BE</div>
+                            <div class="tool-card-desc">获取文件内容并解析，支持多种文档格式</div>
+                            <div class="tool-card-params">
+                                params: file_id, version_no<br>
+                                returns: parsed_content
+                            </div>
+                        </div>
+
+                        <div class="tool-card">
+                            <div class="tool-card-title">SetFormValues</div>
+                            <div class="tool-card-desc">设置表单字段值，支持批量更新和数据验证</div>
+                            <div class="tool-card-params">
+                                params: dynamic (based on<br>
+                                form schema and field types)
+                            </div>
+                        </div>
+
+                        <div class="tool-card">
+                            <div class="tool-card-title">BatchUpdateField</div>
+                            <div class="tool-card-desc">批量更新字段属性，支持必填、可见等配置</div>
+                            <div class="tool-card-params">
+                                params: operations (includes<br>
+                                fieldId, required, visible)
+                            </div>
+                        </div>
+
+                        <div class="tool-card">
+                            <div class="tool-card-title">Navigate</div>
+                            <div class="tool-card-desc">导航到指定页面路径，支持参数传递</div>
+                            <div class="tool-card-params">
+                                params: path, query_params<br>
+                                example: /contracts/123
                             </div>
                         </div>
                     </div>
@@ -762,13 +807,14 @@
                             MeFlow<br>Agent
                         </div>
 
-                        <!-- Tool Bubbles (8 categories shown) -->
+                        <!-- Tool Bubbles (9 categories shown) -->
                         <div class="tool-bubble">数据管理 <span class="tool-count">(9)</span></div>
                         <div class="tool-bubble">文件处理 <span class="tool-count">(3)</span></div>
                         <div class="tool-bubble">表单操作 <span class="tool-count">(1)</span></div>
                         <div class="tool-bubble">列表操作 <span class="tool-count">(8)</span></div>
-                        <div class="tool-bubble">模态框 <span class="tool-count">(2)</span></div>
+                        <div class="tool-bubble">编辑器操作 <span class="tool-count">(1)</span></div>
                         <div class="tool-bubble">表单配置 <span class="tool-count">(9)</span></div>
+                        <div class="tool-bubble">任务管理 <span class="tool-count">(1)</span></div>
                         <div class="tool-bubble">导航控制 <span class="tool-count">(2)</span></div>
                         <div class="tool-bubble">40+更多...</div>
                     </div>
