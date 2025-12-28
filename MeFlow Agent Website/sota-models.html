@@ -110,6 +110,26 @@
             transform: scale(1.05);
         }
 
+        /* Gradient Text for Z.ai */
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        /* Special styling for Zhipu logo with text */
+        .provider-logo.zhipu-logo {
+            flex-direction: row;
+            gap: 0.75rem;
+        }
+
+        .provider-logo.zhipu-logo .logo-text {
+            font-size: 1.25rem;
+            margin-top: 0.5rem;
+        }
+
         /* Back Button */
         .back-button {
             display: inline-flex;
@@ -476,9 +496,9 @@
                         <img src="deepseek-logo.png" alt="DeepSeek">
                         <span>DeepSeek</span>
                     </div>
-                    <div class="provider-logo">
-                        <img src="智谱ai-logo.png" alt="智谱AI">
-                        <span>智谱 AI</span>
+                    <div class="provider-logo zhipu-logo">
+                        <img src="智谱logo.png" alt="智谱AI">
+                        <span class="logo-text gradient-text">Z.ai</span>
                     </div>
                     <div class="provider-logo">
                         <img src="kimi-logo.png" alt="Moonshot AI">
