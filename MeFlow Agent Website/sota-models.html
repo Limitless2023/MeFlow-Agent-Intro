@@ -73,7 +73,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 3rem;
+            gap: 4.5rem;
             flex-wrap: wrap;
             margin-bottom: 3rem;
             padding: 2rem;
@@ -272,6 +272,50 @@
             color: var(--color-olive);
         }
 
+        /* Collapsible Models */
+        .collapsible-models {
+            display: none;
+            margin-top: 1rem;
+        }
+
+        .collapsible-models.expanded {
+            display: contents;
+        }
+
+        .toggle-button {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            margin-top: 1rem;
+            background: var(--color-gray-50);
+            border: 1px dashed var(--color-gray-300);
+            border-radius: var(--radius-md);
+            color: var(--color-gray-600);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .toggle-button:hover {
+            background: var(--color-white);
+            border-color: var(--color-olive);
+            color: var(--color-olive);
+        }
+
+        .toggle-button svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.2s ease;
+        }
+
+        .toggle-button.expanded svg {
+            transform: rotate(180deg);
+        }
+
         /* Reference Links */
         .reference-section {
             background: var(--color-white);
@@ -452,7 +496,6 @@
                 <!-- DeepSeek Models -->
                 <div class="models-section">
                     <h2 class="section-title">
-                        <img src="deepseek-logo.png" alt="DeepSeek" class="section-logo">
                         DeepSeek 系列
                     </h2>
                     <div class="models-grid">
@@ -461,7 +504,7 @@
                                 <span class="model-name">DeepSeek-3.2</span>
                                 <span class="model-badge featured">推荐</span>
                             </div>
-                            <p class="model-desc">新一代推理能力强大的开源模型，在代码生成和复杂推理任务上表现优异</p>
+                            <p class="model-desc">推理能力强大的开源模型，代码生成表现优异</p>
                             <div class="model-features">
                                 <span class="feature-tag">推理优化</span>
                                 <span class="feature-tag">代码生成</span>
@@ -472,7 +515,7 @@
                                 <span class="model-name">DeepSeek-3.2-Thinking</span>
                                 <span class="model-badge new">New</span>
                             </div>
-                            <p class="model-desc">增强思维链推理能力，适合需要复杂逻辑分析的场景</p>
+                            <p class="model-desc">增强思维链推理能力，适合复杂逻辑分析</p>
                             <div class="model-features">
                                 <span class="feature-tag">思维链</span>
                                 <span class="feature-tag">逻辑推理</span>
@@ -484,7 +527,6 @@
                 <!-- GLM Models -->
                 <div class="models-section">
                     <h2 class="section-title">
-                        <img src="智谱AI-logo.png" alt="智谱AI" class="section-logo">
                         GLM 系列 · 智谱AI
                     </h2>
                     <div class="models-grid">
@@ -493,7 +535,7 @@
                                 <span class="model-name">GLM-4.7</span>
                                 <span class="model-badge featured">推荐</span>
                             </div>
-                            <p class="model-desc">智谱 AI 旗舰模型，在中文场景表现出色，支持多轮对话和复杂推理</p>
+                            <p class="model-desc">智谱旗舰模型，中文场景表现出色</p>
                             <div class="model-features">
                                 <span class="feature-tag">中文优化</span>
                                 <span class="feature-tag">多轮对话</span>
@@ -518,7 +560,6 @@
                 <!-- Kimi Models -->
                 <div class="models-section">
                     <h2 class="section-title">
-                        <img src="kimi-logo.png" alt="Moonshot AI" class="section-logo">
                         Kimi 系列 · Moonshot AI
                     </h2>
                     <div class="models-grid">
@@ -527,7 +568,7 @@
                                 <span class="model-name">Kimi-K2</span>
                                 <span class="model-badge featured">推荐</span>
                             </div>
-                            <p class="model-desc">Moonshot AI 最新旗舰模型，长文本处理能力卓越，支持 20 万字上下文</p>
+                            <p class="model-desc">长文本处理能力卓越，支持 20 万字上下文</p>
                             <div class="model-features">
                                 <span class="feature-tag">长文本</span>
                                 <span class="feature-tag">高精度</span>
@@ -549,7 +590,6 @@
                 <!-- Qwen Models -->
                 <div class="models-section">
                     <h2 class="section-title">
-                        <img src="qwen-logo.png" alt="Qwen" class="section-logo">
                         Qwen 系列 · 阿里云
                     </h2>
                     <div class="models-grid">
@@ -558,7 +598,7 @@
                                 <span class="model-name">Qwen3-Max</span>
                                 <span class="model-badge featured">推荐</span>
                             </div>
-                            <p class="model-desc">阿里最强大模型，综合能力全面，适合多种复杂业务场景</p>
+                            <p class="model-desc">阿里最强大模型，综合能力全面</p>
                             <div class="model-features">
                                 <span class="feature-tag">全能型</span>
                                 <span class="feature-tag">高性能</span>
@@ -568,39 +608,47 @@
                             <div class="model-header">
                                 <span class="model-name">Qwen3-Next-80b-Instruct</span>
                             </div>
-                            <p class="model-desc">800亿参数指令优化模型，指令遵循能力强</p>
+                            <p class="model-desc">800亿参数指令优化模型</p>
                             <div class="model-features">
                                 <span class="feature-tag">指令优化</span>
                             </div>
                         </div>
-                        <div class="model-card">
-                            <div class="model-header">
-                                <span class="model-name">Qwen3-Next-80b-Thinking</span>
+                        <div class="collapsible-models" id="qwen-more">
+                            <div class="model-card">
+                                <div class="model-header">
+                                    <span class="model-name">Qwen3-Next-80b-Thinking</span>
+                                </div>
+                                <p class="model-desc">思维链增强版本，适合复杂推理</p>
+                                <div class="model-features">
+                                    <span class="feature-tag">思维链</span>
+                                </div>
                             </div>
-                            <p class="model-desc">思维链增强版本，适合复杂推理任务</p>
-                            <div class="model-features">
-                                <span class="feature-tag">思维链</span>
+                            <div class="model-card">
+                                <div class="model-header">
+                                    <span class="model-name">Qwen3-32b</span>
+                                </div>
+                                <p class="model-desc">高性价比中型模型</p>
+                                <div class="model-features">
+                                    <span class="feature-tag">高性价比</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="model-card">
-                            <div class="model-header">
-                                <span class="model-name">Qwen3-32b</span>
-                            </div>
-                            <p class="model-desc">高性价比中型模型，平衡性能与成本</p>
-                            <div class="model-features">
-                                <span class="feature-tag">高性价比</span>
-                            </div>
-                        </div>
-                        <div class="model-card">
-                            <div class="model-header">
-                                <span class="model-name">Qwen3-30b-thinking</span>
-                            </div>
-                            <p class="model-desc">300亿参数思维链模型</p>
-                            <div class="model-features">
-                                <span class="feature-tag">推理优化</span>
+                            <div class="model-card">
+                                <div class="model-header">
+                                    <span class="model-name">Qwen3-30b-thinking</span>
+                                </div>
+                                <p class="model-desc">300亿参数思维链模型</p>
+                                <div class="model-features">
+                                    <span class="feature-tag">推理优化</span>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <button class="toggle-button" onclick="toggleQwenModels(this)">
+                        <span>展开更多模型 (3)</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
 
@@ -729,6 +777,22 @@
             mobileMenuBtn.addEventListener('click', () => {
                 navLinks.classList.toggle('active');
             });
+        }
+
+        // Toggle Qwen models
+        function toggleQwenModels(button) {
+            const collapsible = document.getElementById('qwen-more');
+            const buttonText = button.querySelector('span');
+
+            if (collapsible.classList.contains('expanded')) {
+                collapsible.classList.remove('expanded');
+                button.classList.remove('expanded');
+                buttonText.textContent = '展开更多模型 (3)';
+            } else {
+                collapsible.classList.add('expanded');
+                button.classList.add('expanded');
+                buttonText.textContent = '收起模型';
+            }
         }
     </script>
 </body>
