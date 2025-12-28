@@ -255,7 +255,7 @@
             width: 80px;
             height: 80px;
             background: var(--color-olive-light);
-            border: 3px solid var(--color-olive);
+            border: 3px dashed var(--color-olive);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -268,6 +268,39 @@
             width: 40px;
             height: 40px;
             color: var(--color-olive);
+        }
+
+        .plugin-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            padding: 0.25rem 0.5rem;
+            background: var(--color-orange-500);
+            color: var(--color-white);
+            font-size: 0.625rem;
+            font-weight: 600;
+            border-radius: 4px;
+            white-space: nowrap;
+            z-index: 2;
+            animation: badge-pulse 2s ease-in-out infinite;
+        }
+
+        .patch-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            padding: 0.25rem 0.5rem;
+            background: var(--color-gray-500);
+            color: var(--color-white);
+            font-size: 0.625rem;
+            font-weight: 600;
+            border-radius: 4px;
+            opacity: 0.8;
+        }
+
+        @keyframes badge-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .block-line {
@@ -708,6 +741,7 @@
                     <div class="diagram-traditional">
                         <!-- System Box -->
                         <div class="system-box">
+                            <div class="patch-badge">补丁改造</div>
                             <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
                             </svg>
@@ -716,6 +750,7 @@
 
                         <!-- Blocked AI -->
                         <div class="ai-blocked">
+                            <div class="plugin-badge">AI插件</div>
                             <svg class="ai-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <circle cx="12" cy="12" r="3"/>
                                 <path d="M12 1v6m0 6v6m5.2-13.2l-4.2 4.2m0 6l-4.2 4.2M1 12h6m6 0h6m-13.2-5.2l4.2 4.2m0 6l4.2 4.2"/>
@@ -740,9 +775,6 @@
                         </div>
                         <h2 class="section-title">AI原生架构 — 让系统为AI而生</h2>
                     </div>
-                    <p class="section-intro">
-                        MeFlow 3.0 不是在旧系统上打补丁，而是从零构建AI原生底座。从底层重构整个系统，让系统原生支持：上下文可读、规则可解析、动作可执行。
-                    </p>
                     <div class="feature-list">
                         <div class="feature-item">
                             <div class="feature-item-title">系统可读 — 让AI能理解</div>
