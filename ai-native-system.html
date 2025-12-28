@@ -342,7 +342,7 @@
         .ai-agent-center {
             position: absolute;
             left: 50%;
-            top: 12%;
+            top: 6%;
             transform: translateX(-50%);
             width: 110px;
             height: 110px;
@@ -361,7 +361,7 @@
             z-index: 10;
         }
 
-        /* Energy beams from AI to layers */
+        /* Energy beams from AI to MeFlow foundation */
         .energy-beam {
             position: absolute;
             left: 50%;
@@ -369,15 +369,17 @@
             width: 3px;
             background: linear-gradient(to bottom,
                 rgba(92, 107, 80, 0.8) 0%,
-                rgba(92, 107, 80, 0.4) 50%,
+                rgba(92, 107, 80, 0.5) 30%,
+                rgba(92, 107, 80, 0.4) 60%,
+                rgba(92, 107, 80, 0.2) 90%,
                 rgba(92, 107, 80, 0.1) 100%);
             opacity: 0;
             z-index: 1;
         }
 
-        .beam-1 { top: 20%; height: 100px; animation: beam-shoot 9s ease-in-out infinite; animation-delay: 0.5s; }
-        .beam-2 { top: 20%; height: 180px; animation: beam-shoot 9s ease-in-out infinite; animation-delay: 1.5s; }
-        .beam-3 { top: 20%; height: 260px; animation: beam-shoot 9s ease-in-out infinite; animation-delay: 2.5s; }
+        .beam-1 { top: 12%; height: 88%; animation: beam-shoot 9s ease-in-out infinite; animation-delay: 0.5s; }
+        .beam-2 { top: 12%; height: 88%; animation: beam-shoot 9s ease-in-out infinite; animation-delay: 1.5s; }
+        .beam-3 { top: 12%; height: 88%; animation: beam-shoot 9s ease-in-out infinite; animation-delay: 2.5s; }
 
         /* Energy particles flowing along beams */
         .energy-particle {
@@ -471,17 +473,17 @@
 
         @keyframes particle-flow {
             0% {
-                top: 18%;
+                top: 12%;
                 opacity: 0;
             }
-            10% {
+            5% {
                 opacity: 1;
             }
             90% {
-                opacity: 1;
+                opacity: 0.8;
             }
             100% {
-                top: 75%;
+                top: 97%;
                 opacity: 0;
             }
         }
