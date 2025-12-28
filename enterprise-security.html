@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业级安全可靠 - MeFlow Agent</title>
+    <meta name="description" content="MeFlow Agent 企业级安全保障 - 数据隔离、人工审批、全程可审计">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Enterprise Security Page Styles */
+
+        .security-page {
+            padding-top: 8rem;
+            padding-bottom: 4rem;
+            background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-olive-bg) 100%);
+        }
+
+        .security-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-md);
+            color: var(--color-gray-700);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            margin-bottom: 2rem;
+        }
+
+        .back-button:hover {
+            background: var(--color-gray-50);
+            border-color: var(--color-olive);
+            color: var(--color-olive);
+        }
+
+        .back-button svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Page Header */
+        .security-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .security-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--color-white);
+            border: 1px solid var(--color-olive-light);
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            color: var(--color-olive);
+            margin-bottom: 1.5rem;
+        }
+
+        .security-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 400;
+            color: var(--color-gray-900);
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        .security-title .highlight {
+            color: var(--color-olive);
+            font-style: italic;
+        }
+
+        .security-subtitle {
+            font-size: 1.125rem;
+            color: var(--color-gray-600);
+            max-width: 900px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+        }
+
+        /* Security Sections Grid */
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .security-section {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--color-gray-200);
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .security-section:hover {
+            border-color: var(--color-olive);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .section-icon {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--color-olive-light) 0%, var(--color-olive-bg) 100%);
+            border-radius: var(--radius-lg);
+            margin-bottom: 1.5rem;
+            color: var(--color-olive);
+        }
+
+        .section-icon svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .section-title {
+            font-size: 1.375rem;
+            font-weight: 600;
+            color: var(--color-gray-900);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--color-olive-light);
+            padding-bottom: 0.75rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .feature-item-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-gray-800);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-item-title::before {
+            content: '●';
+            color: var(--color-olive);
+            font-size: 1.25rem;
+        }
+
+        .feature-item-desc {
+            font-size: 0.9375rem;
+            color: var(--color-gray-600);
+            line-height: 1.7;
+            padding-left: 1.25rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .security-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .security-section {
+                padding: 2rem;
+            }
+
+            .section-icon {
+                width: 56px;
+                height: 56px;
+            }
+
+            .section-icon svg {
+                width: 28px;
+                height: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="32" rx="8" fill="#5c6b50" />
+                    <path d="M8 16L14 10L20 16L14 22L8 16Z" fill="white" />
+                    <path d="M14 16L20 10L26 16L20 22L14 16Z" fill="white" fill-opacity="0.6" />
+                </svg>
+                <span>MeFlow</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html#product-intro">产品介绍</a>
+                <a href="index.html#capability-matrix">能力矩阵</a>
+                <a href="index.html#tech-advantages">技术优势</a>
+                <a href="index.html#core-value">核心价值</a>
+                <a href="https://meflow3.prod.milvzn.com/dashboard" target="_blank" class="btn btn-primary">开始使用</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Enterprise Security Page -->
+    <section class="security-page">
+        <div class="security-container">
+            <a href="index.html#tech-advantages" class="back-button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                </svg>
+                返回技术优势
+            </a>
+
+            <header class="security-header">
+                <div class="security-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
+                        <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                    企业级安全保障
+                </div>
+                <h1 class="security-title">
+                    <span class="highlight">企业级安全可靠</span>
+                </h1>
+                <p class="security-subtitle">
+                    MeFlow Agent在提供强大智能能力的同时，始终将企业数据安全放在首位。通过严格的权限控制、人工审批机制和全程可审计，确保 Agent 在安全可控的前提下高效运行，为企业构建值得信赖的智能合同管理体系。
+                </p>
+            </header>
+
+            <!-- Security Sections Grid -->
+            <div class="security-grid">
+                <!-- Section 1: System Data and Function Permissions -->
+                <div class="security-section">
+                    <div class="section-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <h2 class="section-title">系统数据和功能权限</h2>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-item-title">数据隔离机制</div>
+                            <div class="feature-item-desc">
+                                用户级会话隔离，确保对话记录互不可见<br>
+                                Agent 只能访问当前用户权限范围内的数据
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-item-title">最小权限原则</div>
+                            <div class="feature-item-desc">
+                                Agent 仅拥有"读取+分析+编辑"权限，无删除数据库权限
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Human in The Loop -->
+                <div class="security-section">
+                    <div class="section-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <h2 class="section-title">Human in The Loop人工审批</h2>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-item-title">关键操作人工把关</div>
+                            <div class="feature-item-desc">
+                                关键操作（发起审批、数据导出）强制人工二次确认<br>
+                                风险分级控制：高风险操作人工审批，低风险操作 Agent 自主执行
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-item-title">支持人工干预和纠错</div>
+                            <div class="feature-item-desc">
+                                Agent 执行过程中，用户可随时暂停、修正或取消<br>
+                                支持工作流状态检查点，可从任意节点人工接管
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Observable & Auditable -->
+                <div class="security-section">
+                    <div class="section-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+                        </svg>
+                    </div>
+                    <h2 class="section-title">可观测&可审计</h2>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-item-title">全链路可观测</div>
+                            <div class="feature-item-desc">
+                                基于 OpenTelemetry 标准，实时监控 Agent 运行状态<br>
+                                对话轨迹完整记录：用户输入 → Agent 推理 →工具调用→结果输出
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-item-title">操作全程可审计</div>
+                            <div class="feature-item-desc">
+                                所有对话和操作自动归档，支持按时间、用户、操作类型检索 - 敏感操作（如合同修改、数据导出）生成审计日志
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <a href="index.html" class="nav-logo">
+                        <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="32" height="32" rx="8" fill="#5c6b50" />
+                            <path d="M8 16L14 10L20 16L14 22L8 16Z" fill="white" />
+                            <path d="M14 16L20 10L26 16L20 22L14 16Z" fill="white" fill-opacity="0.6" />
+                        </svg>
+                        <span>MeFlow</span>
+                    </a>
+                    <p class="footer-tagline">AI原生合同生命周期管理平台</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>产品</h4>
+                        <a href="index.html#product-intro">产品介绍</a>
+                        <a href="index.html#capability-matrix">能力矩阵</a>
+                        <a href="index.html#tech-advantages">技术优势</a>
+                        <a href="index.html#core-value">核心价值</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>技术</h4>
+                        <a href="sota-models.html">SOTA模型</a>
+                        <a href="enterprise-security.html">企业安全</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>公司</h4>
+                        <a href="#">关于我们</a>
+                        <a href="#">联系我们</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>法律</h4>
+                        <a href="#">隐私政策</a>
+                        <a href="#">服务条款</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 幂律智能 PowerLaw.AI. 保留所有权利</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        navLinks.classList.remove('active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
