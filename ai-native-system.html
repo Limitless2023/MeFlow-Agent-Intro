@@ -545,6 +545,37 @@
             }
         }
 
+        /* MeFlow System Foundation Label */
+        .system-foundation {
+            position: absolute;
+            left: 50%;
+            bottom: 5%;
+            transform: translateX(-50%);
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, var(--color-olive) 0%, #4a5a40 100%);
+            border: 2px solid var(--color-olive);
+            border-radius: var(--radius-lg);
+            color: var(--color-white);
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(92, 107, 80, 0.3),
+                        0 0 30px rgba(92, 107, 80, 0.2);
+            z-index: 5;
+            animation: foundation-glow 4s ease-in-out infinite;
+        }
+
+        @keyframes foundation-glow {
+            0%, 100% {
+                box-shadow: 0 4px 12px rgba(92, 107, 80, 0.3),
+                            0 0 30px rgba(92, 107, 80, 0.2);
+            }
+            50% {
+                box-shadow: 0 4px 16px rgba(92, 107, 80, 0.4),
+                            0 0 40px rgba(92, 107, 80, 0.3);
+            }
+        }
+
         /* Responsive Design */
         @media (max-width: 1024px) {
             .native-section {
@@ -793,6 +824,11 @@
                             <svg class="layer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                             </svg>
+                        </div>
+
+                        <!-- MeFlow System Foundation -->
+                        <div class="system-foundation">
+                            MeFlow AI原生系统
                         </div>
                     </div>
                 </div>
