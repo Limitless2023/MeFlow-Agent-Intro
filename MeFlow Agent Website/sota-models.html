@@ -97,8 +97,9 @@
         }
 
         .provider-logo img {
-            width: 90px;
-            height: 90px;
+            height: 100px;
+            width: auto;
+            max-width: 200px;
             object-fit: contain;
             transition: all 0.3s ease;
         }
@@ -107,31 +108,10 @@
             transform: scale(1.05);
         }
 
-        /* Hide text labels below logos */
-        .provider-logo > span {
+        /* Hide all text and special elements */
+        .provider-logo > span,
+        .provider-logo .logo-row {
             display: none;
-        }
-
-        /* Special styling for Zhipu logo */
-        .provider-logo.zhipu-logo .logo-row {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            height: 90px;
-        }
-
-        .provider-logo.zhipu-logo .logo-row img {
-            height: 60px;
-            width: auto;
-            object-fit: contain;
-        }
-
-        .provider-logo.zhipu-logo .logo-row .brand-name {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--color-gray-900);
-            line-height: 1;
-            white-space: nowrap;
         }
 
         /* Back Button */
@@ -500,12 +480,8 @@
                         <img src="deepseek-logo.png" alt="DeepSeek">
                         <span>DeepSeek</span>
                     </div>
-                    <div class="provider-logo zhipu-logo">
-                        <div class="logo-row">
-                            <img src="智谱logo.png" alt="智谱AI">
-                            <span class="brand-name">Z.ai</span>
-                        </div>
-                        <span>智谱 AI</span>
+                    <div class="provider-logo">
+                        <img src="智谱logo.png" alt="智谱AI">
                     </div>
                     <div class="provider-logo">
                         <img src="kimi-logo.png" alt="Moonshot AI">
