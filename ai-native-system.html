@@ -250,24 +250,46 @@
             animation: lock-pulse 2s ease-in-out infinite;
         }
 
-        .ai-blocked {
+        .ai-plugin {
             position: absolute;
-            width: 80px;
-            height: 80px;
-            background: var(--color-olive-light);
-            border: 3px dashed var(--color-olive);
-            border-radius: 50%;
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--color-olive-light) 0%, var(--color-olive-bg) 100%);
+            border: 2px dashed var(--color-olive);
+            border-radius: var(--radius-md);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            animation: orbit-blocked 8s linear infinite;
+            gap: 0.25rem;
             z-index: 1;
+            box-shadow: 0 2px 8px rgba(92, 107, 80, 0.15);
+        }
+
+        .plugin-1 {
+            left: -5%;
+            top: 25%;
+            animation: plugin-float-1 4s ease-in-out infinite;
+        }
+
+        .plugin-2 {
+            right: -5%;
+            top: 60%;
+            animation: plugin-float-2 4.5s ease-in-out infinite;
         }
 
         .ai-icon {
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             color: var(--color-olive);
+        }
+
+        .plugin-label {
+            font-size: 0.625rem;
+            font-weight: 600;
+            color: var(--color-olive);
+            text-align: center;
+            line-height: 1.2;
         }
 
         .plugin-badge {
@@ -283,6 +305,43 @@
             white-space: nowrap;
             z-index: 2;
             animation: badge-pulse 2s ease-in-out infinite;
+        }
+
+        .connection-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(to right, var(--color-olive-light), transparent);
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        .connection-1 {
+            left: 20%;
+            top: 40%;
+            width: 25%;
+            animation: connection-pulse 3s ease-in-out infinite;
+        }
+
+        .connection-2 {
+            right: 20%;
+            top: 70%;
+            width: 25%;
+            animation: connection-pulse 3s ease-in-out infinite 0.5s;
+        }
+
+        @keyframes plugin-float-1 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes plugin-float-2 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes connection-pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
         }
 
         .patch-badge {
@@ -303,65 +362,9 @@
             50% { transform: scale(1.05); }
         }
 
-        .block-line {
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: var(--color-red-500);
-            animation: line-attempt 4s ease-in-out infinite;
-        }
-
-        .block-x {
-            position: absolute;
-            font-size: 2rem;
-            color: var(--color-red-500);
-            font-weight: bold;
-            opacity: 0;
-            animation: x-flash 4s ease-in-out infinite;
-        }
-
         @keyframes lock-pulse {
             0%, 100% { transform: scale(1); opacity: 0.8; }
             50% { transform: scale(1.1); opacity: 1; }
-        }
-
-        @keyframes orbit-blocked {
-            0% {
-                left: 50%;
-                top: -10%;
-                transform: translate(-50%, 0);
-            }
-            25% {
-                left: 90%;
-                top: 50%;
-                transform: translate(-50%, -50%);
-            }
-            50% {
-                left: 50%;
-                top: 110%;
-                transform: translate(-50%, -100%);
-            }
-            75% {
-                left: 10%;
-                top: 50%;
-                transform: translate(-50%, -50%);
-            }
-            100% {
-                left: 50%;
-                top: -10%;
-                transform: translate(-50%, 0);
-            }
-        }
-
-        @keyframes line-attempt {
-            0%, 100% { width: 0; opacity: 0; }
-            25% { width: 60px; opacity: 1; }
-            50% { width: 0; opacity: 0; }
-        }
-
-        @keyframes x-flash {
-            0%, 20%, 100% { opacity: 0; transform: scale(0); }
-            25%, 45% { opacity: 1; transform: scale(1); }
         }
 
         /* Diagram 2: AI Native Architecture - Energy Radiation */
@@ -715,24 +718,24 @@
                     </div>
                     <div class="feature-list">
                         <div class="feature-item">
-                            <div class="feature-item-title">AI被困在系统之外</div>
+                            <div class="feature-item-title">插件式AI有其价值</div>
                             <div class="feature-item-desc">
-                                页面、流程、数据都封装在系统内，AI无法读取和理解<br>
-                                AI就像被拒之门外的访客，只能看到表面，无法深入业务核心
+                                对于已有系统，通过AI插件（如智能助手、文档分析）可以获得一定AI能力<br>
+                                适合系统积重难返、无法大规模重构的场景
                             </div>
                         </div>
                         <div class="feature-item">
-                            <div class="feature-item-title">只能做表面文章</div>
+                            <div class="feature-item-title">但受限于系统架构</div>
                             <div class="feature-item-desc">
-                                AI停留在辅助层，无法真正参与业务流程<br>
-                                充其量只能提供一些建议，无法自主执行操作
+                                AI无法深入理解系统上下文、业务规则和数据结构<br>
+                                只能在表层提供辅助，难以真正参与核心业务流程
                             </div>
                         </div>
                         <div class="feature-item">
-                            <div class="feature-item-title">打补丁式改造</div>
+                            <div class="feature-item-title">难以突破能力天花板</div>
                             <div class="feature-item-desc">
-                                在旧架构上叠加AI功能，治标不治本<br>
-                                系统底层不支持，AI能力永远受限
+                                插件方式治标不治本，系统底层不支持AI原生能力<br>
+                                无法实现深度自动化和智能化，AI能力始终受限
                             </div>
                         </div>
                     </div>
@@ -748,18 +751,27 @@
                             <div class="system-label">传统系统</div>
                         </div>
 
-                        <!-- Blocked AI -->
-                        <div class="ai-blocked">
+                        <!-- Connection Lines -->
+                        <div class="connection-line connection-1"></div>
+                        <div class="connection-line connection-2"></div>
+
+                        <!-- AI Plugin 1: 智能助手 -->
+                        <div class="ai-plugin plugin-1">
                             <div class="plugin-badge">AI插件</div>
                             <svg class="ai-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="3"/>
-                                <path d="M12 1v6m0 6v6m5.2-13.2l-4.2 4.2m0 6l-4.2 4.2M1 12h6m6 0h6m-13.2-5.2l4.2 4.2m0 6l4.2 4.2"/>
+                                <path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
                             </svg>
+                            <div class="plugin-label">智能助手</div>
                         </div>
 
-                        <!-- Block indicators -->
-                        <div class="block-line" style="left: 50%; top: 30%;"></div>
-                        <div class="block-x" style="left: 48%; top: 28%;">✖</div>
+                        <!-- AI Plugin 2: 文档分析 -->
+                        <div class="ai-plugin plugin-2">
+                            <div class="plugin-badge">AI插件</div>
+                            <svg class="ai-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                            <div class="plugin-label">文档分析</div>
+                        </div>
                     </div>
                 </div>
             </div>
