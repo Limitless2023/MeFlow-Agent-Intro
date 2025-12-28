@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeFlow Agent - AI原生合同生命周期管理平台</title>
+    <meta name="description" content="MeFlow Agent - 像对话一样管理合同。全生命周期智能化解决方案，支持顶尖大语言模型，释放无限可能">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Product Intro Specific Styles */
+
+        /* Product Intro Section */
+        .product-intro {
+            padding-top: 8rem;
+            padding-bottom: 4rem;
+            background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-olive-bg) 100%);
+        }
+
+        .product-intro-container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .intro-content {
+            max-width: 540px;
+        }
+
+        .intro-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--color-white);
+            border: 1px solid var(--color-olive-light);
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            color: var(--color-olive);
+            margin-bottom: 1.5rem;
+        }
+
+        .intro-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 400;
+            line-height: 1.2;
+            color: var(--color-gray-900);
+            margin-bottom: 1.5rem;
+        }
+
+        .intro-description {
+            font-size: 1.0625rem;
+            color: var(--color-gray-600);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .intro-visual {
+            background: var(--color-white);
+            border-radius: var(--radius-2xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--color-gray-200);
+        }
+
+        .chat-interface {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .chat-message {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .chat-message.user {
+            flex-direction: row-reverse;
+        }
+
+        .chat-avatar {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .chat-avatar.user {
+            background: var(--color-olive-light);
+            color: var(--color-olive);
+        }
+
+        .chat-avatar.ai {
+            background: var(--color-olive);
+            color: var(--color-white);
+        }
+
+        .chat-bubble {
+            background: var(--color-gray-50);
+            padding: 1rem 1.25rem;
+            border-radius: var(--radius-lg);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            color: var(--color-gray-700);
+            max-width: 80%;
+        }
+
+        .chat-message.user .chat-bubble {
+            background: var(--color-olive);
+            color: var(--color-white);
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 0.375rem;
+            padding: 0.75rem 1rem;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--color-gray-400);
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.7;
+            }
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
+
+        .intro-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--color-olive);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9375rem;
+            color: var(--color-gray-600);
+        }
+
+        /* Capability Matrix Section */
+        .capability-matrix {
+            padding: var(--section-padding) 0;
+            background: var(--color-white);
+        }
+
+        .capability-container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .capability-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .capability-badge {
+            display: inline-flex;
+            padding: 0.5rem 1rem;
+            background: var(--color-olive-light);
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            color: var(--color-olive);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .capability-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .capability-card {
+            background: var(--color-gray-50);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            transition: all var(--transition-base);
+        }
+
+        .capability-card:hover {
+            background: var(--color-white);
+            border-color: var(--color-olive);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .capability-icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-white);
+            border: 2px solid var(--color-olive-light);
+            border-radius: var(--radius-lg);
+            margin-bottom: 1.5rem;
+            color: var(--color-olive);
+        }
+
+        .capability-icon svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .capability-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-gray-900);
+            margin-bottom: 0.75rem;
+        }
+
+        .capability-desc {
+            font-size: 0.9375rem;
+            color: var(--color-gray-600);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .capability-features {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .capability-feature {
+            font-size: 0.875rem;
+            color: var(--color-gray-600);
+            padding-left: 1.25rem;
+            position: relative;
+        }
+
+        .capability-feature::before {
+            content: '|';
+            position: absolute;
+            left: 0;
+            color: var(--color-olive);
+            font-weight: 600;
+        }
+
+        /* Tech Advantages Section */
+        .tech-advantages {
+            padding: var(--section-padding) 0;
+            background: var(--color-olive-bg);
+        }
+
+        .tech-nav {
+            background: var(--color-white);
+            border-bottom: 1px solid var(--color-gray-200);
+            position: sticky;
+            top: 73px;
+            z-index: 100;
+            margin-bottom: 3rem;
+        }
+
+        .tech-nav-container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .tech-nav-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tech-nav-item {
+            padding: 1rem 1.5rem;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--color-gray-600);
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            transition: all var(--transition-fast);
+            cursor: pointer;
+        }
+
+        .tech-nav-item:hover {
+            color: var(--color-olive);
+        }
+
+        .tech-nav-item.active {
+            color: var(--color-olive);
+            border-bottom-color: var(--color-olive);
+        }
+
+        .tech-container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .tech-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .tech-modules-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .tech-module-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--color-olive);
+            transform: scaleY(0);
+            transition: transform var(--transition-base);
+        }
+
+        .tech-module-card:hover {
+            border-color: var(--color-olive);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .tech-module-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .tech-module-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: var(--color-olive-light);
+            border-radius: var(--radius-md);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-olive);
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-module-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-gray-900);
+            margin-bottom: 0.75rem;
+        }
+
+        .tech-module-desc {
+            font-size: 0.9375rem;
+            color: var(--color-gray-600);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-module-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.375rem 0.875rem;
+            background: var(--color-gray-100);
+            border-radius: 9999px;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--color-gray-500);
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        /* Core Value Section */
+        .core-value {
+            padding: var(--section-padding) 0;
+            background: var(--color-white);
+        }
+
+        .value-container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .value-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .value-card {
+            background: var(--color-gray-50);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            transition: all var(--transition-base);
+        }
+
+        .value-card.large {
+            grid-column: span 2;
+            background: linear-gradient(135deg, var(--color-olive-bg) 0%, var(--color-white) 100%);
+        }
+
+        .value-card:hover {
+            border-color: var(--color-olive);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .value-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--color-olive);
+            color: var(--color-white);
+            border-radius: var(--radius-md);
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .value-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-gray-900);
+            margin-bottom: 0.75rem;
+        }
+
+        .value-desc {
+            font-size: 0.9375rem;
+            color: var(--color-gray-600);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .value-metrics {
+            display: flex;
+            gap: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--color-gray-200);
+        }
+
+        .value-metric {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .metric-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--color-olive);
+            font-family: var(--font-serif);
+        }
+
+        .metric-label {
+            font-size: 0.8125rem;
+            color: var(--color-gray-500);
+        }
+
+        /* Case Studies */
+        .case-studies {
+            margin-top: 4rem;
+        }
+
+        .case-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .case-subtitle {
+            font-family: var(--font-serif);
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 400;
+            color: var(--color-gray-900);
+        }
+
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .case-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            transition: all var(--transition-base);
+        }
+
+        .case-card:hover {
+            border-color: var(--color-olive);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .case-quote {
+            font-size: 1rem;
+            color: var(--color-gray-700);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .case-company {
+            font-weight: 600;
+            color: var(--color-gray-900);
+            margin-bottom: 1rem;
+        }
+
+        .case-metrics {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--color-gray-200);
+        }
+
+        .case-metric-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+
+        .case-metric-label {
+            color: var(--color-gray-600);
+        }
+
+        .case-metric-value {
+            color: var(--color-olive);
+            font-weight: 600;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .intro-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .capability-grid,
+            .tech-modules-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .value-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .value-card.large {
+                grid-column: span 2;
+            }
+
+            .cases-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .intro-stats,
+            .capability-grid,
+            .tech-modules-grid,
+            .value-grid,
+            .cases-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .value-card.large {
+                grid-column: span 1;
+            }
+
+            .value-metrics {
+                gap: 1rem;
+            }
+
+            .tech-nav-item {
+                padding: 0.875rem 1rem;
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="32" rx="8" fill="#5c6b50" />
+                    <path d="M8 16L14 10L20 16L14 22L8 16Z" fill="white" />
+                    <path d="M14 16L20 10L26 16L20 22L14 16Z" fill="white" fill-opacity="0.6" />
+                </svg>
+                <span>MeFlow</span>
+            </a>
+            <div class="nav-links">
+                <a href="#product-intro">产品介绍</a>
+                <a href="#capability-matrix">能力矩阵</a>
+                <a href="#tech-advantages">技术优势</a>
+                <a href="#core-value">核心价值</a>
+                <a href="https://meflow3.prod.milvzn.com/dashboard" target="_blank" class="btn btn-primary">开始使用</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Product Intro Section -->
+    <section class="product-intro" id="product-intro">
+        <div class="product-intro-container">
+            <div class="intro-grid">
+                <div class="intro-content">
+                    <div class="intro-badge">
+                        <span class="badge-dot"></span>
+                        MeFlow Agent
+                    </div>
+                    <h1 class="intro-title">像对话一样<br>管理合同</h1>
+                    <p class="intro-description">
+                        MeFlow Agent 是新一代 AI 原生合同生命周期管理平台。我们相信，合同管理不应该是在复杂的表单、流程和系统中挣扎，而应该像与专业助手对话一样自然流畅。
+                    </p>
+                    <p class="intro-description">
+                        通过大语言模型、智能Agent编排和深度学习技术，MeFlow Agent 重新定义了企业与合同的交互方式 —— 从起草、审核、谈判到履约，每一个环节都由 AI 驱动，让专业的人专注于专业的决策。
+                    </p>
+                </div>
+
+                <div class="intro-visual">
+                    <div class="chat-interface">
+                        <div class="chat-message user">
+                            <div class="chat-avatar user">U</div>
+                            <div class="chat-bubble">
+                                帮我起草一份与供应商的采购合同，金额200万，交付周期3个月
+                            </div>
+                        </div>
+                        <div class="chat-message ai">
+                            <div class="chat-avatar ai">AI</div>
+                            <div class="chat-bubble">
+                                <div class="typing-indicator">
+                                    <span class="typing-dot"></span>
+                                    <span class="typing-dot"></span>
+                                    <span class="typing-dot"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="intro-stats">
+                <div class="stat-item">
+                    <span class="stat-value">95%</span>
+                    <span class="stat-label">时间节省</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">99.7%</span>
+                    <span class="stat-label">审核准确率</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">10x</span>
+                    <span class="stat-label">效率提升</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Capability Matrix Section -->
+    <section class="capability-matrix" id="capability-matrix">
+        <div class="capability-container">
+            <div class="capability-header">
+                <div class="capability-badge">全生命周期能力</div>
+                <h2 class="section-title">覆盖合同管理的每一个关键环节</h2>
+                <p class="section-subtitle">
+                    从合同起草到归档分析，MeFlow Agent 提供端到端的智能化解决方案
+                </p>
+            </div>
+
+            <div class="capability-grid">
+                <!-- Capability 1: 智能起草 -->
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                        </svg>
+                    </div>
+                    <h3 class="capability-title">智能起草</h3>
+                    <p class="capability-desc">
+                        基于业务场景自动生成合同，支持多模态输入，内置法律合规检查
+                    </p>
+                    <div class="capability-features">
+                        <div class="capability-feature">自然语言生成合同</div>
+                        <div class="capability-feature">智能条款推荐</div>
+                        <div class="capability-feature">多版本对比</div>
+                    </div>
+                </div>
+
+                <!-- Capability 2: 智能审核 -->
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="capability-title">智能审核</h3>
+                    <p class="capability-desc">
+                        AI深度分析合同条款，识别潜在风险点，99.7%准确率
+                    </p>
+                    <div class="capability-features">
+                        <div class="capability-feature">风险自动识别</div>
+                        <div class="capability-feature">条款合规性检查</div>
+                        <div class="capability-feature">修改建议生成</div>
+                    </div>
+                </div>
+
+                <!-- Capability 3: 智能谈判 -->
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="capability-title">智能谈判</h3>
+                    <p class="capability-desc">
+                        AI协同谈判助手，预测对方策略，推荐最优方案
+                    </p>
+                    <div class="capability-features">
+                        <div class="capability-feature">谈判策略建议</div>
+                        <div class="capability-feature">条款让步分析</div>
+                        <div class="capability-feature">历史数据对比</div>
+                    </div>
+                </div>
+
+                <!-- Capability 4: 智能履约 -->
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 6v6l4 2" />
+                        </svg>
+                    </div>
+                    <h3 class="capability-title">智能履约</h3>
+                    <p class="capability-desc">
+                        自动监控合同执行进度，智能提醒关键节点
+                    </p>
+                    <div class="capability-features">
+                        <div class="capability-feature">里程碑自动追踪</div>
+                        <div class="capability-feature">到期智能提醒</div>
+                        <div class="capability-feature">履约风险预警</div>
+                    </div>
+                </div>
+
+                <!-- Capability 5: 智能分析 -->
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                    </div>
+                    <h3 class="capability-title">智能分析</h3>
+                    <p class="capability-desc">
+                        深度挖掘合同数据价值，生成可视化报表
+                    </p>
+                    <div class="capability-features">
+                        <div class="capability-feature">合同数据洞察</div>
+                        <div class="capability-feature">风险趋势分析</div>
+                        <div class="capability-feature">智能报表生成</div>
+                    </div>
+                </div>
+
+                <!-- Capability 6: 知识管理 -->
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
+                    <h3 class="capability-title">知识管理</h3>
+                    <p class="capability-desc">
+                        智能条款库、模板库管理，AI自动归类和推荐
+                    </p>
+                    <div class="capability-features">
+                        <div class="capability-feature">智能条款库</div>
+                        <div class="capability-feature">模板自动归类</div>
+                        <div class="capability-feature">知识图谱构建</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Advantages Section -->
+    <section class="tech-advantages" id="tech-advantages">
+        <!-- Sticky Navigation -->
+        <nav class="tech-nav">
+            <div class="tech-nav-container">
+                <div class="tech-nav-item active">全部模块</div>
+                <div class="tech-nav-item">技术架构</div>
+                <div class="tech-nav-item">SOTA模型</div>
+                <div class="tech-nav-item">上下文工程</div>
+                <div class="tech-nav-item">工具生态</div>
+                <div class="tech-nav-item">AI原生系统</div>
+                <div class="tech-nav-item">企业安全</div>
+            </div>
+        </nav>
+
+        <div class="tech-container">
+            <div class="tech-header">
+                <h2 class="section-title">AI原生架构 重新定义合同管理</h2>
+                <p class="section-subtitle">
+                    基于先进的 AI Agent 架构打造，融合大语言模型、向量数据库、智能编排引擎
+                </p>
+            </div>
+
+            <div class="tech-modules-grid">
+                <!-- Module 1 -->
+                <div class="tech-module-card">
+                    <div class="tech-module-number">01</div>
+                    <h3 class="tech-module-title">技术架构</h3>
+                    <p class="tech-module-desc">
+                        多层Agent协作架构，融合LLM、向量数据库、工作流引擎
+                    </p>
+                    <span class="tech-module-status">
+                        <span class="status-dot"></span>
+                        内容待更新
+                    </span>
+                </div>
+
+                <!-- Module 2 -->
+                <a href="sota-models.html" class="tech-module-card" style="text-decoration: none; color: inherit;">
+                    <div class="tech-module-number">02</div>
+                    <h3 class="tech-module-title">支持主流SOTA模型</h3>
+                    <p class="tech-module-desc">
+                        包括 DeepSeek、GLM、Kimi、Qwen 等顶尖大模型
+                    </p>
+                    <span class="tech-module-status" style="background: var(--color-olive-light); color: var(--color-olive);">
+                        <span class="status-dot"></span>
+                        查看详情 →
+                    </span>
+                </a>
+
+                <!-- Module 3 -->
+                <div class="tech-module-card">
+                    <div class="tech-module-number">03</div>
+                    <h3 class="tech-module-title">智能上下文工程</h3>
+                    <p class="tech-module-desc">
+                        RAG检索增强、长上下文处理、知识图谱构建
+                    </p>
+                    <span class="tech-module-status">
+                        <span class="status-dot"></span>
+                        内容待添加
+                    </span>
+                </div>
+
+                <!-- Module 4 -->
+                <div class="tech-module-card">
+                    <div class="tech-module-number">04</div>
+                    <h3 class="tech-module-title">丰富且友好的工具</h3>
+                    <p class="tech-module-desc">
+                        500+预置工具函数，覆盖合同全生命周期
+                    </p>
+                    <span class="tech-module-status">
+                        <span class="status-dot"></span>
+                        内容待添加
+                    </span>
+                </div>
+
+                <!-- Module 5 -->
+                <div class="tech-module-card">
+                    <div class="tech-module-number">05</div>
+                    <h3 class="tech-module-title">全新AI原生系统</h3>
+                    <p class="tech-module-desc">
+                        从零构建的AI-First架构，而非传统系统的AI改造
+                    </p>
+                    <span class="tech-module-status">
+                        <span class="status-dot"></span>
+                        内容待添加
+                    </span>
+                </div>
+
+                <!-- Module 6 -->
+                <div class="tech-module-card">
+                    <div class="tech-module-number">06</div>
+                    <h3 class="tech-module-title">企业级安全可靠</h3>
+                    <p class="tech-module-desc">
+                        符合等保2.0三级标准，数据加密存储传输
+                    </p>
+                    <span class="tech-module-status">
+                        <span class="status-dot"></span>
+                        内容待添加
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Value Section -->
+    <section class="core-value" id="core-value">
+        <div class="value-container">
+            <div class="value-header">
+                <h2 class="section-title">不只是工具 更是效率与价值的倍增器</h2>
+                <p class="section-subtitle">
+                    MeFlow Agent 帮助企业在合同管理上实现质的飞跃
+                </p>
+            </div>
+
+            <div class="value-grid">
+                <!-- Value 1: 效率革命 (Large) -->
+                <div class="value-card large">
+                    <div class="value-number">01</div>
+                    <h3 class="value-title">效率革命</h3>
+                    <p class="value-desc">
+                        从数天到数分钟，AI重塑合同处理效率。起草时间缩短95%，审核速度提升10倍
+                    </p>
+                    <div class="value-metrics">
+                        <div class="value-metric">
+                            <span class="metric-value">95%</span>
+                            <span class="metric-label">时间节省</span>
+                        </div>
+                        <div class="value-metric">
+                            <span class="metric-value">10x</span>
+                            <span class="metric-label">处理速度</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Value 2: 风险管控 (Large) -->
+                <div class="value-card large">
+                    <div class="value-number">02</div>
+                    <h3 class="value-title">风险管控</h3>
+                    <p class="value-desc">
+                        AI以99.7%的准确率识别合同风险点，全方位保护企业利益
+                    </p>
+                    <div class="value-metrics">
+                        <div class="value-metric">
+                            <span class="metric-value">99.7%</span>
+                            <span class="metric-label">风险识别率</span>
+                        </div>
+                        <div class="value-metric">
+                            <span class="metric-value">0</span>
+                            <span class="metric-label">重大遗漏</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Value 3: 成本优化 -->
+                <div class="value-card">
+                    <div class="value-number">03</div>
+                    <h3 class="value-title">成本优化</h3>
+                    <p class="value-desc">
+                        显著降低人力成本和运营开销，平均为企业每年节省数百万
+                    </p>
+                </div>
+
+                <!-- Value 4: 决策支持 -->
+                <div class="value-card">
+                    <div class="value-number">04</div>
+                    <h3 class="value-title">决策支持</h3>
+                    <p class="value-desc">
+                        基于历史数据和AI分析，为管理层提供精准的商业洞察
+                    </p>
+                </div>
+
+                <!-- Value 5: 合规保障 -->
+                <div class="value-card">
+                    <div class="value-number">05</div>
+                    <h3 class="value-title">合规保障</h3>
+                    <p class="value-desc">
+                        实时跟踪监管政策变化，确保企业始终符合最新法规
+                    </p>
+                </div>
+
+                <!-- Value 6: 知识沉淀 -->
+                <div class="value-card">
+                    <div class="value-number">06</div>
+                    <h3 class="value-title">知识沉淀</h3>
+                    <p class="value-desc">
+                        将每一次合同交互转化为企业知识资产，持续优化AI模型
+                    </p>
+                </div>
+            </div>
+
+            <!-- Customer Case Studies -->
+            <div class="case-studies">
+                <div class="case-header">
+                    <h3 class="case-subtitle">客户成功案例</h3>
+                </div>
+
+                <div class="cases-grid">
+                    <!-- Case 1 -->
+                    <div class="case-card">
+                        <p class="case-quote">
+                            "合同审核时间从3天缩短至2小时，法务团队效率提升20倍"
+                        </p>
+                        <div class="case-company">某头部互联网企业</div>
+                        <div class="case-metrics">
+                            <div class="case-metric-item">
+                                <span class="case-metric-label">处理量</span>
+                                <span class="case-metric-value">10,000+份/月</span>
+                            </div>
+                            <div class="case-metric-item">
+                                <span class="case-metric-label">节省成本</span>
+                                <span class="case-metric-value">¥500万/年</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case 2 -->
+                    <div class="case-card">
+                        <p class="case-quote">
+                            "智能风险识别帮助我们避免了3起重大合同纠纷，挽回损失超千万"
+                        </p>
+                        <div class="case-company">某大型制造企业</div>
+                        <div class="case-metrics">
+                            <div class="case-metric-item">
+                                <span class="case-metric-label">风险识别</span>
+                                <span class="case-metric-value">100%准确</span>
+                            </div>
+                            <div class="case-metric-item">
+                                <span class="case-metric-label">避免损失</span>
+                                <span class="case-metric-value">¥1200万+</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case 3 -->
+                    <div class="case-card">
+                        <p class="case-quote">
+                            "全球化合同管理从此变得简单，多语言支持让跨境业务更加顺畅"
+                        </p>
+                        <div class="case-company">某跨国供应链公司</div>
+                        <div class="case-metrics">
+                            <div class="case-metric-item">
+                                <span class="case-metric-label">覆盖语言</span>
+                                <span class="case-metric-value">15+种</span>
+                            </div>
+                            <div class="case-metric-item">
+                                <span class="case-metric-label">合同周期</span>
+                                <span class="case-metric-value">缩短60%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-container">
+            <h2 class="cta-title">准备好开启 AI 原生合同管理了吗？</h2>
+            <p class="cta-desc">
+                加入数千家企业，体验 MeFlow Agent 带来的效率革命
+            </p>
+            <div class="cta-buttons">
+                <a href="https://meflow3.prod.milvzn.com/dashboard" target="_blank" class="btn btn-primary btn-lg">立即开始</a>
+                <a href="index.html" class="btn btn-outline btn-lg">了解更多</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <a href="index.html" class="nav-logo">
+                        <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="32" height="32" rx="8" fill="#5c6b50" />
+                            <path d="M8 16L14 10L20 16L14 22L8 16Z" fill="white" />
+                            <path d="M14 16L20 10L26 16L20 22L14 16Z" fill="white" fill-opacity="0.6" />
+                        </svg>
+                        <span>MeFlow</span>
+                    </a>
+                    <p class="footer-tagline">AI原生合同生命周期管理平台</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>产品</h4>
+                        <a href="#product-intro">产品介绍</a>
+                        <a href="#capability-matrix">能力矩阵</a>
+                        <a href="#tech-advantages">技术优势</a>
+                        <a href="#core-value">核心价值</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>公司</h4>
+                        <a href="#">关于我们</a>
+                        <a href="#">新闻动态</a>
+                        <a href="#">加入我们</a>
+                        <a href="#">联系我们</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>资源</h4>
+                        <a href="#">产品文档</a>
+                        <a href="#">API文档</a>
+                        <a href="#">帮助中心</a>
+                        <a href="#">开发者社区</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>法律</h4>
+                        <a href="#">隐私政策</a>
+                        <a href="#">服务条款</a>
+                        <a href="#">安全说明</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 幂律智能 PowerLaw.AI. 保留所有权利</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z" />
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="GitHub">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        // Close mobile menu if open
+                        navLinks.classList.remove('active');
+                    }
+                }
+            });
+        });
+
+        // Tech nav active state on scroll
+        const techNavItems = document.querySelectorAll('.tech-nav-item');
+        const sections = document.querySelectorAll('section[id]');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            techNavItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.textContent.includes('全部') && current === 'tech-advantages') {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
