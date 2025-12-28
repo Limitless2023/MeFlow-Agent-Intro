@@ -84,28 +84,34 @@
 
         .provider-logo {
             display: flex;
+            flex-direction: column;
             align-items: center;
             gap: 0.75rem;
-            font-size: 1.25rem;
+            font-size: 1rem;
             font-weight: 600;
             color: var(--color-gray-700);
             opacity: 0.8;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
         }
 
         .provider-logo:hover {
             opacity: 1;
-            transform: translateY(-2px);
+            transform: translateY(-4px);
         }
 
         .provider-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: var(--radius-md);
+            width: 64px;
+            height: 64px;
+            border-radius: var(--radius-lg);
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--color-gray-50);
+            transition: all 0.3s ease;
+        }
+
+        .provider-logo:hover .provider-icon {
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.15);
         }
 
         /* Back Button */
@@ -155,19 +161,17 @@
         }
 
         .section-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--color-olive-light);
+            width: 48px;
+            height: 48px;
             border-radius: var(--radius-md);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--color-olive);
         }
 
         .section-icon svg {
-            width: 20px;
-            height: 20px;
+            width: 28px;
+            height: 28px;
         }
 
         .models-grid {
@@ -179,49 +183,95 @@
         .model-card {
             padding: 1.25rem;
             background: var(--color-gray-50);
-            border: 1px solid var(--color-gray-100);
+            border: 2px solid var(--color-gray-100);
             border-radius: var(--radius-lg);
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             gap: 0.75rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 推荐模型特殊样式 */
+        .model-card.recommended {
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+            border-color: var(--color-olive);
+            border-width: 2px;
+        }
+
+        .model-card.recommended::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-olive) 0%, #6d7f61 100%);
         }
 
         .model-card:hover {
-            background: var(--color-olive-light);
             border-color: var(--color-olive);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -8px rgba(92, 107, 80, 0.2);
+        }
+
+        .model-card.recommended:hover {
+            box-shadow: 0 12px 24px -8px rgba(92, 107, 80, 0.35);
         }
 
         .model-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 0.5rem;
         }
 
         .model-name {
-            font-size: 1rem;
+            font-size: 1.0625rem;
             font-weight: 600;
             color: var(--color-gray-900);
         }
 
+        /* 推荐标志优化 */
         .model-badge {
-            padding: 0.25rem 0.625rem;
+            padding: 0.375rem 0.75rem;
             background: var(--color-olive);
             color: var(--color-white);
-            font-size: 0.6875rem;
-            font-weight: 600;
+            font-size: 0.75rem;
+            font-weight: 700;
             border-radius: 9999px;
             text-transform: uppercase;
+            letter-spacing: 0.025em;
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px -2px rgba(92, 107, 80, 0.4);
         }
 
         .model-badge.featured {
-            background: var(--color-olive);
+            background: linear-gradient(135deg, var(--color-olive) 0%, #4a5740 100%);
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        .model-badge.featured::before {
+            content: '★';
+            font-size: 0.875rem;
         }
 
         .model-badge.new {
-            background: #3b82f6;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            box-shadow: 0 2px 8px -2px rgba(59, 130, 246, 0.4);
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 2px 8px -2px rgba(92, 107, 80, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 12px -2px rgba(92, 107, 80, 0.6);
+            }
         }
 
         .model-desc {
@@ -243,6 +293,12 @@
             border-radius: var(--radius-md);
             font-size: 0.75rem;
             color: var(--color-gray-600);
+            transition: all 0.2s ease;
+        }
+
+        .model-card:hover .feature-tag {
+            border-color: var(--color-olive-light);
+            background: var(--color-white);
         }
 
         /* Reference Links */
@@ -398,19 +454,42 @@
                 <!-- Provider Logos -->
                 <div class="provider-logos">
                     <div class="provider-logo">
-                        <div class="provider-icon">🤖</div>
+                        <div class="provider-icon" style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);">
+                            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 36px; height: 36px;">
+                                <path d="M12 24c0-2.5 1.5-4.5 3.5-5.5C17 14 21 11 26 11c7 0 12 5 12 11 0 4-2 7.5-5 9.5-1 2.5-3.5 4.5-6.5 4.5-5 0-9-4-10-8.5-1.5-1-2.5-3-2.5-5.5z" fill="white" opacity="0.9"/>
+                                <circle cx="20" cy="20" r="2" fill="white"/>
+                                <path d="M26 28c3 0 5-2 6-4" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
                         <span>DeepSeek</span>
                     </div>
                     <div class="provider-logo">
-                        <div class="provider-icon">💎</div>
+                        <div class="provider-icon" style="background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%);">
+                            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 36px; height: 36px;">
+                                <path d="M24 8L16 20h8l-8 12 16-16h-8l8-8z" fill="white" opacity="0.9"/>
+                                <circle cx="24" cy="24" r="3" fill="white"/>
+                            </svg>
+                        </div>
                         <span>BigModel</span>
                     </div>
                     <div class="provider-logo">
-                        <div class="provider-icon">🌙</div>
+                        <div class="provider-icon" style="background: linear-gradient(135deg, #0c4a6e 0%, #0ea5e9 100%);">
+                            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 36px; height: 36px;">
+                                <path d="M24 8c-6 4-10 10-10 16 0 5 4 9 9 9 5 0 9-4 9-9 0-3-1.5-5.5-4-7 1-2 1-4 0-6-1.5-1.5-3-2.5-4-3z" fill="white" opacity="0.9"/>
+                                <circle cx="28" cy="14" r="2" fill="white"/>
+                                <circle cx="32" cy="16" r="1.5" fill="white" opacity="0.7"/>
+                            </svg>
+                        </div>
                         <span>Moonshot AI</span>
                     </div>
                     <div class="provider-logo">
-                        <div class="provider-icon">✨</div>
+                        <div class="provider-icon" style="background: linear-gradient(135deg, #ea580c 0%, #fb923c 100%);">
+                            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 36px; height: 36px;">
+                                <path d="M24 10L14 20l10 8 10-8-10-10z" fill="white" opacity="0.9"/>
+                                <path d="M14 24l10 8 10-8" fill="white" opacity="0.7"/>
+                                <path d="M14 28l10 8 10-8" fill="white" opacity="0.5"/>
+                            </svg>
+                        </div>
                         <span>Qwen</span>
                     </div>
                 </div>
@@ -419,15 +498,16 @@
             <!-- DeepSeek Models -->
             <div class="models-section">
                 <h2 class="section-title">
-                    <div class="section-icon">
+                    <div class="section-icon" style="background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); color: #1e40af;">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                            <path d="M8 16c0-2 1-3.5 2.5-4.5C12 8 15 6 18 6c4.5 0 7.5 3 7.5 6.5 0 2.5-1.5 4.5-3 5.5-.5 1.5-2 3-4 3-3 0-5.5-2.5-6-5-1-.5-1.5-2-1.5-3.5z"/>
+                            <circle cx="13" cy="12" r="1"/>
                         </svg>
                     </div>
                     DeepSeek 系列
                 </h2>
                 <div class="models-grid">
-                    <div class="model-card">
+                    <div class="model-card recommended">
                         <div class="model-header">
                             <span class="model-name">DeepSeek-3.2</span>
                             <span class="model-badge featured">推荐</span>
@@ -452,18 +532,93 @@
                 </div>
             </div>
 
+            <!-- GLM Models -->
+            <div class="models-section">
+                <h2 class="section-title">
+                    <div class="section-icon" style="background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%); color: #6d28d9;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L3 8l9 6 9-6-9-6z"/>
+                            <path d="M12 14l-9-6v8l9 6 9-6v-8l-9 6z"/>
+                            <circle cx="12" cy="14" r="2" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    GLM 系列 · 智谱AI
+                </h2>
+                <div class="models-grid">
+                    <div class="model-card recommended">
+                        <div class="model-header">
+                            <span class="model-name">GLM-4.7</span>
+                            <span class="model-badge featured">推荐</span>
+                        </div>
+                        <p class="model-desc">智谱 AI 旗舰模型，在中文场景表现出色，支持多轮对话和复杂推理</p>
+                        <div class="model-features">
+                            <span class="feature-tag">中文优化</span>
+                            <span class="feature-tag">多轮对话</span>
+                        </div>
+                    </div>
+                    <div class="model-card">
+                        <div class="model-header">
+                            <span class="model-name">GLM-4.6</span>
+                        </div>
+                        <p class="model-desc">高效平衡型模型，适合日常业务场景</p>
+                        <div class="model-features">
+                            <span class="feature-tag">高效</span>
+                            <span class="feature-tag">平衡性能</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kimi Models -->
+            <div class="models-section">
+                <h2 class="section-title">
+                    <div class="section-icon" style="background: linear-gradient(135deg, #cffafe 0%, #a5f3fc 100%); color: #0c4a6e;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 3c-4 2.5-7 6.5-7 10.5 0 3.5 2.5 6.5 6 6.5s6-3 6-6.5c0-2-1-4-2.5-5 .5-1.5.5-3 0-4.5-1-1-2-1.5-2.5-2z"/>
+                            <circle cx="14" cy="8" r="1.5"/>
+                        </svg>
+                    </div>
+                    Kimi 系列 · Moonshot AI
+                </h2>
+                <div class="models-grid">
+                    <div class="model-card recommended">
+                        <div class="model-header">
+                            <span class="model-name">Kimi-K2</span>
+                            <span class="model-badge featured">推荐</span>
+                        </div>
+                        <p class="model-desc">Moonshot AI 最新旗舰模型，长文本处理能力卓越，支持 20 万字上下文</p>
+                        <div class="model-features">
+                            <span class="feature-tag">长文本</span>
+                            <span class="feature-tag">高精度</span>
+                        </div>
+                    </div>
+                    <div class="model-card">
+                        <div class="model-header">
+                            <span class="model-name">Kimi-K2-Thinking</span>
+                        </div>
+                        <p class="model-desc">增强推理版本，适合复杂分析任务</p>
+                        <div class="model-features">
+                            <span class="feature-tag">思维链</span>
+                            <span class="feature-tag">深度分析</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Qwen Models -->
             <div class="models-section">
                 <h2 class="section-title">
-                    <div class="section-icon">
+                    <div class="section-icon" style="background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%); color: #c2410c;">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            <path d="M12 4L4 10l8 5 8-5-8-6z"/>
+                            <path d="M4 14l8 5 8-5"/>
+                            <path d="M4 18l8 5 8-5"/>
                         </svg>
                     </div>
-                    Qwen 系列
+                    Qwen 系列 · 阿里云
                 </h2>
                 <div class="models-grid">
-                    <div class="model-card">
+                    <div class="model-card recommended">
                         <div class="model-header">
                             <span class="model-name">Qwen3-Max</span>
                             <span class="model-badge featured">推荐</span>
@@ -513,78 +668,10 @@
                 </div>
             </div>
 
-            <!-- Kimi Models -->
-            <div class="models-section">
-                <h2 class="section-title">
-                    <div class="section-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M12 6v6l4 2"/>
-                        </svg>
-                    </div>
-                    Kimi 系列
-                </h2>
-                <div class="models-grid">
-                    <div class="model-card">
-                        <div class="model-header">
-                            <span class="model-name">Kimi-K2</span>
-                            <span class="model-badge featured">推荐</span>
-                        </div>
-                        <p class="model-desc">Moonshot AI 最新旗舰模型，长文本处理能力卓越</p>
-                        <div class="model-features">
-                            <span class="feature-tag">长文本</span>
-                            <span class="feature-tag">高精度</span>
-                        </div>
-                    </div>
-                    <div class="model-card">
-                        <div class="model-header">
-                            <span class="model-name">Kimi-K2-Thinking</span>
-                        </div>
-                        <p class="model-desc">增强推理版本，适合复杂分析任务</p>
-                        <div class="model-features">
-                            <span class="feature-tag">思维链</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- GLM Models -->
-            <div class="models-section">
-                <h2 class="section-title">
-                    <div class="section-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                        </svg>
-                    </div>
-                    GLM 系列
-                </h2>
-                <div class="models-grid">
-                    <div class="model-card">
-                        <div class="model-header">
-                            <span class="model-name">GLM-4.7</span>
-                            <span class="model-badge featured">推荐</span>
-                        </div>
-                        <p class="model-desc">智谱 AI 旗舰模型，在中文场景表现出色</p>
-                        <div class="model-features">
-                            <span class="feature-tag">中文优化</span>
-                        </div>
-                    </div>
-                    <div class="model-card">
-                        <div class="model-header">
-                            <span class="model-name">GLM-4.6</span>
-                        </div>
-                        <p class="model-desc">高效平衡型模型</p>
-                        <div class="model-features">
-                            <span class="feature-tag">高效</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Reference Links -->
             <div class="reference-section">
                 <h2 class="section-title">
-                    <div class="section-icon">
+                    <div class="section-icon" style="background: var(--color-olive-light); color: var(--color-olive);">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
                         </svg>
