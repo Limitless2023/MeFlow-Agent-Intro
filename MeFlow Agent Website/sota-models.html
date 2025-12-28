@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>支持主流SOTA模型 - MeFlow Agent</title>
+    <meta name="description" content="MeFlow Agent 支持顶尖的 SOTA 大语言模型，提供灵活的模型选择">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* SOTA Models Specific Styles */
+
+        .sota-page {
+            padding-top: 8rem;
+            padding-bottom: 4rem;
+            background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-olive-bg) 100%);
+        }
+
+        .sota-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Page Header */
+        .sota-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .sota-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--color-white);
+            border: 1px solid var(--color-olive-light);
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            color: var(--color-olive);
+            margin-bottom: 1.5rem;
+        }
+
+        .sota-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 400;
+            color: var(--color-gray-900);
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        .sota-title .highlight {
+            color: var(--color-olive);
+            font-style: italic;
+        }
+
+        .sota-subtitle {
+            font-size: 1.125rem;
+            color: var(--color-gray-600);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        /* Provider Logos */
+        .provider-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--color-gray-200);
+        }
+
+        .provider-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-gray-700);
+            opacity: 0.8;
+            transition: all 0.2s ease;
+        }
+
+        .provider-logo:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+
+        .provider-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-gray-50);
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-md);
+            color: var(--color-gray-700);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            margin-bottom: 2rem;
+        }
+
+        .back-button:hover {
+            background: var(--color-gray-50);
+            border-color: var(--color-gray-300);
+        }
+
+        .back-button svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Models Grid */
+        .models-section {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--color-gray-200);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-gray-900);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--color-olive-light);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-olive);
+        }
+
+        .section-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .model-card {
+            padding: 1.25rem;
+            background: var(--color-gray-50);
+            border: 1px solid var(--color-gray-100);
+            border-radius: var(--radius-lg);
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .model-card:hover {
+            background: var(--color-olive-light);
+            border-color: var(--color-olive);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .model-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .model-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-gray-900);
+        }
+
+        .model-badge {
+            padding: 0.25rem 0.625rem;
+            background: var(--color-olive);
+            color: var(--color-white);
+            font-size: 0.6875rem;
+            font-weight: 600;
+            border-radius: 9999px;
+            text-transform: uppercase;
+        }
+
+        .model-badge.featured {
+            background: var(--color-olive);
+        }
+
+        .model-badge.new {
+            background: #3b82f6;
+        }
+
+        .model-desc {
+            font-size: 0.8125rem;
+            color: var(--color-gray-600);
+            line-height: 1.5;
+        }
+
+        .model-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .feature-tag {
+            padding: 0.25rem 0.625rem;
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-md);
+            font-size: 0.75rem;
+            color: var(--color-gray-600);
+        }
+
+        /* Reference Links */
+        .reference-section {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--color-gray-200);
+            padding: 2.5rem;
+        }
+
+        .reference-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .reference-card {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--color-olive-bg) 0%, var(--color-white) 100%);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .reference-card:hover {
+            border-color: var(--color-olive);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .reference-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .reference-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-gray-900);
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+
+        .reference-title svg {
+            width: 20px;
+            height: 20px;
+            color: var(--color-olive);
+        }
+
+        .external-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--color-gray-400);
+        }
+
+        .reference-desc {
+            font-size: 0.875rem;
+            color: var(--color-gray-600);
+            line-height: 1.6;
+        }
+
+        .reference-url {
+            font-size: 0.8125rem;
+            color: var(--color-olive);
+            font-family: 'Monaco', 'Consolas', monospace;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sota-page {
+                padding-top: 6rem;
+            }
+
+            .provider-logos {
+                gap: 1.5rem;
+            }
+
+            .models-section,
+            .reference-section {
+                padding: 1.5rem;
+            }
+
+            .reference-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .models-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="32" rx="8" fill="#5c6b50" />
+                    <path d="M8 16L14 10L20 16L14 22L8 16Z" fill="white" />
+                    <path d="M14 16L20 10L26 16L20 22L14 16Z" fill="white" fill-opacity="0.6" />
+                </svg>
+                <span>MeFlow</span>
+            </a>
+            <div class="nav-links">
+                <a href="meflow-agent-intro.html#product-intro">产品介绍</a>
+                <a href="meflow-agent-intro.html#capability-matrix">能力矩阵</a>
+                <a href="meflow-agent-intro.html#tech-advantages">技术优势</a>
+                <a href="meflow-agent-intro.html#core-value">核心价值</a>
+                <a href="https://meflow3.prod.milvzn.com/dashboard" target="_blank" class="btn btn-primary">开始使用</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- SOTA Models Page -->
+    <section class="sota-page">
+        <div class="sota-container">
+            <a href="meflow-agent-intro.html#tech-advantages" class="back-button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                </svg>
+                返回技术优势
+            </a>
+
+            <header class="sota-header">
+                <div class="sota-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
+                        <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                    支持主流 SOTA 模型
+                </div>
+                <h1 class="sota-title">
+                    兼容 <span class="highlight">顶尖大语言模型</span>
+                </h1>
+                <p class="sota-subtitle">
+                    MeFlow Agent 支持全球领先的 SOTA 大模型，包括 Claude、GPT-4、Gemini、DeepSeek、Qwen 等，为不同业务场景提供最优推理引擎选择
+                </p>
+
+                <!-- Provider Logos -->
+                <div class="provider-logos">
+                    <div class="provider-logo">
+                        <div class="provider-icon">🤖</div>
+                        <span>DeepSeek</span>
+                    </div>
+                    <div class="provider-logo">
+                        <div class="provider-icon">💎</div>
+                        <span>BigModel</span>
+                    </div>
+                    <div class="provider-logo">
+                        <div class="provider-icon">🌙</div>
+                        <span>Moonshot AI</span>
+                    </div>
+                    <div class="provider-logo">
+                        <div class="provider-icon">✨</div>
+                        <span>Qwen</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- DeepSeek Models -->
+            <div class="models-section">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </div>
+                    DeepSeek 系列
+                </h2>
+                <div class="models-grid">
+                    <div class="model-card">
+                        <div class="model-header">
+                            <span class="model-name">DeepSeek-3.2</span>
+                            <span class="model-badge featured">推荐</span>
+                        </div>
+                        <p class="model-desc">新一代推理能力强大的开源模型，在代码生成和复杂推理任务上表现优异</p>
+                        <div class="model-features">
+                            <span class="feature-tag">推理优化</span>
+                            <span class="feature-tag">代码生成</span>
+                        </div>
+                    </div>
+                    <div class="model-card">
+                        <div class="model-header">
+                            <span class="model-name">DeepSeek-3.2-Thinking</span>
+                            <span class="model-badge new">New</span>
+                        </div>
+                        <p class="model-desc">增强思维链推理能力，适合需要复杂逻辑分析的场景</p>
+                        <div class="model-features">
+                            <span class="feature-tag">思维链</span>
+                            <span class="feature-tag">逻辑推理</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Qwen Models -->
+            <div class="models-section">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    Qwen 系列
+                </h2>
+                <div class="models-grid">
+                    <div class="model-card">
+                        <div class="model-header">
+                            <span class="model-name">Qwen3-Max</span>
+                            <span class="model-badge featured">推荐</span>
+                        </div>
+                        <p class="model-desc">阿里最强大模型，综合能力全面，适合多种复杂业务场景</p>
+                        <div class="model-features">
+                            <span class="feature-tag">全能型</span>
+                            <span class="feature-tag">高性能</span>
+                        </div>
+                    </div>
+                    <div class="model-card">
+                        <div class="model-header">
+                            <span class="model-name">Qwen3-Next-80b-Instruct</span>
+                        </div>
+                        <p class="model-desc">800亿参数指令优化模型，指令遵循能力强</p>
+                        <div class="model-features">
+                            <span class="feature-tag">指令优化</span>
+                        </div>
+                    </div>
+                    <div class="model-card">
+                        <div class="model-header">
+                            <span class="model-name">Qwen3-Next-80b-Thinking</span>
+                        </div>
+                        <p class="model-desc">思维链增强版本，适合复杂推理任务</p>
+                        <div class="model-features">
+                            <span class="feature-tag">思维链</span>
+                        </div>
+                    </div>
+                    <div class="model-card">
+                        <div class="model-header">
+                            <span class="model-name">Qwen3-32b</span>
+                        </div>
+                        <p class="model-desc">高性价比中型模型，平衡性能与成本</p>
+                        <div class="model-features">
+                            <span class="feature-tag">高性价比</span>
+                        </div>
+                    </div>
+                    <div class="model-card">
+                        <div class="model-header">
+                            <span class="model-name">Qwen3-30b-thinking</span>
+                        </div>
+                        <p class="model-desc">300亿参数思维链模型</p>
+                        <div class="model-features">
+                            <span class="feature-tag">推理优化</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kimi Models -->
+            <div class="models-section">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                    </div>
+                    Kimi 系列
+                </h2>
+                <div class="models-grid">
+                    <div class="model-card">
+                        <div class="model-header">
+                            <span class="model-name">Kimi-K2</span>
+                            <span class="model-badge featured">推荐</span>
+                        </div>
+                        <p class="model-desc">Moonshot AI 最新旗舰模型，长文本处理能力卓越</p>
+                        <div class="model-features">
+                            <span class="feature-tag">长文本</span>
+                            <span class="feature-tag">高精度</span>
+                        </div>
+                    </div>
+                    <div class="model-card">
+                        <div class="model-header">
+                            <span class="model-name">Kimi-K2-Thinking</span>
+                        </div>
+                        <p class="model-desc">增强推理版本，适合复杂分析任务</p>
+                        <div class="model-features">
+                            <span class="feature-tag">思维链</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GLM Models -->
+            <div class="models-section">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                    </div>
+                    GLM 系列
+                </h2>
+                <div class="models-grid">
+                    <div class="model-card">
+                        <div class="model-header">
+                            <span class="model-name">GLM-4.7</span>
+                            <span class="model-badge featured">推荐</span>
+                        </div>
+                        <p class="model-desc">智谱 AI 旗舰模型，在中文场景表现出色</p>
+                        <div class="model-features">
+                            <span class="feature-tag">中文优化</span>
+                        </div>
+                    </div>
+                    <div class="model-card">
+                        <div class="model-header">
+                            <span class="model-name">GLM-4.6</span>
+                        </div>
+                        <p class="model-desc">高效平衡型模型</p>
+                        <div class="model-features">
+                            <span class="feature-tag">高效</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reference Links -->
+            <div class="reference-section">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                        </svg>
+                    </div>
+                    模型能力参考
+                </h2>
+                <div class="reference-grid">
+                    <a href="https://artificialanalysis.ai/models/" target="_blank" class="reference-card">
+                        <div class="reference-header">
+                            <h3 class="reference-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                </svg>
+                                Artificial Analysis
+                            </h3>
+                            <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
+                        </div>
+                        <p class="reference-desc">
+                            全面的 AI 模型性能分析平台，提供 Intelligence Index、性能对比、成本分析等专业评测数据
+                        </p>
+                        <code class="reference-url">artificialanalysis.ai/models/</code>
+                    </a>
+
+                    <a href="https://lmarena.ai/leaderboard" target="_blank" class="reference-card">
+                        <div class="reference-header">
+                            <h3 class="reference-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                                </svg>
+                                LM Arena Leaderboard
+                            </h3>
+                            <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
+                        </div>
+                        <p class="reference-desc">
+                            基于真实用户评测的大模型排行榜，通过盲测对比展示各模型在实际应用中的表现
+                        </p>
+                        <code class="reference-url">lmarena.ai/leaderboard</code>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-container">
+            <h2 class="cta-title">灵活选择最适合的 AI 模型</h2>
+            <p class="cta-desc">
+                MeFlow Agent 支持一键切换模型，为不同场景选择最优推理引擎
+            </p>
+            <div class="cta-buttons">
+                <a href="https://meflow3.prod.milvzn.com/dashboard" target="_blank" class="btn btn-primary btn-lg">立即体验</a>
+                <a href="meflow-agent-intro.html" class="btn btn-outline btn-lg">了解更多</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <a href="index.html" class="nav-logo">
+                        <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="32" height="32" rx="8" fill="#5c6b50" />
+                            <path d="M8 16L14 10L20 16L14 22L8 16Z" fill="white" />
+                            <path d="M14 16L20 10L26 16L20 22L14 16Z" fill="white" fill-opacity="0.6" />
+                        </svg>
+                        <span>MeFlow</span>
+                    </a>
+                    <p class="footer-tagline">AI原生合同生命周期管理平台</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>产品</h4>
+                        <a href="meflow-agent-intro.html#product-intro">产品介绍</a>
+                        <a href="meflow-agent-intro.html#capability-matrix">能力矩阵</a>
+                        <a href="meflow-agent-intro.html#tech-advantages">技术优势</a>
+                        <a href="meflow-agent-intro.html#core-value">核心价值</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>技术</h4>
+                        <a href="context-engineering.html">智能上下文</a>
+                        <a href="sota-models.html">SOTA模型</a>
+                        <a href="tech-advantages.html">技术架构</a>
+                        <a href="#">工具生态</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>资源</h4>
+                        <a href="#">产品文档</a>
+                        <a href="#">API文档</a>
+                        <a href="#">帮助中心</a>
+                        <a href="#">开发者社区</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>法律</h4>
+                        <a href="#">隐私政策</a>
+                        <a href="#">服务条款</a>
+                        <a href="#">安全说明</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 幂律智能 PowerLaw.AI. 保留所有权利</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+
+</html>
