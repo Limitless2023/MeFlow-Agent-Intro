@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能履约 - MeFlow Agent</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* FOUT Prevention */
+        body {
+            opacity: 0;
+            animation: fadeInPage 0.3s ease-in forwards;
+        }
+
+        @keyframes fadeInPage {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .detail-hero {
+            background: linear-gradient(135deg, #f8f9f6 0%, #eef0eb 100%);
+            padding: 5rem 0 4rem;
+            text-align: center;
+        }
+
+        .detail-hero h1 {
+            font-size: 3rem;
+            color: var(--color-olive-dark);
+            margin-bottom: 1rem;
+            font-family: 'Fraunces', 'Noto Sans SC', serif;
+        }
+
+        .detail-hero p {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .detail-content {
+            padding: 4rem 0;
+        }
+
+        .feature-section {
+            margin-bottom: 6rem;
+        }
+
+        .feature-section:last-child {
+            margin-bottom: 2rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .feature-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-number {
+            background: var(--color-olive);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .feature-title {
+            font-size: 1.75rem;
+            color: var(--color-olive-dark);
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .feature-description {
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-highlights {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-highlights li {
+            padding: 0.75rem 0;
+            padding-left: 1.75rem;
+            position: relative;
+            color: var(--color-text-secondary);
+            font-size: 1rem;
+        }
+
+        .feature-highlights li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--color-olive);
+            font-weight: bold;
+        }
+
+        /* Timeline Visualization */
+        .timeline-viz {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            box-shadow: 0 4px 20px rgba(92, 107, 80, 0.08);
+        }
+
+        .timeline-track {
+            position: relative;
+            height: 8px;
+            background: var(--color-gray-200);
+            border-radius: 4px;
+            margin: 2rem 0 3rem;
+            overflow: hidden;
+        }
+
+        .timeline-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-olive) 0%, var(--color-olive-light) 100%);
+            border-radius: 4px;
+            animation: progressFill 2s ease-out forwards;
+        }
+
+        @keyframes progressFill {
+            from { width: 0; }
+            to { width: 65%; }
+        }
+
+        .timeline-milestones {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .milestone {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            opacity: 0;
+            animation: milestoneAppear 0.6s ease-out forwards;
+        }
+
+        .milestone:nth-child(1) { animation-delay: 0.3s; }
+        .milestone:nth-child(2) { animation-delay: 0.5s; }
+        .milestone:nth-child(3) { animation-delay: 0.7s; }
+        .milestone:nth-child(4) { animation-delay: 0.9s; }
+
+        @keyframes milestoneAppear {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .milestone-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--color-olive);
+            margin: 0 auto 0.75rem;
+            position: relative;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(92, 107, 80, 0.3);
+        }
+
+        .milestone.completed .milestone-dot {
+            background: var(--color-olive);
+        }
+
+        .milestone.pending .milestone-dot {
+            background: var(--color-gray-300);
+            box-shadow: none;
+        }
+
+        .milestone-label {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .milestone-date {
+            font-size: 0.75rem;
+            color: var(--color-gray-500);
+        }
+
+        /* Alert Cards */
+        .alert-cards {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(92, 107, 80, 0.08);
+        }
+
+        .alert-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border-radius: 12px;
+            border-left: 4px solid;
+            background: var(--color-gray-50);
+            opacity: 0;
+            animation: alertSlideIn 0.5s ease-out forwards;
+        }
+
+        .alert-card:nth-child(1) {
+            border-left-color: #ef4444;
+            animation-delay: 0.2s;
+        }
+
+        .alert-card:nth-child(2) {
+            border-left-color: #f59e0b;
+            animation-delay: 0.4s;
+        }
+
+        .alert-card:nth-child(3) {
+            border-left-color: #10b981;
+            animation-delay: 0.6s;
+        }
+
+        .alert-card:last-child {
+            margin-bottom: 0;
+        }
+
+        @keyframes alertSlideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .alert-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-weight: 600;
+            color: var(--color-olive-dark);
+            margin-bottom: 0.25rem;
+            font-size: 0.95rem;
+        }
+
+        .alert-message {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        .alert-time {
+            font-size: 0.75rem;
+            color: var(--color-gray-500);
+            white-space: nowrap;
+            margin-top: 0.25rem;
+        }
+
+        /* Workflow Diagram */
+        .workflow-viz {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            box-shadow: 0 4px 20px rgba(92, 107, 80, 0.08);
+        }
+
+        .workflow-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .workflow-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .workflow-step {
+            background: var(--color-gray-50);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            opacity: 0;
+            animation: stepFadeIn 0.6s ease-out forwards;
+        }
+
+        .workflow-step:nth-child(1) { animation-delay: 0.2s; }
+        .workflow-step:nth-child(2) { animation-delay: 0.4s; }
+        .workflow-step:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes stepFadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .workflow-step-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--color-olive-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .workflow-step-title {
+            font-weight: 600;
+            color: var(--color-olive-dark);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .workflow-step-desc {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        .workflow-arrow {
+            position: absolute;
+            top: 50%;
+            right: -1.5rem;
+            transform: translateY(-50%);
+            color: var(--color-gray-300);
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .workflow-arrow {
+                display: none;
+            }
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-olive);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--color-olive-dark);
+        }
+
+        footer {
+            background: var(--color-olive-dark);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .footer-text {
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="detail-hero">
+        <div class="container">
+            <h1>智能履约</h1>
+            <p>从被动监控到主动预警,让每一份合同都按时履行</p>
+        </div>
+    </div>
+
+    <div class="detail-content">
+        <div class="container">
+            <a href="index.html" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                返回首页
+            </a>
+
+            <!-- Feature 1: Performance Tracking -->
+            <div class="feature-section">
+                <div class="feature-grid">
+                    <div class="feature-content">
+                        <div class="feature-header">
+                            <span class="feature-number">01</span>
+                            <h2 class="feature-title">履约监控</h2>
+                        </div>
+                        <p class="feature-description">
+                            实时跟踪合同履行进度,自动标记关键节点和里程碑。清晰可视化的时间轴让每个履约阶段一目了然,不错过任何重要时刻。
+                        </p>
+                        <ul class="feature-highlights">
+                            <li>自动提取合同中的关键时间节点和交付物</li>
+                            <li>可视化进度跟踪,实时同步履约状态</li>
+                            <li>支持多合同并行监控,统一管理视图</li>
+                        </ul>
+                    </div>
+                    <div class="feature-visual">
+                        <div class="timeline-viz">
+                            <div class="timeline-track">
+                                <div class="timeline-progress"></div>
+                            </div>
+                            <div class="timeline-milestones">
+                                <div class="milestone completed">
+                                    <div class="milestone-dot"></div>
+                                    <div class="milestone-label">合同签署</div>
+                                    <div class="milestone-date">2025-01-01</div>
+                                </div>
+                                <div class="milestone completed">
+                                    <div class="milestone-dot"></div>
+                                    <div class="milestone-label">首付款</div>
+                                    <div class="milestone-date">2025-01-15</div>
+                                </div>
+                                <div class="milestone completed">
+                                    <div class="milestone-dot"></div>
+                                    <div class="milestone-label">中期验收</div>
+                                    <div class="milestone-date">2025-02-28</div>
+                                </div>
+                                <div class="milestone pending">
+                                    <div class="milestone-dot"></div>
+                                    <div class="milestone-label">项目交付</div>
+                                    <div class="milestone-date">2025-03-31</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 2: Risk Alerts -->
+            <div class="feature-section">
+                <div class="feature-grid">
+                    <div class="feature-content">
+                        <div class="feature-header">
+                            <span class="feature-number">02</span>
+                            <h2 class="feature-title">风险预警</h2>
+                        </div>
+                        <p class="feature-description">
+                            AI主动识别履约风险,提前预警潜在问题。智能分析合同条款和履行进度,在风险发生前就发出提醒,为决策争取宝贵时间。
+                        </p>
+                        <ul class="feature-highlights">
+                            <li>多维度风险评估,识别逾期、违约等潜在问题</li>
+                            <li>智能预警分级,紧急事项优先提醒</li>
+                            <li>自动推送至相关负责人,确保及时响应</li>
+                        </ul>
+                    </div>
+                    <div class="feature-visual">
+                        <div class="alert-cards">
+                            <div class="alert-card">
+                                <svg class="alert-icon" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" stroke="#ef4444" stroke-width="2"/>
+                                    <path d="M12 8V12" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+                                    <circle cx="12" cy="16" r="1" fill="#ef4444"/>
+                                </svg>
+                                <div class="alert-content">
+                                    <div class="alert-title">紧急: 付款期限临近</div>
+                                    <div class="alert-message">合同 #2025-A001 第二期款项将于3天后到期,请及时安排付款</div>
+                                    <div class="alert-time">2025-03-26 09:30</div>
+                                </div>
+                            </div>
+                            <div class="alert-card">
+                                <svg class="alert-icon" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#f59e0b" stroke-width="2" stroke-linejoin="round"/>
+                                    <path d="M2 17L12 22L22 17" stroke="#f59e0b" stroke-width="2" stroke-linejoin="round"/>
+                                    <path d="M2 12L12 17L22 12" stroke="#f59e0b" stroke-width="2" stroke-linejoin="round"/>
+                                </svg>
+                                <div class="alert-content">
+                                    <div class="alert-title">提醒: 交付物待确认</div>
+                                    <div class="alert-message">供应商已提交第一批交付物,需要在7天内完成验收</div>
+                                    <div class="alert-time">2025-03-25 14:20</div>
+                                </div>
+                            </div>
+                            <div class="alert-card">
+                                <svg class="alert-icon" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" stroke="#10b981" stroke-width="2"/>
+                                    <path d="M8 12L11 15L16 9" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <div class="alert-content">
+                                    <div class="alert-title">完成: 中期验收通过</div>
+                                    <div class="alert-message">合同 #2024-B089 中期验收已完成,所有指标符合要求</div>
+                                    <div class="alert-time">2025-03-24 16:45</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 3: Collaborative Management -->
+            <div class="feature-section">
+                <div class="feature-grid">
+                    <div class="feature-content">
+                        <div class="feature-header">
+                            <span class="feature-number">03</span>
+                            <h2 class="feature-title">协同管理</h2>
+                        </div>
+                        <p class="feature-description">
+                            打通多方协作流程,让合同履行各环节无缝衔接。从申请审批到执行反馈,每个角色都在统一平台上高效协作。
+                        </p>
+                        <ul class="feature-highlights">
+                            <li>多角色权限管理,各司其职又信息透明</li>
+                            <li>自动流转审批流程,减少人工协调成本</li>
+                            <li>实时协作记录,完整留痕便于追溯</li>
+                        </ul>
+                    </div>
+                    <div class="feature-visual">
+                        <div class="workflow-viz">
+                            <div class="workflow-steps">
+                                <div class="workflow-step">
+                                    <div class="workflow-step-icon">
+                                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                            <path d="M16 4C12.6863 4 10 6.68629 10 10C10 13.3137 12.6863 16 16 16C19.3137 16 22 13.3137 22 10C22 6.68629 19.3137 4 16 4Z" stroke="var(--color-olive)" stroke-width="2"/>
+                                            <path d="M6 28C6 22.4772 10.4772 18 16 18C21.5228 18 26 22.4772 26 28" stroke="var(--color-olive)" stroke-width="2" stroke-linecap="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="workflow-step-title">业务发起</div>
+                                    <div class="workflow-step-desc">业务部门提交履约申请或变更</div>
+                                    <div class="workflow-arrow">→</div>
+                                </div>
+                                <div class="workflow-step">
+                                    <div class="workflow-step-icon">
+                                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                            <rect x="6" y="6" width="20" height="20" rx="2" stroke="var(--color-olive)" stroke-width="2"/>
+                                            <path d="M11 16L14 19L21 12" stroke="var(--color-olive)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="workflow-step-title">法务审核</div>
+                                    <div class="workflow-step-desc">法务团队进行合规性审查</div>
+                                    <div class="workflow-arrow">→</div>
+                                </div>
+                                <div class="workflow-step">
+                                    <div class="workflow-step-icon">
+                                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                            <path d="M8 12L16 6L24 12V24C24 25.1046 23.1046 26 22 26H10C8.89543 26 8 25.1046 8 24V12Z" stroke="var(--color-olive)" stroke-width="2"/>
+                                            <path d="M16 26V18" stroke="var(--color-olive)" stroke-width="2"/>
+                                        </svg>
+                                    </div>
+                                    <div class="workflow-step-title">管理决策</div>
+                                    <div class="workflow-step-desc">管理层最终审批并执行</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p class="footer-text">&copy; 2025 MeFlow Agent. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

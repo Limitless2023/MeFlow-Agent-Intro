@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能分析 - MeFlow Agent</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* FOUT Prevention */
+        body {
+            opacity: 0;
+            animation: fadeInPage 0.3s ease-in forwards;
+        }
+
+        @keyframes fadeInPage {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .detail-hero {
+            background: linear-gradient(135deg, #f8f9f6 0%, #eef0eb 100%);
+            padding: 5rem 0 4rem;
+            text-align: center;
+        }
+
+        .detail-hero h1 {
+            font-size: 3rem;
+            color: var(--color-olive-dark);
+            margin-bottom: 1rem;
+            font-family: 'Fraunces', 'Noto Sans SC', serif;
+        }
+
+        .detail-hero p {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .detail-content {
+            padding: 4rem 0;
+        }
+
+        .feature-section {
+            margin-bottom: 6rem;
+        }
+
+        .feature-section:last-child {
+            margin-bottom: 2rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .feature-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-number {
+            background: var(--color-olive);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .feature-title {
+            font-size: 1.75rem;
+            color: var(--color-olive-dark);
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .feature-description {
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-highlights {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-highlights li {
+            padding: 0.75rem 0;
+            padding-left: 1.75rem;
+            position: relative;
+            color: var(--color-text-secondary);
+            font-size: 1rem;
+        }
+
+        .feature-highlights li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--color-olive);
+            font-weight: bold;
+        }
+
+        /* Dashboard Metrics */
+        .dashboard-viz {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(92, 107, 80, 0.08);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: var(--color-gray-50);
+            border-radius: 12px;
+            padding: 1.5rem;
+            opacity: 0;
+            animation: metricFadeIn 0.6s ease-out forwards;
+        }
+
+        .metric-card:nth-child(1) { animation-delay: 0.2s; }
+        .metric-card:nth-child(2) { animation-delay: 0.3s; }
+        .metric-card:nth-child(3) { animation-delay: 0.4s; }
+        .metric-card:nth-child(4) { animation-delay: 0.5s; }
+
+        @keyframes metricFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-olive-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-change {
+            font-size: 0.75rem;
+            color: #10b981;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .metric-change.negative {
+            color: #ef4444;
+        }
+
+        .chart-container {
+            background: var(--color-gray-50);
+            border-radius: 12px;
+            padding: 1.5rem;
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+            gap: 0.5rem;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: var(--color-olive-light);
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            animation: barGrow 1s ease-out forwards;
+            transform-origin: bottom;
+        }
+
+        .chart-bar:nth-child(1) { animation-delay: 0.1s; height: 60%; }
+        .chart-bar:nth-child(2) { animation-delay: 0.2s; height: 75%; }
+        .chart-bar:nth-child(3) { animation-delay: 0.3s; height: 45%; }
+        .chart-bar:nth-child(4) { animation-delay: 0.4s; height: 90%; }
+        .chart-bar:nth-child(5) { animation-delay: 0.5s; height: 70%; }
+        .chart-bar:nth-child(6) { animation-delay: 0.6s; height: 85%; }
+
+        @keyframes barGrow {
+            from { transform: scaleY(0); }
+            to { transform: scaleY(1); }
+        }
+
+        /* Trend Lines */
+        .trend-viz {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(92, 107, 80, 0.08);
+        }
+
+        .trend-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .trend-title {
+            font-weight: 600;
+            color: var(--color-olive-dark);
+            font-size: 1.125rem;
+        }
+
+        .trend-period {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+        }
+
+        .trend-graph {
+            position: relative;
+            height: 200px;
+            background: var(--color-gray-50);
+            border-radius: 12px;
+            padding: 1.5rem;
+            overflow: hidden;
+        }
+
+        .trend-line {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            right: 1.5rem;
+            height: calc(100% - 3rem);
+        }
+
+        .trend-path {
+            stroke: var(--color-olive);
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawLine 2s ease-out forwards;
+        }
+
+        @keyframes drawLine {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .trend-area {
+            fill: url(#gradient);
+            opacity: 0;
+            animation: fadeInArea 1s ease-out 1s forwards;
+        }
+
+        @keyframes fadeInArea {
+            to { opacity: 0.2; }
+        }
+
+        .trend-dots {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+        }
+
+        .trend-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--color-olive);
+            border: 2px solid white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            animation: dotAppear 0.4s ease-out forwards;
+        }
+
+        .trend-dot:nth-child(1) { left: 10%; bottom: 30%; animation-delay: 0.5s; }
+        .trend-dot:nth-child(2) { left: 25%; bottom: 45%; animation-delay: 0.7s; }
+        .trend-dot:nth-child(3) { left: 40%; bottom: 40%; animation-delay: 0.9s; }
+        .trend-dot:nth-child(4) { left: 55%; bottom: 60%; animation-delay: 1.1s; }
+        .trend-dot:nth-child(5) { left: 70%; bottom: 55%; animation-delay: 1.3s; }
+        .trend-dot:nth-child(6) { left: 85%; bottom: 75%; animation-delay: 1.5s; }
+
+        @keyframes dotAppear {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        /* Report Preview */
+        .report-viz {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(92, 107, 80, 0.08);
+        }
+
+        .report-preview {
+            background: var(--color-gray-50);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 2px solid var(--color-gray-200);
+        }
+
+        .report-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--color-gray-200);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: slideDown 0.6s ease-out 0.2s forwards;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .report-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--color-olive-light);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .report-title-block h3 {
+            margin: 0 0 0.25rem 0;
+            color: var(--color-olive-dark);
+            font-size: 1.25rem;
+        }
+
+        .report-subtitle {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            margin: 0;
+        }
+
+        .report-section {
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: slideDown 0.6s ease-out forwards;
+        }
+
+        .report-section:nth-child(2) { animation-delay: 0.4s; }
+        .report-section:nth-child(3) { animation-delay: 0.6s; }
+        .report-section:nth-child(4) { animation-delay: 0.8s; }
+
+        .report-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .report-section-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--color-olive-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .report-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+        }
+
+        .report-item-value {
+            font-weight: 600;
+            color: var(--color-olive);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-olive);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--color-olive-dark);
+        }
+
+        footer {
+            background: var(--color-olive-dark);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .footer-text {
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="detail-hero">
+        <div class="container">
+            <h1>智能分析</h1>
+            <p>从海量数据中洞察规律,让每个决策都有数据支撑</p>
+        </div>
+    </div>
+
+    <div class="detail-content">
+        <div class="container">
+            <a href="index.html" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                返回首页
+            </a>
+
+            <!-- Feature 1: Data Insights -->
+            <div class="feature-section">
+                <div class="feature-grid">
+                    <div class="feature-content">
+                        <div class="feature-header">
+                            <span class="feature-number">01</span>
+                            <h2 class="feature-title">数据洞察</h2>
+                        </div>
+                        <p class="feature-description">
+                            自动聚合合同全生命周期数据,生成可视化仪表盘。关键指标一目了然,让管理层快速把握合同管理整体状况。
+                        </p>
+                        <ul class="feature-highlights">
+                            <li>实时统计合同数量、金额、履约率等核心指标</li>
+                            <li>多维度数据交叉分析,发现隐藏的业务规律</li>
+                            <li>可视化图表展示,支持自定义筛选和钻取</li>
+                        </ul>
+                    </div>
+                    <div class="feature-visual">
+                        <div class="dashboard-viz">
+                            <div class="metrics-grid">
+                                <div class="metric-card">
+                                    <div class="metric-label">合同总数</div>
+                                    <div class="metric-value">1,284</div>
+                                    <div class="metric-change">
+                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                            <path d="M6 10V2M6 2L2 6M6 2L10 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        +12% 本月
+                                    </div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-label">总金额</div>
+                                    <div class="metric-value">¥8.5亿</div>
+                                    <div class="metric-change">
+                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                            <path d="M6 10V2M6 2L2 6M6 2L10 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        +8% 本季度
+                                    </div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-label">履约率</div>
+                                    <div class="metric-value">94.2%</div>
+                                    <div class="metric-change">
+                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                            <path d="M6 10V2M6 2L2 6M6 2L10 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        +2.1% 同比
+                                    </div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-label">平均周期</div>
+                                    <div class="metric-value">45天</div>
+                                    <div class="metric-change negative">
+                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                            <path d="M6 2V10M6 10L10 6M6 10L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        -5天 本月
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chart-container">
+                                <div class="chart-bar"></div>
+                                <div class="chart-bar"></div>
+                                <div class="chart-bar"></div>
+                                <div class="chart-bar"></div>
+                                <div class="chart-bar"></div>
+                                <div class="chart-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 2: Trend Analysis -->
+            <div class="feature-section">
+                <div class="feature-grid">
+                    <div class="feature-content">
+                        <div class="feature-header">
+                            <span class="feature-number">02</span>
+                            <h2 class="feature-title">趋势分析</h2>
+                        </div>
+                        <p class="feature-description">
+                            基于历史数据智能预测未来走势,识别业务风险和机会。从时间维度看清合同管理的变化轨迹,为战略决策提供依据。
+                        </p>
+                        <ul class="feature-highlights">
+                            <li>时间序列分析,展示合同数据的历史演变</li>
+                            <li>AI预测模型,提前发现潜在风险和机会</li>
+                            <li>季节性趋势识别,优化资源配置和规划</li>
+                        </ul>
+                    </div>
+                    <div class="feature-visual">
+                        <div class="trend-viz">
+                            <div class="trend-header">
+                                <div class="trend-title">合同签署趋势</div>
+                                <div class="trend-period">近6个月</div>
+                            </div>
+                            <div class="trend-graph">
+                                <svg class="trend-line" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                    <defs>
+                                        <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" style="stop-color:var(--color-olive);stop-opacity:0.3" />
+                                            <stop offset="100%" style="stop-color:var(--color-olive);stop-opacity:0" />
+                                        </linearGradient>
+                                    </defs>
+                                    <path class="trend-area" d="M 0,70 L 20,55 L 40,60 L 60,40 L 80,45 L 100,25 L 100,100 L 0,100 Z"/>
+                                    <path class="trend-path" d="M 0,70 L 20,55 L 40,60 L 60,40 L 80,45 L 100,25"/>
+                                </svg>
+                                <div class="trend-dots">
+                                    <div class="trend-dot"></div>
+                                    <div class="trend-dot"></div>
+                                    <div class="trend-dot"></div>
+                                    <div class="trend-dot"></div>
+                                    <div class="trend-dot"></div>
+                                    <div class="trend-dot"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 3: Smart Reports -->
+            <div class="feature-section">
+                <div class="feature-grid">
+                    <div class="feature-content">
+                        <div class="feature-header">
+                            <span class="feature-number">03</span>
+                            <h2 class="feature-title">智能报告</h2>
+                        </div>
+                        <p class="feature-description">
+                            一键生成专业分析报告,自动总结关键发现和建议。从数据收集到报告输出全程自动化,大幅提升管理效率。
+                        </p>
+                        <ul class="feature-highlights">
+                            <li>自动化报告生成,支持日报、周报、月报等多种周期</li>
+                            <li>智能摘要提炼,突出重点数据和异常情况</li>
+                            <li>多格式导出,支持PDF、Excel等格式</li>
+                        </ul>
+                    </div>
+                    <div class="feature-visual">
+                        <div class="report-viz">
+                            <div class="report-preview">
+                                <div class="report-header">
+                                    <div class="report-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M9 12H15M9 16H15M17 21H7C5.89543 21 5 20.1046 5 19V5C5 3.89543 5.89543 3 7 3H12.5858C12.851 3 13.1054 3.10536 13.2929 3.29289L18.7071 8.70711C18.8946 8.89464 19 9.149 19 9.41421V19C19 20.1046 18.1046 21 17 21Z" stroke="var(--color-olive)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="report-title-block">
+                                        <h3>2025年3月合同管理月报</h3>
+                                        <p class="report-subtitle">生成时间: 2025-04-01 09:00</p>
+                                    </div>
+                                </div>
+                                <div class="report-section">
+                                    <div class="report-section-title">📊 本月概览</div>
+                                    <div class="report-item">
+                                        <span>新签合同</span>
+                                        <span class="report-item-value">156份</span>
+                                    </div>
+                                    <div class="report-item">
+                                        <span>合同金额</span>
+                                        <span class="report-item-value">¥2.8亿</span>
+                                    </div>
+                                    <div class="report-item">
+                                        <span>履约完成</span>
+                                        <span class="report-item-value">142份</span>
+                                    </div>
+                                </div>
+                                <div class="report-section">
+                                    <div class="report-section-title">⚠️ 风险预警</div>
+                                    <div class="report-item">
+                                        <span>即将到期合同</span>
+                                        <span class="report-item-value">23份</span>
+                                    </div>
+                                    <div class="report-item">
+                                        <span>履约延期风险</span>
+                                        <span class="report-item-value">8份</span>
+                                    </div>
+                                </div>
+                                <div class="report-section">
+                                    <div class="report-section-title">💡 智能建议</div>
+                                    <div class="report-item">
+                                        <span style="line-height: 1.5;">建议加强对履约延期合同的跟进,重点关注大额合同的付款进度</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p class="footer-text">&copy; 2025 MeFlow Agent. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
