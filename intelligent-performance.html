@@ -358,6 +358,30 @@
             color: var(--color-gray-700);
         }
 
+        /* Intro Section */
+        .intro-section {
+            background: linear-gradient(135deg, var(--color-olive) 0%, var(--color-olive-dark) 100%);
+            color: var(--color-white);
+            border-radius: var(--radius-xl);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .intro-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .intro-description {
+            font-size: 1.0625rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
         @media (max-width: 768px) {
             .feature-section {
                 grid-template-columns: 1fr;
@@ -372,6 +396,10 @@
 
             .workflow-diagram {
                 grid-template-columns: 1fr;
+            }
+
+            .intro-section {
+                padding: 2rem 1.5rem;
             }
         }
     </style>
@@ -421,6 +449,13 @@
                     实时跟踪合同履行进度，智能提醒关键节点，让每一份合同都按时履行，每一个风险都提前预警
                 </p>
             </header>
+
+            <div class="intro-section">
+                <h2 class="intro-title">从事后补救到事前预防</h2>
+                <p class="intro-description">
+                    传统履约管理往往是被动的:合同到期了才想起来提醒,出了问题才开始追责。MeFlow Agent 将履约管理变为主动预警,提前识别风险,让每一份合同都能按时、按质完成
+                </p>
+            </div>
 
             <!-- Feature 1: Performance Tracking -->
             <div class="feature-section">
