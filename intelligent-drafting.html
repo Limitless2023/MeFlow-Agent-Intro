@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>智能起草 - MeFlow Agent</title>
-    <meta name="description" content="MeFlow Agent 智能起草 - 基于业务场景自动生成合同,支持多模态输入,内置法律合规检查">
+    <meta name="description" content="MeFlow Agent 智能起草 - 基于业务场景自动生成合同,让AI成为你的起草专家">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -64,7 +64,7 @@
             font-size: 1.125rem;
             color: var(--color-gray-600);
             max-width: 800px;
-            margin: 0 auto 2rem;
+            margin: 0 auto;
             line-height: 1.7;
         }
 
@@ -95,143 +95,88 @@
             height: 16px;
         }
 
-        /* Content Section */
-        .content-section {
+        /* Feature Section - Left-Right Layout */
+        .feature-section {
             background: var(--color-white);
             border-radius: var(--radius-xl);
             border: 1px solid var(--color-gray-200);
             padding: 3rem;
             margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            transition: all 0.3s ease;
         }
 
-        .content-section.intro {
+        .feature-section:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: var(--color-olive-light);
+        }
+
+        /* Alternate layout for visual variety */
+        .feature-section.reverse {
             background: linear-gradient(135deg, var(--color-olive-bg) 0%, var(--color-white) 100%);
         }
 
-        .content-section.problem {
-            background: var(--color-gray-50);
-            border-left: 4px solid var(--color-gray-400);
+        .feature-section.reverse .feature-content {
+            order: 2;
         }
 
-        .section-header {
-            margin-bottom: 2rem;
+        .feature-section.reverse .feature-visual {
+            order: 1;
         }
 
-        .section-icon-wrapper {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 56px;
-            height: 56px;
-            background: var(--color-olive-light);
-            border-radius: var(--radius-lg);
-            margin-bottom: 1.5rem;
-        }
-
-        .section-icon {
-            width: 28px;
-            height: 28px;
-            color: var(--color-olive);
-        }
-
-        .section-title {
-            font-size: 1.75rem;
-            font-weight: 600;
-            color: var(--color-gray-900);
-            margin-bottom: 1rem;
-        }
-
-        .section-description {
-            font-size: 1.0625rem;
-            color: var(--color-gray-600);
-            line-height: 1.8;
-            margin-bottom: 1rem;
-        }
-
-        .section-description:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Features Grid */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .feature-card {
-            background: var(--color-white);
-            border: 2px solid var(--color-gray-200);
-            border-radius: var(--radius-xl);
-            padding: 2rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--color-olive);
-            transform: scaleY(0);
-            transition: transform 0.3s ease;
-        }
-
-        .feature-card:hover {
-            border-color: var(--color-olive);
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-4px);
-        }
-
-        .feature-card:hover::before {
-            transform: scaleY(1);
+        .feature-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
         .feature-number {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 48px;
-            height: 48px;
+            width: 56px;
+            height: 56px;
             background: var(--color-olive);
             color: var(--color-white);
-            border-radius: var(--radius-md);
-            font-size: 1.25rem;
+            border-radius: var(--radius-lg);
+            font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 1.5rem;
         }
 
         .feature-title {
-            font-size: 1.25rem;
+            font-size: 1.75rem;
             font-weight: 600;
             color: var(--color-gray-900);
-            margin-bottom: 0.75rem;
+            line-height: 1.3;
         }
 
-        .feature-desc {
-            font-size: 0.9375rem;
+        .feature-description {
+            font-size: 1.0625rem;
             color: var(--color-gray-600);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
+            line-height: 1.8;
         }
 
         .feature-highlights {
             display: flex;
             flex-direction: column;
-            gap: 0.75rem;
+            gap: 1rem;
         }
 
         .highlight-item {
             display: flex;
             align-items: flex-start;
             gap: 0.75rem;
-            font-size: 0.9375rem;
-            color: var(--color-gray-700);
+            padding: 1rem;
+            background: var(--color-gray-50);
+            border-radius: var(--radius-md);
+            border-left: 3px solid var(--color-olive);
+        }
+
+        .feature-section.reverse .highlight-item {
+            background: var(--color-white);
         }
 
         .highlight-icon {
@@ -242,158 +187,210 @@
             margin-top: 0.125rem;
         }
 
-        /* Process Flow */
-        .process-flow {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin: 3rem 0;
-            padding: 2rem;
+        .highlight-text {
+            font-size: 0.9375rem;
+            color: var(--color-gray-700);
+            line-height: 1.6;
+        }
+
+        /* Feature Visual - Illustration Area */
+        .feature-visual {
             background: var(--color-gray-50);
-            border-radius: var(--radius-xl);
-            border: 1px solid var(--color-gray-200);
-        }
-
-        .process-step {
-            flex: 1;
-            text-align: center;
-            position: relative;
-        }
-
-        .process-step:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            right: -20px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 40px;
-            height: 2px;
-            background: var(--color-gray-300);
-        }
-
-        .process-step:not(:last-child)::before {
-            content: '→';
-            position: absolute;
-            right: -28px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--color-olive);
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .process-icon {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 1rem;
-            background: var(--color-white);
-            border: 2px solid var(--color-olive);
-            border-radius: 50%;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
+            min-height: 300px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .process-icon svg {
-            width: 32px;
-            height: 32px;
-            color: var(--color-olive);
+        .feature-section.reverse .feature-visual {
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
         }
 
-        .process-label {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--color-gray-900);
+        /* Illustration Placeholder */
+        .illustration {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
         }
 
-        /* Value Proposition */
-        .value-section {
-            background: linear-gradient(135deg, var(--color-olive) 0%, var(--color-olive-dark) 100%);
-            color: var(--color-white);
-            padding: 3rem;
-            border-radius: var(--radius-xl);
-            margin-bottom: 2rem;
-        }
-
-        .value-section .section-title {
-            color: var(--color-white);
-        }
-
-        .value-section .section-description {
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .value-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .value-item {
-            text-align: center;
-        }
-
-        .value-icon {
-            width: 56px;
-            height: 56px;
-            margin: 0 auto 1rem;
-            background: rgba(255, 255, 255, 0.2);
+        .illustration-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--color-olive-light);
             border-radius: var(--radius-lg);
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .value-icon svg {
-            width: 28px;
-            height: 28px;
-            color: var(--color-white);
+        .illustration-icon svg {
+            width: 48px;
+            height: 48px;
+            color: var(--color-olive);
         }
 
-        .value-label {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--color-white);
-            margin-bottom: 0.5rem;
+        .illustration-elements {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            width: 100%;
         }
 
-        .value-desc {
-            font-size: 0.9375rem;
-            color: rgba(255, 255, 255, 0.85);
-            line-height: 1.6;
+        .illustration-bar {
+            height: 12px;
+            background: var(--color-gray-300);
+            border-radius: var(--radius-sm);
+            animation: pulse 2s ease-in-out infinite;
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .features-grid,
-            .value-grid {
-                grid-template-columns: repeat(2, 1fr);
+        .illustration-bar:nth-child(1) {
+            width: 80%;
+            animation-delay: 0s;
+        }
+
+        .illustration-bar:nth-child(2) {
+            width: 60%;
+            animation-delay: 0.2s;
+        }
+
+        .illustration-bar:nth-child(3) {
+            width: 70%;
+            animation-delay: 0.4s;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
             }
         }
 
+        /* Document Illustration */
+        .doc-illustration {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .doc-card {
+            background: var(--color-white);
+            border: 2px solid var(--color-gray-200);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .doc-header {
+            width: 100%;
+            height: 8px;
+            background: var(--color-olive);
+            border-radius: var(--radius-sm);
+        }
+
+        .doc-line {
+            width: 100%;
+            height: 6px;
+            background: var(--color-gray-200);
+            border-radius: var(--radius-sm);
+        }
+
+        .doc-line.short {
+            width: 60%;
+        }
+
+        /* Form Illustration */
+        .form-illustration {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .form-field {
+            background: var(--color-white);
+            border: 2px solid var(--color-gray-200);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .form-label {
+            width: 30%;
+            height: 8px;
+            background: var(--color-gray-300);
+            border-radius: var(--radius-sm);
+        }
+
+        .form-value {
+            flex: 1;
+            height: 8px;
+            background: var(--color-olive-light);
+            border-radius: var(--radius-sm);
+        }
+
+        /* Intro Section - Simplified */
+        .intro-section {
+            background: linear-gradient(135deg, var(--color-olive) 0%, var(--color-olive-dark) 100%);
+            color: var(--color-white);
+            border-radius: var(--radius-xl);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .intro-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .intro-description {
+            font-size: 1.0625rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
             .drafting-page {
                 padding-top: 6rem;
             }
 
-            .content-section {
+            .feature-section,
+            .feature-section.reverse {
+                grid-template-columns: 1fr;
                 padding: 2rem 1.5rem;
             }
 
-            .features-grid,
-            .value-grid {
+            .feature-section.reverse .feature-content,
+            .feature-section.reverse .feature-visual {
+                order: unset;
+            }
+
+            .intro-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .doc-illustration {
                 grid-template-columns: 1fr;
-            }
-
-            .process-flow {
-                flex-direction: column;
-                gap: 2rem;
-            }
-
-            .process-step:not(:last-child)::after,
-            .process-step:not(:last-child)::before {
-                display: none;
             }
         }
     </style>
@@ -447,212 +444,168 @@
                     让 AI 成为你的 <span class="highlight">合同起草专家</span>
                 </h1>
                 <p class="drafting-subtitle">
-                    基于业务场景自动生成合同,支持多模态输入,内置法律合规检查,从零到一快速生成高质量合同文本
+                    MeFlow 3.0 让 AI 自主思考、规划任务、推理和调用企业数据,围绕交易管理合同信息流,优化合同起草的工作效率及文本质量
                 </p>
             </header>
 
-            <!-- What is a Good Contract -->
-            <div class="content-section intro">
-                <div class="section-header">
-                    <div class="section-icon-wrapper">
-                        <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                        </svg>
-                    </div>
-                    <h2 class="section-title">好的合同,到底是什么?</h2>
-                </div>
-                <p class="section-description">
-                    合同常被狭隘地认为只是打官司时的证据,但实际上,<strong>合同最重要的作用是把生意谈清楚</strong>。做生意时,买卖双方对很多细节的理解其实并不一致,如果只是口头说说,或者各自心里有个模糊的预期,后面很容易扯皮。
-                </p>
-                <p class="section-description">
-                    合同起草的过程,就是让双方把这些模糊的想法、没说透的期待、可能出现的风险,一条条写清楚。把整个交易流程推演一遍:货什么时候交?钱怎么付?出了质量问题怎么办?把这些都提前谈好、写明白,把原本充满变数的商业合作,变成了一套双方都认可的明确规则。
-                </p>
-                <p class="section-description">
-                    一份好合同,就是把可能出现的风险想得足够全面、足够准确。对于企业来说,<strong>过往的交易情况和历史经验,就是未来风险判断的重要参考信息</strong>。
+            <!-- Simplified Intro -->
+            <div class="intro-section">
+                <h2 class="intro-title">从低效重复到智能高效</h2>
+                <p class="intro-description">
+                    企业积累了大量的合同模板、条款库、过往案例,但这些宝贵经验却散落在各个系统里,真正需要时找不到、用不上。MeFlow 3.0 让 AI 调动企业沉淀的所有相关知识,让每一次起草都站在过往经验的肩膀上。
                 </p>
             </div>
 
-            <!-- Current Problems -->
-            <div class="content-section problem">
-                <div class="section-header">
-                    <div class="section-icon-wrapper" style="background: var(--color-gray-200);">
-                        <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-gray-600);">
-                            <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                        </svg>
-                    </div>
-                    <h2 class="section-title">现实困境:低效重复的起草流程</h2>
-                </div>
-                <p class="section-description">
-                    现实中,合同起草往往从零开始,陷入"低效重复"的困境。法务或业务人员每次起草合同时,都要从零开始:翻找历史文件夹里的相似合同,复制粘贴条款,再根据记忆修改细节。遇到新的交易类型,更是两眼一抹黑——不知道该参考哪份合同,不确定哪些风险点需要覆盖。
-                </p>
-                <p class="section-description">
-                    企业明明积累了大量的合同模板、条款库、过往案例,但这些宝贵经验却散落在各个文件夹、不同系统里,真正需要时找不到、用不上。<strong>结果就是效率低、质量不稳定、风险难把控</strong>。
-                </p>
-            </div>
+            <!-- Feature 1: Template Drafting -->
+            <div class="feature-section">
+                <div class="feature-content">
+                    <div class="feature-number">01</div>
+                    <h2 class="feature-title">模板起草</h2>
+                    <p class="feature-description">为你找到最佳模板</p>
 
-            <!-- Solution: MeFlow 3.0 -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2 class="section-title">MeFlow 3.0:AI 原生的智能起草解决方案</h2>
-                    <p class="section-description">
-                        MeFlow 3.0 基于这一业务洞察,建设 AI 原生的 Agent 框架,让 AI 自主思考、规划任务、推理和调用系统内为它所设计的工具及相关数据,围绕交易管理合同信息流,优化合同起草的工作效率及文本质量。
-                    </p>
-                </div>
-
-                <!-- Process Flow -->
-                <div class="process-flow">
-                    <div class="process-step">
-                        <div class="process-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <div class="feature-highlights">
+                        <div class="highlight-item">
+                            <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                             </svg>
+                            <span class="highlight-text">AI 自动识别交易类型,主动翻阅企业所有历史合同</span>
                         </div>
-                        <div class="process-label">理解需求</div>
+                        <div class="highlight-item">
+                            <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span class="highlight-text">智能匹配最适合的模板,提高模版使用率</span>
+                        </div>
+                        <div class="highlight-item">
+                            <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                            <span class="highlight-text">让合同起点站在企业历史经验的肩膀上</span>
+                        </div>
                     </div>
-                    <div class="process-step">
-                        <div class="process-icon">
+                </div>
+
+                <div class="feature-visual">
+                    <div class="illustration">
+                        <div class="illustration-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
                         </div>
-                        <div class="process-label">检索资源</div>
-                    </div>
-                    <div class="process-step">
-                        <div class="process-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                            </svg>
-                        </div>
-                        <div class="process-label">生成内容</div>
-                    </div>
-                    <div class="process-step">
-                        <div class="process-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </div>
-                        <div class="process-label">交叉验证</div>
-                    </div>
-                </div>
-
-                <!-- Three Core Capabilities -->
-                <div class="features-grid">
-                    <!-- Feature 1: Template-based Drafting -->
-                    <div class="feature-card">
-                        <div class="feature-number">01</div>
-                        <h3 class="feature-title">模板起草</h3>
-                        <p class="feature-desc">为你找到最佳模板</p>
-                        <div class="feature-highlights">
-                            <div class="highlight-item">
-                                <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M5 13l4 4L19 7" />
-                                </svg>
-                                <span>AI 自动识别交易类型,主动翻阅企业所有历史合同</span>
+                        <div class="doc-illustration">
+                            <div class="doc-card">
+                                <div class="doc-header"></div>
+                                <div class="doc-line"></div>
+                                <div class="doc-line"></div>
+                                <div class="doc-line short"></div>
                             </div>
-                            <div class="highlight-item">
-                                <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M5 13l4 4L19 7" />
-                                </svg>
-                                <span>智能匹配最适合的模板,提高模版使用率</span>
-                            </div>
-                            <div class="highlight-item">
-                                <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M5 13l4 4L19 7" />
-                                </svg>
-                                <span>让合同起点站在企业历史经验的肩膀上</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Feature 2: Custom Drafting -->
-                    <div class="feature-card">
-                        <div class="feature-number">02</div>
-                        <h3 class="feature-title">非标起草</h3>
-                        <p class="feature-desc">从 0-1 生成高质量合同</p>
-                        <div class="feature-highlights">
-                            <div class="highlight-item">
-                                <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M5 13l4 4L19 7" />
-                                </svg>
-                                <span>AI 以专家视角推演交易可能遇到的问题</span>
-                            </div>
-                            <div class="highlight-item">
-                                <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M5 13l4 4L19 7" />
-                                </svg>
-                                <span>主动检索企业条款库、范本库、知识库</span>
-                            </div>
-                            <div class="highlight-item">
-                                <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M5 13l4 4L19 7" />
-                                </svg>
-                                <span>结合专业能力和企业数据,生成完整合同框架</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Feature 3: Form Filling -->
-                    <div class="feature-card">
-                        <div class="feature-number">03</div>
-                        <h3 class="feature-title">填写表单</h3>
-                        <p class="feature-desc">智能提取关键字段</p>
-                        <div class="feature-highlights">
-                            <div class="highlight-item">
-                                <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M5 13l4 4L19 7" />
-                                </svg>
-                                <span>自动识别合同中的关键信息要素</span>
-                            </div>
-                            <div class="highlight-item">
-                                <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M5 13l4 4L19 7" />
-                                </svg>
-                                <span>提取主体、金额、期限等字段,准确填充表单</span>
-                            </div>
-                            <div class="highlight-item">
-                                <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M5 13l4 4L19 7" />
-                                </svg>
-                                <span>自动生成履约计划表,为后续管理提供数据基础</span>
+                            <div class="doc-card">
+                                <div class="doc-header"></div>
+                                <div class="doc-line"></div>
+                                <div class="doc-line"></div>
+                                <div class="doc-line short"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Value Proposition -->
-            <div class="value-section">
-                <h2 class="section-title">让 AI 之力自然流淌在合同管理全流程中</h2>
-                <p class="section-description">
-                    起草是整个合同管理流程的有机起点,从起草阶段生成的数据、建立的关联关系、识别的风险,都会自然流动到后续的审批、履约、归档环节。同时也是企业交易经验的高密度信息载体。
-                </p>
-                <div class="value-grid">
-                    <div class="value-item">
-                        <div class="value-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+            <!-- Feature 2: Custom Drafting -->
+            <div class="feature-section reverse">
+                <div class="feature-content">
+                    <div class="feature-number">02</div>
+                    <h2 class="feature-title">非标起草</h2>
+                    <p class="feature-description">从 0-1 生成高质量合同</p>
+
+                    <div class="feature-highlights">
+                        <div class="highlight-item">
+                            <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
                             </svg>
+                            <span class="highlight-text">AI 以专家视角推演交易可能遇到的问题</span>
                         </div>
-                        <div class="value-label">效率提升</div>
-                        <p class="value-desc">从数天到数分钟,AI 重塑合同起草效率</p>
-                    </div>
-                    <div class="value-item">
-                        <div class="value-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                            </svg>
-                        </div>
-                        <div class="value-label">质量保障</div>
-                        <p class="value-desc">基于企业经验,确保合同质量稳定</p>
-                    </div>
-                    <div class="value-item">
-                        <div class="value-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <div class="highlight-item">
+                            <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
                             </svg>
+                            <span class="highlight-text">主动检索企业条款库、范本库、知识库</span>
                         </div>
-                        <div class="value-label">知识沉淀</div>
-                        <p class="value-desc">有效调用和沉淀企业数据资产</p>
+                        <div class="highlight-item">
+                            <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
+                            <span class="highlight-text">结合专业能力和企业数据,生成完整合同框架</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-visual">
+                    <div class="illustration">
+                        <div class="illustration-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
+                        </div>
+                        <div class="illustration-elements">
+                            <div class="illustration-bar"></div>
+                            <div class="illustration-bar"></div>
+                            <div class="illustration-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 3: Form Filling -->
+            <div class="feature-section">
+                <div class="feature-content">
+                    <div class="feature-number">03</div>
+                    <h2 class="feature-title">填写表单</h2>
+                    <p class="feature-description">智能提取关键字段</p>
+
+                    <div class="feature-highlights">
+                        <div class="highlight-item">
+                            <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                            <span class="highlight-text">自动识别合同中的关键信息要素</span>
+                        </div>
+                        <div class="highlight-item">
+                            <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                            </svg>
+                            <span class="highlight-text">提取主体、金额、期限等字段,准确填充表单</span>
+                        </div>
+                        <div class="highlight-item">
+                            <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span class="highlight-text">自动生成履约计划表,为后续管理提供数据基础</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-visual">
+                    <div class="illustration">
+                        <div class="illustration-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                            </svg>
+                        </div>
+                        <div class="form-illustration">
+                            <div class="form-field">
+                                <div class="form-label"></div>
+                                <div class="form-value"></div>
+                            </div>
+                            <div class="form-field">
+                                <div class="form-label"></div>
+                                <div class="form-value"></div>
+                            </div>
+                            <div class="form-field">
+                                <div class="form-label"></div>
+                                <div class="form-value"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
