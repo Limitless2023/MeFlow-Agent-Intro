@@ -249,30 +249,53 @@
             height: 12px;
             background: var(--color-gray-300);
             border-radius: var(--radius-sm);
-            animation: pulse 2s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .illustration-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: var(--color-olive);
+            animation: typing 3s ease-in-out infinite;
         }
 
         .illustration-bar:nth-child(1) {
             width: 80%;
+        }
+
+        .illustration-bar:nth-child(1)::after {
             animation-delay: 0s;
         }
 
         .illustration-bar:nth-child(2) {
             width: 60%;
-            animation-delay: 0.2s;
+        }
+
+        .illustration-bar:nth-child(2)::after {
+            animation-delay: 0.8s;
         }
 
         .illustration-bar:nth-child(3) {
             width: 70%;
-            animation-delay: 0.4s;
         }
 
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 0.6;
+        .illustration-bar:nth-child(3)::after {
+            animation-delay: 1.6s;
+        }
+
+        @keyframes typing {
+            0% {
+                width: 0;
             }
-            50% {
-                opacity: 1;
+            30%, 70% {
+                width: 100%;
+            }
+            100% {
+                width: 100%;
             }
         }
 
@@ -292,6 +315,30 @@
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
+            transition: all 0.3s ease;
+            animation: cardFloat 3s ease-in-out infinite;
+        }
+
+        .doc-card:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .doc-card:nth-child(2) {
+            animation-delay: 1.5s;
+        }
+
+        .feature-section:hover .doc-card {
+            border-color: var(--color-olive);
+            box-shadow: 0 4px 12px rgba(92, 107, 80, 0.15);
+        }
+
+        @keyframes cardFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
         }
 
         .doc-header {
@@ -328,6 +375,31 @@
             display: flex;
             align-items: center;
             gap: 1rem;
+            animation: formFadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .form-field:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .form-field:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .form-field:nth-child(3) {
+            animation-delay: 0.8s;
+        }
+
+        @keyframes formFadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .form-label {
@@ -340,8 +412,42 @@
         .form-value {
             flex: 1;
             height: 8px;
-            background: var(--color-olive-light);
+            background: var(--color-gray-200);
             border-radius: var(--radius-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-value::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: var(--color-olive-light);
+            animation: fillValue 2s ease-in-out infinite;
+        }
+
+        .form-field:nth-child(1) .form-value::after {
+            animation-delay: 0.5s;
+        }
+
+        .form-field:nth-child(2) .form-value::after {
+            animation-delay: 0.8s;
+        }
+
+        .form-field:nth-child(3) .form-value::after {
+            animation-delay: 1.1s;
+        }
+
+        @keyframes fillValue {
+            0% {
+                width: 0;
+            }
+            50%, 100% {
+                width: 100%;
+            }
         }
 
         /* Intro Section - Simplified */
@@ -573,7 +679,7 @@
                             <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
-                            <span class="highlight-text">多文件批量提取信息,一次处理多份合同</span>
+                            <span class="highlight-text">批量处理多份文件,一键提取所有信息</span>
                         </div>
                         <div class="highlight-item">
                             <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
