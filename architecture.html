@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>技术架构 - MeFlow Agent</title>
-    <meta name="description" content="MeFlow Agent 技术架构 - 多层Agent协作架构，融合LLM、向量数据库、工作流引擎">
+    <meta name="description" content="MeFlow Agent 技术架构 - 基于微服务与AI原生架构的多层技术栈">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -103,25 +103,42 @@
             margin-bottom: 3rem;
         }
 
-        /* Layer Section */
-        .layer-section {
+        /* Layer Row - Horizontal Layout with Label on Left */
+        .layer-row {
+            display: flex;
+            gap: 1.5rem;
             margin-bottom: 2rem;
+            align-items: stretch;
         }
 
-        .layer-section:last-child {
+        .layer-row:last-child {
             margin-bottom: 0;
         }
 
-        .layer-header {
+        /* Layer Label - Left Side */
+        .layer-label {
+            flex-shrink: 0;
+            width: 140px;
             background: linear-gradient(135deg, var(--color-olive) 0%, #4a5a40 100%);
             color: var(--color-white);
-            padding: 0.75rem 1.5rem;
+            padding: 1rem;
             border-radius: var(--radius-lg);
             font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 1rem;
+            font-size: 0.9375rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
             box-shadow: 0 2px 8px rgba(92, 107, 80, 0.2);
+            writing-mode: horizontal-tb;
+        }
+
+        /* Layer Content - Right Side */
+        .layer-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
         /* Grid Container */
@@ -130,8 +147,24 @@
             gap: 1rem;
         }
 
+        .grid-1col {
+            grid-template-columns: 1fr;
+        }
+
+        .grid-2col {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .grid-3col {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .grid-5col {
+            grid-template-columns: repeat(5, 1fr);
+        }
+
         /* Category Container */
-        .category-container {
+        .category-box {
             background: var(--color-olive-bg);
             border: 1px solid var(--color-olive-light);
             border-radius: var(--radius-lg);
@@ -150,67 +183,58 @@
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
+            justify-content: center;
         }
 
-        /* Component Item */
-        .component-item {
+        /* Tech Item Badge */
+        .tech-badge {
             background: var(--color-white);
             border: 1px solid var(--color-gray-200);
             border-radius: var(--radius-md);
-            padding: 0.5rem 1rem;
-            font-size: 0.875rem;
+            padding: 0.4rem 0.75rem;
+            font-size: 0.75rem;
             color: var(--color-gray-700);
             transition: all 0.2s ease;
             cursor: default;
             white-space: nowrap;
         }
 
-        .component-item:hover {
+        .tech-badge:hover {
             border-color: var(--color-olive);
             color: var(--color-olive);
             transform: translateY(-2px);
             box-shadow: 0 2px 8px rgba(92, 107, 80, 0.15);
         }
 
-        /* Special Layouts */
+        /* Single Row Layout */
         .single-row {
             display: flex;
             justify-content: center;
-            gap: 0.5rem;
+            flex-wrap: wrap;
+            gap: 0.75rem;
         }
 
-        .two-columns {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .three-columns {
-            grid-template-columns: repeat(3, 1fr);
-        }
-
-        .five-columns {
-            grid-template-columns: repeat(5, 1fr);
-        }
-
-        /* Full Width Category */
-        .full-width-category {
+        /* Full Width Single Category */
+        .full-width-box {
             background: var(--color-gray-50);
             border: 1px solid var(--color-gray-200);
             border-radius: var(--radius-lg);
             padding: 1rem;
         }
 
-        .full-width-category .component-item {
-            background: var(--color-white);
-        }
-
         /* Responsive Design */
         @media (max-width: 1024px) {
-            .three-columns {
+            .grid-3col {
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .five-columns {
+            .grid-5col {
                 grid-template-columns: repeat(3, 1fr);
+            }
+
+            .layer-label {
+                width: 100px;
+                font-size: 0.8125rem;
             }
         }
 
@@ -219,18 +243,20 @@
                 padding: 2rem 1rem;
             }
 
-            .two-columns,
-            .three-columns,
-            .five-columns {
-                grid-template-columns: 1fr;
-            }
-
-            .category-items {
+            .layer-row {
                 flex-direction: column;
+                gap: 1rem;
             }
 
-            .component-item {
-                text-align: center;
+            .layer-label {
+                width: 100%;
+                writing-mode: horizontal-tb;
+            }
+
+            .grid-2col,
+            .grid-3col,
+            .grid-5col {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -281,210 +307,230 @@
                     技术架构
                 </div>
                 <h1 class="arch-title">
-                    <span class="highlight">多层Agent协作架构</span>
+                    <span class="highlight">微服务 + AI原生</span> 多层技术架构
                 </h1>
                 <p class="arch-subtitle">
-                    融合大语言模型、向量数据库、智能编排引擎，构建AI原生合同管理系统
+                    基于现代微服务架构与AI原生技术栈，构建高可用、可扩展的合同管理系统
                 </p>
             </header>
 
             <!-- Architecture Diagram -->
             <div class="arch-diagram">
-                <!-- Layer 1: 接入层 -->
-                <div class="layer-section">
-                    <div class="layer-header">接入层</div>
-                    <div class="single-row">
-                        <div class="component-item">Web 应用界面</div>
-                        <div class="component-item">API 网关</div>
-                    </div>
-                </div>
-
-                <!-- Layer 2: AI Agent 层 -->
-                <div class="layer-section">
-                    <div class="layer-header">AI Agent 协作层</div>
-                    <div class="layer-grid three-columns">
-                        <div class="category-container">
-                            <div class="category-title">主控 Agent</div>
-                            <div class="category-items">
-                                <div class="component-item">任务分解</div>
-                                <div class="component-item">流程编排</div>
-                                <div class="component-item">结果聚合</div>
-                            </div>
-                        </div>
-
-                        <div class="category-container">
-                            <div class="category-title">专业 Agent</div>
-                            <div class="category-items">
-                                <div class="component-item">合同审查 Agent</div>
-                                <div class="component-item">条款分析 Agent</div>
-                                <div class="component-item">风险识别 Agent</div>
-                            </div>
-                        </div>
-
-                        <div class="category-container">
-                            <div class="category-title">执行 Agent</div>
-                            <div class="category-items">
-                                <div class="component-item">工具调用</div>
-                                <div class="component-item">数据操作</div>
-                                <div class="component-item">流程执行</div>
-                            </div>
+                <!-- Layer 1: 负载均衡 -->
+                <div class="layer-row">
+                    <div class="layer-label">负载均衡</div>
+                    <div class="layer-content">
+                        <div class="single-row">
+                            <div class="tech-badge">Nginx</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Layer 3: 能力层 -->
-                <div class="layer-section">
-                    <div class="layer-header">核心能力层</div>
-                    <div class="layer-grid five-columns">
-                        <div class="category-container">
-                            <div class="category-title">大语言模型</div>
-                            <div class="category-items">
-                                <div class="component-item">DeepSeek</div>
-                                <div class="component-item">GLM</div>
-                                <div class="component-item">Qwen</div>
-                                <div class="component-item">Kimi</div>
+                <!-- Layer 2: 网关层 -->
+                <div class="layer-row">
+                    <div class="layer-label">网关层</div>
+                    <div class="layer-content">
+                        <div class="layer-grid grid-3col">
+                            <!-- 主服务前端 -->
+                            <div class="category-box">
+                                <div class="category-title">主服务前端</div>
+                                <div class="category-items">
+                                    <div class="tech-badge">React</div>
+                                    <div class="tech-badge">React-Router</div>
+                                    <div class="tech-badge">React-Query</div>
+                                    <div class="tech-badge">Axios</div>
+                                    <div class="tech-badge">Vite</div>
+                                    <div class="tech-badge">TailwindCSS</div>
+                                    <div class="tech-badge">Ant Design</div>
+                                    <div class="tech-badge">Jotai</div>
+                                    <div class="tech-badge">Kubb</div>
+                                    <div class="tech-badge">Node.JS</div>
+                                    <div class="tech-badge">React-XYFLOW</div>
+                                    <div class="tech-badge">PowerOffice</div>
+                                </div>
+                            </div>
+
+                            <!-- 统一接口 -->
+                            <div class="category-box">
+                                <div class="category-title">统一接口</div>
+                                <div class="category-items">
+                                    <div class="tech-badge">RESTFUL API</div>
+                                    <div class="tech-badge">OpenAPI</div>
+                                </div>
+                            </div>
+
+                            <!-- 无成本集成前端 -->
+                            <div class="category-box">
+                                <div class="category-title">无成本集成前端</div>
+                                <div class="category-items">
+                                    <div class="tech-badge">Vue</div>
+                                    <div class="tech-badge">Monaco-editor</div>
+                                    <div class="tech-badge">Ant-design-vue</div>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                </div>
 
-                        <div class="category-container">
-                            <div class="category-title">向量数据库</div>
-                            <div class="category-items">
-                                <div class="component-item">Embedding</div>
-                                <div class="component-item">检索引擎</div>
-                                <div class="component-item">相似度计算</div>
+                <!-- Layer 3: 应用层 -->
+                <div class="layer-row">
+                    <div class="layer-label">应用层</div>
+                    <div class="layer-content">
+                        <div class="layer-grid grid-3col">
+                            <!-- 主服务 -->
+                            <div class="category-box">
+                                <div class="category-title">主服务</div>
+                                <div class="category-items">
+                                    <div class="tech-badge">Spring Boot</div>
+                                    <div class="tech-badge">MyBatis-Plus</div>
+                                    <div class="tech-badge">gRPC</div>
+                                    <div class="tech-badge">Chord</div>
+                                    <div class="tech-badge">Spring Cloud Stream</div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="category-container">
-                            <div class="category-title">上下文引擎</div>
-                            <div class="category-items">
-                                <div class="component-item">文档解析</div>
-                                <div class="component-item">语义理解</div>
-                                <div class="component-item">记忆管理</div>
+                            <!-- Copilot -->
+                            <div class="category-box">
+                                <div class="category-title">Copilot</div>
+                                <div class="category-items">
+                                    <div class="tech-badge">Python</div>
+                                    <div class="tech-badge">Agent Framework</div>
+                                    <div class="tech-badge">FastAPI</div>
+                                    <div class="tech-badge">Httpx</div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="category-container">
-                            <div class="category-title">工具引擎</div>
-                            <div class="category-items">
-                                <div class="component-item">40+ 工具</div>
-                                <div class="component-item">函数调用</div>
-                                <div class="component-item">工具编排</div>
-                            </div>
-                        </div>
-
-                        <div class="category-container">
-                            <div class="category-title">编排引擎</div>
-                            <div class="category-items">
-                                <div class="component-item">工作流</div>
-                                <div class="component-item">规则引擎</div>
-                                <div class="component-item">任务调度</div>
+                            <!-- 集成平台 -->
+                            <div class="category-box">
+                                <div class="category-title">集成平台</div>
+                                <div class="category-items">
+                                    <div class="tech-badge">数据模块</div>
+                                    <div class="tech-badge">消息引擎</div>
+                                    <div class="tech-badge">接口模块</div>
+                                    <div class="tech-badge">Golang</div>
+                                    <div class="tech-badge">Gin</div>
+                                    <div class="tech-badge">Watermill</div>
+                                    <div class="tech-badge">gocorn</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Layer 4: 基础支撑 -->
-                <div class="layer-section">
-                    <div class="layer-header">基础支撑</div>
-                    <div class="layer-grid five-columns">
-                        <div class="category-container">
-                            <div class="category-title">文档解析</div>
-                            <div class="category-items">
-                                <div class="component-item">PDF 解析</div>
-                                <div class="component-item">Word 解析</div>
-                                <div class="component-item">OCR 识别</div>
+                <div class="layer-row">
+                    <div class="layer-label">基础支撑</div>
+                    <div class="layer-content">
+                        <div class="layer-grid grid-5col">
+                            <!-- 文件解析 -->
+                            <div class="category-box">
+                                <div class="category-title">文件解析</div>
+                                <div class="category-items">
+                                    <div class="tech-badge">PDF 解析</div>
+                                    <div class="tech-badge">Word 解析</div>
+                                    <div class="tech-badge">Excel 解析</div>
+                                    <div class="tech-badge">OCR 识别</div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="category-container">
-                            <div class="category-title">智能比对</div>
-                            <div class="category-items">
-                                <div class="component-item">条款对比</div>
-                                <div class="component-item">版本比对</div>
-                                <div class="component-item">差异分析</div>
+                            <!-- 比对算法 -->
+                            <div class="category-box">
+                                <div class="category-title">比对算法</div>
+                                <div class="category-items">
+                                    <div class="tech-badge">文本比对</div>
+                                    <div class="tech-badge">版本比对</div>
+                                    <div class="tech-badge">差异分析</div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="category-container">
-                            <div class="category-title">格式转换</div>
-                            <div class="category-items">
-                                <div class="component-item">文档转换</div>
-                                <div class="component-item">格式标准化</div>
+                            <!-- 文件转换 -->
+                            <div class="category-box">
+                                <div class="category-title">文件转换</div>
+                                <div class="category-items">
+                                    <div class="tech-badge">格式转换</div>
+                                    <div class="tech-badge">标准化</div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="category-container">
-                            <div class="category-title">权限控制</div>
-                            <div class="category-items">
-                                <div class="component-item">RBAC</div>
-                                <div class="component-item">数据权限</div>
-                                <div class="component-item">审批流程</div>
+                            <!-- 文本编辑 -->
+                            <div class="category-box">
+                                <div class="category-title">文本编辑</div>
+                                <div class="category-items">
+                                    <div class="tech-badge">在线编辑</div>
+                                    <div class="tech-badge">协同编辑</div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="category-container">
-                            <div class="category-title">监控审计</div>
-                            <div class="category-items">
-                                <div class="component-item">操作日志</div>
-                                <div class="component-item">调用链追踪</div>
-                                <div class="component-item">性能监控</div>
+                            <!-- 其他 -->
+                            <div class="category-box">
+                                <div class="category-title">其他</div>
+                                <div class="category-items">
+                                    <div class="tech-badge">权限控制</div>
+                                    <div class="tech-badge">审计日志</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Layer 5: 数据层 -->
-                <div class="layer-section">
-                    <div class="layer-header">数据层</div>
-                    <div class="layer-grid five-columns">
-                        <div class="category-container">
-                            <div class="category-title">关系数据库</div>
-                            <div class="category-items">
-                                <div class="component-item">MySQL</div>
-                                <div class="component-item">PostgreSQL</div>
+                <div class="layer-row">
+                    <div class="layer-label">数据层</div>
+                    <div class="layer-content">
+                        <div class="layer-grid grid-5col">
+                            <!-- MySQL -->
+                            <div class="category-box">
+                                <div class="category-title">关系数据库</div>
+                                <div class="category-items">
+                                    <div class="tech-badge">MySQL</div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="category-container">
-                            <div class="category-title">文档数据库</div>
-                            <div class="category-items">
-                                <div class="component-item">MongoDB</div>
+                            <!-- MongoDB -->
+                            <div class="category-box">
+                                <div class="category-title">文档数据库</div>
+                                <div class="category-items">
+                                    <div class="tech-badge">MongoDB</div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="category-container">
-                            <div class="category-title">搜索引擎</div>
-                            <div class="category-items">
-                                <div class="component-item">Elasticsearch</div>
+                            <!-- Elasticsearch -->
+                            <div class="category-box">
+                                <div class="category-title">搜索引擎</div>
+                                <div class="category-items">
+                                    <div class="tech-badge">Elasticsearch</div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="category-container">
-                            <div class="category-title">缓存</div>
-                            <div class="category-items">
-                                <div class="component-item">Redis</div>
+                            <!-- Redis -->
+                            <div class="category-box">
+                                <div class="category-title">缓存</div>
+                                <div class="category-items">
+                                    <div class="tech-badge">Redis</div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="category-container">
-                            <div class="category-title">对象存储</div>
-                            <div class="category-items">
-                                <div class="component-item">OSS</div>
-                                <div class="component-item">MinIO</div>
+                            <!-- OSS/MinIO -->
+                            <div class="category-box">
+                                <div class="category-title">对象存储</div>
+                                <div class="category-items">
+                                    <div class="tech-badge">OSS</div>
+                                    <div class="tech-badge">MinIO</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Layer 6: 基础设施 -->
-                <div class="layer-section">
-                    <div class="layer-header">基础设施层</div>
-                    <div class="single-row">
-                        <div class="component-item">Docker</div>
-                        <div class="component-item">Kubernetes</div>
-                        <div class="component-item">Linux 服务器</div>
-                        <div class="component-item">CI/CD</div>
+                <!-- Layer 6: 基础设施层 -->
+                <div class="layer-row">
+                    <div class="layer-label">基础设施层</div>
+                    <div class="layer-content">
+                        <div class="single-row">
+                            <div class="tech-badge">Docker</div>
+                            <div class="tech-badge">Kubernetes</div>
+                            <div class="tech-badge">Linux 服务器</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -494,9 +540,9 @@
     <!-- CTA Section -->
     <section class="cta-section">
         <div class="cta-container">
-            <h2 class="cta-title">体验多层 Agent 协作架构的强大能力</h2>
+            <h2 class="cta-title">探索现代化技术架构的强大能力</h2>
             <p class="cta-desc">
-                融合大模型、向量数据库、智能编排引擎，构建 AI 原生合同管理系统
+                基于微服务与AI原生技术栈，构建高可用、可扩展的合同管理系统
             </p>
             <div class="cta-buttons">
                 <a href="https://meflow3.prod.milvzn.com/dashboard" target="_blank" class="btn btn-primary btn-lg">立即体验</a>
