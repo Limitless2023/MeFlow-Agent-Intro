@@ -226,7 +226,7 @@
         .knowledge-layers {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.25rem;
         }
 
         .knowledge-layer {
@@ -238,6 +238,16 @@
             gap: 1.5rem;
             opacity: 0;
             animation: layerSlideIn 0.6s ease-out forwards;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .knowledge-layer:hover {
+            transform: translateX(8px);
+            background: white;
+            border-color: var(--color-olive-light);
+            box-shadow: 0 4px 12px rgba(92, 107, 80, 0.1);
         }
 
         .knowledge-layer:nth-child(1) { animation-delay: 0.2s; }
@@ -245,7 +255,7 @@
         .knowledge-layer:nth-child(3) { animation-delay: 0.6s; }
 
         @keyframes layerSlideIn {
-            from { opacity: 0; transform: translateX(-20px); }
+            from { opacity: 0; transform: translateX(-30px); }
             to { opacity: 1; transform: translateX(0); }
         }
 
@@ -258,6 +268,20 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .knowledge-layer:hover .layer-icon {
+            transform: rotate(5deg) scale(1.05);
+            background: var(--color-olive);
+        }
+
+        .knowledge-layer:hover .layer-icon svg {
+            transform: scale(1.1);
+        }
+
+        .layer-icon svg {
+            transition: transform 0.3s ease;
         }
 
         .layer-content {
@@ -282,6 +306,12 @@
             font-weight: 700;
             color: var(--color-olive);
             white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .knowledge-layer:hover .layer-count {
+            transform: scale(1.15);
+            color: var(--color-olive-dark);
         }
 
         /* Search Interface */
@@ -337,6 +367,15 @@
             border-left: 4px solid var(--color-olive);
             opacity: 0;
             animation: resultFadeIn 0.5s ease-out forwards;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .search-result:hover {
+            transform: translateX(8px);
+            background: white;
+            box-shadow: 0 4px 12px rgba(92, 107, 80, 0.12);
+            border-left-width: 6px;
         }
 
         .search-result:nth-child(1) { animation-delay: 0.3s; }
@@ -440,6 +479,20 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .template-card:hover .template-icon {
+            background: linear-gradient(135deg, var(--color-olive-light) 0%, var(--color-olive) 100%);
+            transform: rotate(-5deg) scale(1.1);
+        }
+
+        .template-card:hover .template-icon svg {
+            transform: scale(1.1);
+        }
+
+        .template-icon svg {
+            transition: transform 0.3s ease;
         }
 
         .template-info {
@@ -474,6 +527,12 @@
             color: var(--color-olive);
             font-size: 1.125rem;
             margin-bottom: 0.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .template-card:hover .template-stat-value {
+            transform: scale(1.1);
+            color: var(--color-olive-dark);
         }
 
         .template-stat-label {
@@ -652,7 +711,7 @@
                                         <div class="layer-title">条款库</div>
                                         <div class="layer-description">经过验证的优质条款,支持快速组装合同</div>
                                     </div>
-                                    <div class="layer-count">1,542</div>
+                                    <div class="layer-count">486</div>
                                 </div>
                                 <div class="knowledge-layer">
                                     <div class="layer-icon">
