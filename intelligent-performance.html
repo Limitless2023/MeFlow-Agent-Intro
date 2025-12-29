@@ -274,7 +274,7 @@
             color: var(--color-gray-700);
         }
 
-        /* Alert Dashboard */
+        /* Alert Dashboard - Olive Theme */
         .alert-dashboard {
             width: 100%;
             max-width: 420px;
@@ -292,19 +292,18 @@
         .alert-bell {
             width: 48px;
             height: 48px;
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            background: linear-gradient(135deg, var(--color-olive) 0%, var(--color-olive-dark) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            animation: bellShake 2s ease-in-out infinite;
+            animation: bellPulse 2s ease-in-out infinite;
         }
 
-        @keyframes bellShake {
-            0%, 50%, 100% { transform: rotate(0deg); }
-            5%, 15% { transform: rotate(-15deg); }
-            10%, 20% { transform: rotate(15deg); }
+        @keyframes bellPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(92, 107, 80, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(92, 107, 80, 0); }
         }
 
         .alert-bell svg {
@@ -317,23 +316,18 @@
             position: absolute;
             top: -4px;
             right: -4px;
-            width: 20px;
+            min-width: 20px;
             height: 20px;
-            background: #fbbf24;
-            border-radius: 50%;
+            padding: 0 0.25rem;
+            background: var(--color-olive-dark);
+            border-radius: 10px;
             border: 2px solid white;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 0.625rem;
             font-weight: 700;
-            color: #78350f;
-            animation: badgePulse 2s ease-in-out infinite;
-        }
-
-        @keyframes badgePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            color: white;
         }
 
         .alert-summary {
@@ -361,8 +355,8 @@
         .alert-item {
             padding: 1rem 1.25rem;
             border-radius: var(--radius-lg);
+            border: 2px solid var(--color-gray-200);
             background: white;
-            border: 2px solid;
             position: relative;
             display: flex;
             gap: 1rem;
@@ -382,23 +376,41 @@
         }
 
         .alert-item:hover {
-            transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-color: var(--color-olive);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(92, 107, 80, 0.15);
         }
 
-        .alert-item.urgent {
-            border-color: #fecaca;
-            background: linear-gradient(135deg, #fef2f2 0%, #fff 100%);
+        .alert-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--color-olive);
+            border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .alert-item.warning {
-            border-color: #fed7aa;
-            background: linear-gradient(135deg, #fffbeb 0%, #fff 100%);
+        .alert-item:hover::before {
+            opacity: 1;
         }
 
-        .alert-item.info {
-            border-color: #bfdbfe;
-            background: linear-gradient(135deg, #eff6ff 0%, #fff 100%);
+        .alert-item.urgent::before {
+            opacity: 1;
+            background: var(--color-olive-dark);
+        }
+
+        .alert-item.warning::before {
+            opacity: 0.7;
+            background: var(--color-olive);
+        }
+
+        .alert-item.info::before {
+            opacity: 0.5;
+            background: var(--color-olive-light);
         }
 
         .alert-icon-wrapper {
@@ -409,35 +421,29 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            background: var(--color-olive-bg);
         }
 
         .alert-item.urgent .alert-icon-wrapper {
-            background: #fee2e2;
+            background: rgba(92, 107, 80, 0.15);
         }
 
         .alert-item.warning .alert-icon-wrapper {
-            background: #fef3c7;
+            background: rgba(92, 107, 80, 0.1);
         }
 
         .alert-item.info .alert-icon-wrapper {
-            background: #dbeafe;
+            background: rgba(92, 107, 80, 0.08);
         }
 
         .alert-icon-wrapper svg {
             width: 20px;
             height: 20px;
+            color: var(--color-olive);
         }
 
         .alert-item.urgent .alert-icon-wrapper svg {
-            color: #ef4444;
-        }
-
-        .alert-item.warning .alert-icon-wrapper svg {
-            color: #f59e0b;
-        }
-
-        .alert-item.info .alert-icon-wrapper svg {
-            color: #3b82f6;
+            color: var(--color-olive-dark);
         }
 
         .alert-content {
@@ -453,25 +459,26 @@
 
         .alert-priority {
             font-size: 0.625rem;
-            padding: 0.125rem 0.5rem;
+            padding: 0.25rem 0.625rem;
             border-radius: 9999px;
             font-weight: 600;
-            text-transform: uppercase;
+            background: var(--color-olive-light);
+            color: var(--color-olive-dark);
         }
 
         .alert-item.urgent .alert-priority {
-            background: #fee2e2;
-            color: #991b1b;
+            background: var(--color-olive-dark);
+            color: white;
         }
 
         .alert-item.warning .alert-priority {
-            background: #fef3c7;
-            color: #92400e;
+            background: var(--color-olive);
+            color: white;
         }
 
         .alert-item.info .alert-priority {
-            background: #dbeafe;
-            color: #1e40af;
+            background: var(--color-olive-light);
+            color: var(--color-olive-dark);
         }
 
         .alert-time {
