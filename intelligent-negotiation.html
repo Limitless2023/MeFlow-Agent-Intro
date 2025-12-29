@@ -268,59 +268,142 @@
             }
         }
 
-        /* Timeline */
-        .timeline {
+        /* Contract Chat Interface */
+        .contract-chat-container {
             width: 100%;
-            max-width: 320px;
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
         }
 
-        .timeline-item {
-            display: flex;
-            gap: 1rem;
+        .contract-document {
+            background: white;
+            border: 2px solid var(--color-gray-200);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 0.875rem;
+            line-height: 1.8;
+            color: var(--color-gray-700);
             position: relative;
         }
 
-        .timeline-item::before {
+        .contract-text {
+            margin-bottom: 0.75rem;
+        }
+
+        .contract-text.highlighted {
+            background: linear-gradient(120deg, rgba(92, 107, 80, 0.1) 0%, rgba(92, 107, 80, 0.2) 100%);
+            padding: 0.5rem;
+            border-radius: var(--radius-sm);
+            border-left: 3px solid var(--color-olive);
+            position: relative;
+            animation: highlightPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes highlightPulse {
+            0%, 100% { background: linear-gradient(120deg, rgba(92, 107, 80, 0.1) 0%, rgba(92, 107, 80, 0.2) 100%); }
+            50% { background: linear-gradient(120deg, rgba(92, 107, 80, 0.15) 0%, rgba(92, 107, 80, 0.25) 100%); }
+        }
+
+        .ai-chat-bubble {
+            background: var(--color-olive);
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            position: relative;
+            animation: chatSlideIn 0.6s ease-out 0.5s both;
+        }
+
+        @keyframes chatSlideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .ai-chat-bubble::before {
             content: '';
             position: absolute;
-            left: 15px;
-            top: 40px;
-            bottom: -24px;
-            width: 2px;
-            background: var(--color-gray-200);
+            top: -8px;
+            left: 24px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid var(--color-olive);
         }
 
-        .timeline-item:last-child::before {
-            display: none;
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.75rem;
+            opacity: 0.9;
         }
 
-        .timeline-dot {
-            width: 32px;
-            height: 32px;
-            min-width: 32px;
-            background: var(--color-olive);
+        .chat-avatar {
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 700;
-            z-index: 1;
+            font-size: 0.625rem;
+            font-weight: 600;
         }
 
-        .timeline-content {
-            flex: 1;
-            background: white;
-            border: 2px solid var(--color-gray-200);
-            border-radius: var(--radius-md);
-            padding: 0.75rem 1rem;
+        .chat-content {
             font-size: 0.875rem;
-            color: var(--color-gray-700);
-            line-height: 1.5;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+
+        .chat-suggestion {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-md);
+            padding: 0.75rem;
+            font-size: 0.8125rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .chat-suggestion strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+
+        .apply-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            color: var(--color-olive);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            margin-top: 0.75rem;
+            transition: all 0.2s;
+            animation: buttonPulse 2s ease-in-out 2s infinite;
+        }
+
+        @keyframes buttonPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .apply-button:hover {
+            background: var(--color-gray-50);
+            transform: translateY(-2px);
+        }
+
+        .apply-button svg {
+            width: 14px;
+            height: 14px;
         }
 
         /* Data Cards */
@@ -550,24 +633,36 @@
                 </div>
 
                 <div class="feature-visual">
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <div class="timeline-dot">1</div>
-                            <div class="timeline-content">
-                                <strong>付款条件:</strong> 可让步15天账期,换取5%折扣
+                    <div class="contract-chat-container">
+                        <div class="contract-document">
+                            <div class="contract-text">
+                                第五条 付款条件:乙方应在货物验收合格后30个工作日内支付全额款项。
+                            </div>
+                            <div class="contract-text highlighted">
+                                第六条 违约责任:如乙方未按时付款,每逾期一日,应按未付款项的0.5%向甲方支付违约金。
+                            </div>
+                            <div class="contract-text">
+                                第七条 争议解决:双方因本合同发生争议,应友好协商解决。
                             </div>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot">2</div>
-                            <div class="timeline-content">
-                                <strong>交付时间:</strong> 底线条款,建议坚持原方案
+                        <div class="ai-chat-bubble">
+                            <div class="chat-header">
+                                <div class="chat-avatar">AI</div>
+                                <span>MeFlow Agent</span>
                             </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot">3</div>
-                            <div class="timeline-content">
-                                <strong>质保期:</strong> 可从1年延长至1.5年,风险可控
+                            <div class="chat-content">
+                                已分析该违约条款,0.5%/日的违约金率偏高(行业标准0.03%-0.05%/日),建议调整。
                             </div>
+                            <div class="chat-suggestion">
+                                <strong>建议修改:</strong>
+                                "每逾期一日,应按未付款项的0.03%向甲方支付违约金,累计不超过合同总额的5%。"
+                            </div>
+                            <button class="apply-button">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                应用修改
+                            </button>
                         </div>
                     </div>
                 </div>
