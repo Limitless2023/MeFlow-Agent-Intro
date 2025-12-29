@@ -13,6 +13,18 @@
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* Prevent FOUT (Flash of Unstyled Text) */
+        body {
+            opacity: 0;
+            animation: fadeInPage 0.3s ease-in forwards;
+        }
+
+        @keyframes fadeInPage {
+            to {
+                opacity: 1;
+            }
+        }
+
         /* Product Intro Specific Styles */
 
         /* Product Intro Section */
@@ -426,6 +438,7 @@
             font-size: 0.8125rem;
             font-weight: 500;
             color: var(--color-gray-500);
+            width: fit-content;
         }
 
         .status-dot {
@@ -751,7 +764,7 @@
 
             <div class="capability-grid">
                 <!-- Capability 1: 智能起草 -->
-                <div class="capability-card">
+                <a href="intelligent-drafting.html" class="capability-card" style="text-decoration: none; color: inherit; display: block;">
                     <div class="capability-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -759,17 +772,25 @@
                     </div>
                     <h3 class="capability-title">智能起草</h3>
                     <p class="capability-desc">
-                        基于业务场景自动生成合同，支持多模态输入，内置法律合规检查
+                        基于业务场景自动生成合同,让AI成为你的起草专家
                     </p>
                     <div class="capability-features">
                         <div class="capability-feature">自然语言生成合同</div>
                         <div class="capability-feature">智能条款推荐</div>
                         <div class="capability-feature">多版本对比</div>
                     </div>
-                </div>
+                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-gray-200);">
+                        <span style="color: var(--color-olive); font-size: 0.9375rem; font-weight: 500; display: inline-flex; align-items: center; gap: 0.5rem;">
+                            查看详情
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
+                                <path d="M9 5l7 7-7 7" />
+                            </svg>
+                        </span>
+                    </div>
+                </a>
 
                 <!-- Capability 2: 智能审核 -->
-                <div class="capability-card">
+                <a href="intelligent-review.html" class="capability-card" style="text-decoration: none; color: inherit; display: block;">
                     <div class="capability-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -784,10 +805,18 @@
                         <div class="capability-feature">条款合规性检查</div>
                         <div class="capability-feature">修改建议生成</div>
                     </div>
-                </div>
+                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-gray-200);">
+                        <span style="color: var(--color-olive); font-size: 0.9375rem; font-weight: 500; display: inline-flex; align-items: center; gap: 0.5rem;">
+                            查看详情
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
+                                <path d="M9 5l7 7-7 7" />
+                            </svg>
+                        </span>
+                    </div>
+                </a>
 
                 <!-- Capability 3: 智能谈判 -->
-                <div class="capability-card">
+                <a href="intelligent-negotiation.html" class="capability-card" style="text-decoration: none; color: inherit; display: block;">
                     <div class="capability-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -802,10 +831,18 @@
                         <div class="capability-feature">条款让步分析</div>
                         <div class="capability-feature">历史数据对比</div>
                     </div>
-                </div>
+                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-gray-200);">
+                        <span style="color: var(--color-olive); font-size: 0.9375rem; font-weight: 500; display: inline-flex; align-items: center; gap: 0.5rem;">
+                            查看详情
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
+                                <path d="M9 5l7 7-7 7" />
+                            </svg>
+                        </span>
+                    </div>
+                </a>
 
                 <!-- Capability 4: 智能履约 -->
-                <div class="capability-card">
+                <a href="intelligent-performance.html" class="capability-card" style="text-decoration: none; color: inherit; display: block;">
                     <div class="capability-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <circle cx="12" cy="12" r="10" />
@@ -821,10 +858,18 @@
                         <div class="capability-feature">到期智能提醒</div>
                         <div class="capability-feature">履约风险预警</div>
                     </div>
-                </div>
+                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-gray-200);">
+                        <span style="color: var(--color-olive); font-size: 0.9375rem; font-weight: 500; display: inline-flex; align-items: center; gap: 0.5rem;">
+                            查看详情
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
+                                <path d="M9 5l7 7-7 7" />
+                            </svg>
+                        </span>
+                    </div>
+                </a>
 
                 <!-- Capability 5: 智能分析 -->
-                <div class="capability-card">
+                <a href="intelligent-analytics.html" class="capability-card" style="text-decoration: none; color: inherit; display: block;">
                     <div class="capability-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -839,10 +884,18 @@
                         <div class="capability-feature">风险趋势分析</div>
                         <div class="capability-feature">智能报表生成</div>
                     </div>
-                </div>
+                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-gray-200);">
+                        <span style="color: var(--color-olive); font-size: 0.9375rem; font-weight: 500; display: inline-flex; align-items: center; gap: 0.5rem;">
+                            查看详情
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
+                                <path d="M9 5l7 7-7 7" />
+                            </svg>
+                        </span>
+                    </div>
+                </a>
 
                 <!-- Capability 6: 知识管理 -->
-                <div class="capability-card">
+                <a href="knowledge-management.html" class="capability-card" style="text-decoration: none; color: inherit; display: block;">
                     <div class="capability-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -857,7 +910,15 @@
                         <div class="capability-feature">模板自动归类</div>
                         <div class="capability-feature">知识图谱构建</div>
                     </div>
-                </div>
+                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-gray-200);">
+                        <span style="color: var(--color-olive); font-size: 0.9375rem; font-weight: 500; display: inline-flex; align-items: center; gap: 0.5rem;">
+                            查看详情
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
+                                <path d="M9 5l7 7-7 7" />
+                            </svg>
+                        </span>
+                    </div>
+                </a>
             </div>
         </div>
     </section>

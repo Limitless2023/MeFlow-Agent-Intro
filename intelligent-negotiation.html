@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能谈判 - MeFlow Agent</title>
+    <meta name="description" content="MeFlow Agent 智能谈判 - AI协同谈判助手,预测对方策略,推荐最优方案">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Prevent FOUT */
+        body {
+            opacity: 0;
+            animation: fadeInPage 0.3s ease-in forwards;
+        }
+
+        @keyframes fadeInPage {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Page Styles */
+        .negotiation-page {
+            padding-top: 8rem;
+            padding-bottom: 4rem;
+            background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-olive-bg) 100%);
+        }
+
+        .negotiation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .page-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--color-white);
+            border: 1px solid var(--color-olive-light);
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            color: var(--color-olive);
+            margin-bottom: 1.5rem;
+        }
+
+        .page-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 400;
+            color: var(--color-gray-900);
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        .page-title .highlight {
+            color: var(--color-olive);
+            font-style: italic;
+        }
+
+        .page-subtitle {
+            font-size: 1.125rem;
+            color: var(--color-gray-600);
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-md);
+            color: var(--color-gray-700);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            margin-bottom: 2rem;
+        }
+
+        .back-button:hover {
+            background: var(--color-gray-50);
+            border-color: var(--color-gray-300);
+        }
+
+        .back-button svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .feature-section {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--color-gray-200);
+            padding: 3rem;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-section:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: var(--color-olive-light);
+        }
+
+        .feature-section.reverse {
+            background: linear-gradient(135deg, var(--color-olive-bg) 0%, var(--color-white) 100%);
+        }
+
+        .feature-section.reverse .feature-content {
+            order: 2;
+        }
+
+        .feature-section.reverse .feature-visual {
+            order: 1;
+        }
+
+        .feature-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .feature-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            background: var(--color-olive);
+            color: var(--color-white);
+            border-radius: var(--radius-lg);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .feature-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--color-gray-900);
+            line-height: 1.3;
+        }
+
+        .feature-description {
+            font-size: 1.0625rem;
+            color: var(--color-gray-600);
+            line-height: 1.8;
+        }
+
+        .feature-highlights {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: var(--color-gray-50);
+            border-radius: var(--radius-md);
+            border-left: 3px solid var(--color-olive);
+        }
+
+        .feature-section.reverse .highlight-item {
+            background: var(--color-white);
+        }
+
+        .highlight-icon {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            color: var(--color-olive);
+            margin-top: 0.125rem;
+        }
+
+        .highlight-text {
+            font-size: 0.9375rem;
+            color: var(--color-gray-700);
+            line-height: 1.6;
+        }
+
+        .feature-visual {
+            background: var(--color-gray-50);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 320px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-section.reverse .feature-visual {
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+        }
+
+        /* Strategy Chart */
+        .strategy-chart {
+            width: 100%;
+            max-width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .strategy-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .strategy-label {
+            flex: 0 0 80px;
+            font-size: 0.875rem;
+            color: var(--color-gray-600);
+            font-weight: 500;
+        }
+
+        .strategy-bar {
+            flex: 1;
+            height: 32px;
+            background: var(--color-white);
+            border: 2px solid var(--color-gray-200);
+            border-radius: var(--radius-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .strategy-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-olive-light) 0%, var(--color-olive) 100%);
+            animation: fillBar 2s ease-out forwards;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-olive);
+        }
+
+        @keyframes fillBar {
+            from {
+                width: 0;
+            }
+        }
+
+        /* Contract Chat Interface */
+        .contract-chat-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contract-document {
+            background: white;
+            border: 2px solid var(--color-gray-200);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 0.875rem;
+            line-height: 1.8;
+            color: var(--color-gray-700);
+            position: relative;
+        }
+
+        .contract-text {
+            margin-bottom: 0.75rem;
+        }
+
+        .contract-text.highlighted {
+            background: linear-gradient(120deg, rgba(92, 107, 80, 0.1) 0%, rgba(92, 107, 80, 0.2) 100%);
+            padding: 0.5rem;
+            border-radius: var(--radius-sm);
+            border-left: 3px solid var(--color-olive);
+            position: relative;
+            animation: highlightPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes highlightPulse {
+            0%, 100% { background: linear-gradient(120deg, rgba(92, 107, 80, 0.1) 0%, rgba(92, 107, 80, 0.2) 100%); }
+            50% { background: linear-gradient(120deg, rgba(92, 107, 80, 0.15) 0%, rgba(92, 107, 80, 0.25) 100%); }
+        }
+
+        .ai-chat-bubble {
+            background: var(--color-olive);
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            position: relative;
+            animation: chatSlideIn 0.6s ease-out 0.5s both;
+        }
+
+        @keyframes chatSlideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .ai-chat-bubble::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 24px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid var(--color-olive);
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+
+        .chat-avatar {
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.625rem;
+            font-weight: 600;
+        }
+
+        .chat-content {
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+
+        .chat-suggestion {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-md);
+            padding: 0.75rem;
+            font-size: 0.8125rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .chat-suggestion strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+
+        .apply-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            color: var(--color-olive);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            margin-top: 0.75rem;
+            transition: all 0.2s;
+            animation: buttonPulse 2s ease-in-out 2s infinite;
+        }
+
+        @keyframes buttonPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .apply-button:hover {
+            background: var(--color-gray-50);
+            transform: translateY(-2px);
+        }
+
+        .apply-button svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Data Cards */
+        .data-grid {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .data-card {
+            background: white;
+            border: 2px solid var(--color-gray-200);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .data-card:hover {
+            border-color: var(--color-olive);
+            transform: translateY(-4px);
+        }
+
+        .data-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-olive);
+            font-family: var(--font-serif);
+            margin-bottom: 0.5rem;
+        }
+
+        .data-label {
+            font-size: 0.875rem;
+            color: var(--color-gray-600);
+        }
+
+        .intro-section {
+            background: linear-gradient(135deg, var(--color-olive) 0%, var(--color-olive-dark) 100%);
+            color: var(--color-white);
+            border-radius: var(--radius-xl);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .intro-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .intro-description {
+            font-size: 1.0625rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .negotiation-page {
+                padding-top: 6rem;
+            }
+
+            .feature-section,
+            .feature-section.reverse {
+                grid-template-columns: 1fr;
+                padding: 2rem 1.5rem;
+            }
+
+            .feature-section.reverse .feature-content,
+            .feature-section.reverse .feature-visual {
+                order: unset;
+            }
+
+            .data-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="32" rx="8" fill="#5c6b50" />
+                    <path d="M8 16L14 10L20 16L14 22L8 16Z" fill="white" />
+                    <path d="M14 16L20 10L26 16L20 22L14 16Z" fill="white" fill-opacity="0.6" />
+                </svg>
+                <span>MeFlow</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html#product-intro">产品介绍</a>
+                <a href="index.html#capability-matrix">能力矩阵</a>
+                <a href="index.html#tech-advantages">技术优势</a>
+                <a href="index.html#core-value">核心价值</a>
+                <a href="https://meflow3.prod.milvzn.com/dashboard" target="_blank" class="btn btn-primary">开始使用</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <section class="negotiation-page">
+        <div class="negotiation-container">
+            <a href="index.html#capability-matrix" class="back-button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                </svg>
+                返回能力矩阵
+            </a>
+
+            <header class="page-header">
+                <div class="page-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
+                        <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0" />
+                    </svg>
+                    智能谈判
+                </div>
+                <h1 class="page-title">
+                    AI 协同谈判 <span class="highlight">洞察先机</span>
+                </h1>
+                <p class="page-subtitle">
+                    基于历史数据和 AI 分析,预测对方策略,推荐最优谈判方案。让每一次谈判都有数据支撑,让每一个决策都胸有成竹
+                </p>
+            </header>
+
+            <div class="intro-section">
+                <h2 class="intro-title">从经验驱动到数据驱动</h2>
+                <p class="intro-description">
+                    传统谈判依赖个人经验和即兴发挥,MeFlow 3.0 将企业历史交易数据转化为可执行的谈判策略,AI 实时分析双方立场,预测可能结果,助力达成最优协议
+                </p>
+            </div>
+
+            <!-- Feature 1 -->
+            <div class="feature-section">
+                <div class="feature-content">
+                    <div class="feature-number">01</div>
+                    <h2 class="feature-title">策略建议</h2>
+                    <p class="feature-description">AI 分析历史数据,推荐最优谈判策略</p>
+
+                    <div class="feature-highlights">
+                        <div class="highlight-item">
+                            <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                            <span class="highlight-text">分析双方历史交易,识别对方谈判偏好和底线</span>
+                        </div>
+                        <div class="highlight-item">
+                            <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                            <span class="highlight-text">实时评估当前谈判进展,提示关键转折点</span>
+                        </div>
+                        <div class="highlight-item">
+                            <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span class="highlight-text">推荐最优谈判路径,提高成功率</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-visual">
+                    <div class="strategy-chart">
+                        <div class="strategy-item">
+                            <div class="strategy-label">价格弹性</div>
+                            <div class="strategy-bar">
+                                <div class="strategy-fill" style="width: 75%;">75%</div>
+                            </div>
+                        </div>
+                        <div class="strategy-item">
+                            <div class="strategy-label">账期要求</div>
+                            <div class="strategy-bar">
+                                <div class="strategy-fill" style="width: 60%; animation-delay: 0.2s;">60%</div>
+                            </div>
+                        </div>
+                        <div class="strategy-item">
+                            <div class="strategy-label">质保期</div>
+                            <div class="strategy-bar">
+                                <div class="strategy-fill" style="width: 85%; animation-delay: 0.4s;">85%</div>
+                            </div>
+                        </div>
+                        <div class="strategy-item">
+                            <div class="strategy-label">违约条款</div>
+                            <div class="strategy-bar">
+                                <div class="strategy-fill" style="width: 50%; animation-delay: 0.6s;">50%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-section reverse">
+                <div class="feature-content">
+                    <div class="feature-number">02</div>
+                    <h2 class="feature-title">让步分析</h2>
+                    <p class="feature-description">量化条款影响,智能规划让步空间</p>
+
+                    <div class="feature-highlights">
+                        <div class="highlight-item">
+                            <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span class="highlight-text">量化每个条款的商业价值和风险成本</span>
+                        </div>
+                        <div class="highlight-item">
+                            <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                            </svg>
+                            <span class="highlight-text">模拟不同让步方案的预期结果</span>
+                        </div>
+                        <div class="highlight-item">
+                            <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                            <span class="highlight-text">标注底线条款,确保不触碰核心利益</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-visual">
+                    <div class="contract-chat-container">
+                        <div class="contract-document">
+                            <div class="contract-text">
+                                第五条 付款条件:乙方应在货物验收合格后30个工作日内支付全额款项。
+                            </div>
+                            <div class="contract-text highlighted">
+                                第六条 违约责任:如乙方未按时付款,每逾期一日,应按未付款项的0.5%向甲方支付违约金。
+                            </div>
+                            <div class="contract-text">
+                                第七条 争议解决:双方因本合同发生争议,应友好协商解决。
+                            </div>
+                        </div>
+                        <div class="ai-chat-bubble">
+                            <div class="chat-header">
+                                <div class="chat-avatar">AI</div>
+                                <span>MeFlow Agent</span>
+                            </div>
+                            <div class="chat-content">
+                                已分析该违约条款,0.5%/日的违约金率偏高(行业标准0.03%-0.05%/日),建议调整。
+                            </div>
+                            <div class="chat-suggestion">
+                                <strong>建议修改:</strong>
+                                "每逾期一日,应按未付款项的0.03%向甲方支付违约金,累计不超过合同总额的5%。"
+                            </div>
+                            <button class="apply-button">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                应用修改
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-section">
+                <div class="feature-content">
+                    <div class="feature-number">03</div>
+                    <h2 class="feature-title">历史对比</h2>
+                    <p class="feature-description">参考过往案例,避免重复失误</p>
+
+                    <div class="feature-highlights">
+                        <div class="highlight-item">
+                            <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span class="highlight-text">检索相似交易的历史谈判记录和最终结果</span>
+                        </div>
+                        <div class="highlight-item">
+                            <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                            <span class="highlight-text">总结成功经验和失败教训,提供决策参考</span>
+                        </div>
+                        <div class="highlight-item">
+                            <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
+                            <span class="highlight-text">展示行业基准数据,了解市场标准</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-visual">
+                    <div class="data-grid">
+                        <div class="data-card">
+                            <div class="data-value">12</div>
+                            <div class="data-label">相似交易案例</div>
+                        </div>
+                        <div class="data-card">
+                            <div class="data-value">83%</div>
+                            <div class="data-label">历史成功率</div>
+                        </div>
+                        <div class="data-card">
+                            <div class="data-value">30天</div>
+                            <div class="data-label">平均账期</div>
+                        </div>
+                        <div class="data-card">
+                            <div class="data-value">8.5%</div>
+                            <div class="data-label">平均折扣率</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-container">
+            <h2 class="cta-title">让数据为谈判赋能</h2>
+            <p class="cta-desc">
+                MeFlow Agent 智能谈判助手,让每次谈判都有理有据,胸有成竹
+            </p>
+            <div class="cta-buttons">
+                <a href="https://meflow3.prod.milvzn.com/dashboard" target="_blank" class="btn btn-primary btn-lg">立即体验</a>
+                <a href="index.html" class="btn btn-outline btn-lg">了解更多</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <a href="index.html" class="nav-logo">
+                        <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="32" height="32" rx="8" fill="#5c6b50" />
+                            <path d="M8 16L14 10L20 16L14 22L8 16Z" fill="white" />
+                            <path d="M14 16L20 10L26 16L20 22L14 16Z" fill="white" fill-opacity="0.6" />
+                        </svg>
+                        <span>MeFlow</span>
+                    </a>
+                    <p class="footer-tagline">AI原生合同生命周期管理平台</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>产品</h4>
+                        <a href="index.html#product-intro">产品介绍</a>
+                        <a href="index.html#capability-matrix">能力矩阵</a>
+                        <a href="index.html#tech-advantages">技术优势</a>
+                        <a href="index.html#core-value">核心价值</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>能力</h4>
+                        <a href="intelligent-drafting.html">智能起草</a>
+                        <a href="intelligent-review.html">智能审核</a>
+                        <a href="intelligent-negotiation.html">智能谈判</a>
+                        <a href="#">智能履约</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>资源</h4>
+                        <a href="#">产品文档</a>
+                        <a href="#">API文档</a>
+                        <a href="#">帮助中心</a>
+                        <a href="#">开发者社区</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>法律</h4>
+                        <a href="#">隐私政策</a>
+                        <a href="#">服务条款</a>
+                        <a href="#">安全说明</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 幂律智能 PowerLaw.AI. 保留所有权利</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+
+</html>
