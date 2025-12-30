@@ -537,7 +537,7 @@
             }
         }
 
-        /* Scene 5: Risk Alerts - 优化：统一为浅色主题 */
+        /* Scene 5: Risk Alerts - 优化：左右布局双动画 */
         .scene-5 {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
@@ -551,36 +551,49 @@
             animation: fadeUp 0.8s ease forwards;
         }
 
-        .alert-dashboard {
+        .alert-split-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Left: Monitoring Dashboard */
+        .monitor-panel {
             background: var(--color-white);
             border-radius: 24px;
             padding: 3rem;
-            max-width: 1000px;
-            margin: 0 auto;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: slideInFromLeft 0.8s ease 0.3s forwards;
         }
 
-        .alert-header {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
-            border-bottom: 2px solid var(--color-gray-100);
+        @keyframes slideInFromLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
-        .alert-bell {
-            width: 80px;
-            height: 80px;
+        .monitor-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .monitor-bell {
+            width: 100px;
+            height: 100px;
             background: var(--color-olive-light);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin: 0 auto 1.5rem;
             position: relative;
             color: var(--color-olive-dark);
-            opacity: 0;
-            animation: bellPulse 2s ease-in-out infinite, fadeUp 0.8s ease 0.5s forwards;
+            animation: bellPulse 2s ease-in-out infinite;
         }
 
         @keyframes bellPulse {
@@ -594,20 +607,21 @@
             }
         }
 
-        .alert-badge {
+        .monitor-badge {
             position: absolute;
-            top: -8px;
-            right: -8px;
-            width: 36px;
-            height: 36px;
+            top: -5px;
+            right: -5px;
+            width: 40px;
+            height: 40px;
             background: #ff6b6b;
             color: white;
             border-radius: 50%;
             font-weight: 700;
+            font-size: 1.25rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            animation: badgePop 0.5s ease 1s forwards;
+            animation: badgePop 0.5s ease 0.8s forwards;
             transform: scale(0);
         }
 
@@ -617,20 +631,120 @@
             }
         }
 
-        .alert-info h3 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
+        .monitor-title {
+            font-size: 1.75rem;
+            font-weight: 700;
             color: var(--color-gray-900);
-            opacity: 0;
-            animation: fadeUp 0.8s ease 0.7s forwards;
+            margin-bottom: 0.5rem;
         }
 
-        .alert-info p {
+        .monitor-subtitle {
             color: var(--color-gray-600);
-            font-size: 1.125rem;
+            font-size: 1rem;
+        }
+
+        .monitor-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, var(--color-gray-50), var(--color-white));
+            border: 2px solid var(--color-gray-100);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
             opacity: 0;
-            animation: fadeUp 0.8s ease 0.9s forwards;
+            animation: metricPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+
+        .stat-box:nth-child(1) { animation-delay: 1s; }
+        .stat-box:nth-child(2) { animation-delay: 1.2s; }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--color-olive-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--color-gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--color-olive-dark);
+            margin-top: 0.5rem;
+        }
+
+        .mini-chart {
+            height: 120px;
+            background: linear-gradient(to top, var(--color-olive-bg), transparent);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            align-items: flex-end;
+            gap: 0.5rem;
+            justify-content: space-around;
+        }
+
+        .monitor-chart {
+            height: 120px;
+            background: linear-gradient(to top, var(--color-olive-bg), transparent);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            align-items: flex-end;
+            gap: 0.5rem;
+            justify-content: space-around;
+        }
+
+        .mini-bar {
+            flex: 1;
+            background: linear-gradient(to top, var(--color-olive-dark), var(--color-olive));
+            border-radius: 4px 4px 0 0;
+            opacity: 0;
+            animation: barGrow 0.8s ease forwards;
+        }
+
+        .mini-bar:nth-child(1) { animation-delay: 1.4s; height: 50%; }
+        .mini-bar:nth-child(2) { animation-delay: 1.5s; height: 70%; }
+        .mini-bar:nth-child(3) { animation-delay: 1.6s; height: 40%; }
+        .mini-bar:nth-child(4) { animation-delay: 1.7s; height: 85%; }
+        .mini-bar:nth-child(5) { animation-delay: 1.8s; height: 60%; }
+
+        /* Right: Alerts Panel */
+        .alerts-panel {
+            background: var(--color-white);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateX(50px);
+            animation: slideInFromRight 0.8s ease 0.5s forwards;
+        }
+
+        @keyframes slideInFromRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .alerts-header {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-gray-900);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--color-gray-100);
         }
 
         .alert-list {
@@ -642,25 +756,25 @@
         .alert-item {
             background: var(--color-gray-50);
             border-radius: 16px;
-            padding: 2rem;
+            padding: 1.75rem;
             border-left: 4px solid var(--color-olive);
             display: flex;
-            gap: 1.5rem;
-            align-items: center;
+            gap: 1.25rem;
+            align-items: flex-start;
             opacity: 0;
-            transform: translateX(-50px);
+            transform: translateX(30px);
             animation: alertSlideIn 0.6s ease forwards;
             transition: all 0.3s ease;
             cursor: pointer;
         }
 
         .alert-item:nth-child(1) {
-            animation-delay: 1.2s;
+            animation-delay: 1s;
             border-left-color: #ff6b6b;
         }
 
         .alert-item:nth-child(2) {
-            animation-delay: 1.4s;
+            animation-delay: 1.3s;
             border-left-color: #ffd93d;
         }
 
@@ -678,11 +792,22 @@
 
         .alert-item:hover {
             background: var(--color-white);
-            transform: translateX(8px);
+            transform: translateX(-5px);
             box-shadow: 0 10px 40px rgba(92, 107, 80, 0.15);
         }
 
         .alert-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .alert-icon-new {
             width: 48px;
             height: 48px;
             border-radius: 12px;
@@ -693,20 +818,49 @@
             flex-shrink: 0;
         }
 
-        .alert-content {
-            flex: 1;
-            text-align: left;
+        .alert-icon-new.alert-danger {
+            background: rgba(255, 107, 107, 0.15);
+            color: #ff6b6b;
         }
 
-        .alert-content h4 {
-            font-size: 1.25rem;
+        .alert-icon-new.alert-warning {
+            background: rgba(255, 217, 61, 0.15);
+            color: #d4a017;
+        }
+
+        .alert-icon-new.alert-success {
+            background: rgba(92, 107, 80, 0.15);
+            color: var(--color-olive-dark);
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-details {
+            flex: 1;
+        }
+
+        .alert-content h4,
+        .alert-details h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
             margin-bottom: 0.5rem;
             color: var(--color-gray-900);
         }
 
-        .alert-content p {
+        .alert-content p,
+        .alert-details p {
             color: var(--color-gray-600);
             font-size: 0.9375rem;
+            line-height: 1.5;
+        }
+
+        .alert-time {
+            display: block;
+            font-size: 0.8125rem;
+            color: var(--color-gray-400);
+            margin-top: 0.5rem;
         }
 
         /* Scene 6: Tech Stack - 优化：统一专业风格 */
@@ -1192,43 +1346,64 @@
             </div>
         </div>
 
-        <!-- Scene 5: Risk Alerts - 优化：浅色主题统一 -->
+        <!-- Scene 5: Risk Alerts - 优化：左右布局双动画 -->
         <div class="scene scene-5" data-scene="5">
             <div class="scene-content">
                 <h2 class="alert-title">智能风险预警</h2>
-                <div class="alert-dashboard">
-                    <div class="alert-header">
-                        <div class="alert-bell">
-                            <svg width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
+                <div class="alert-split-layout">
+                    <!-- LEFT: Monitoring Dashboard -->
+                    <div class="monitor-panel">
+                        <div class="monitor-bell">
+                            <svg width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
                                 <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
                             </svg>
-                            <div class="alert-badge">3</div>
                         </div>
-                        <div class="alert-info">
-                            <h3>3 条风险预警</h3>
-                            <p>需要您的关注</p>
+                        <h3 class="monitor-title">实时监控</h3>
+                        <p class="monitor-subtitle">AI 7×24 持续监测合同风险</p>
+                        <div class="monitor-stats">
+                            <div class="stat-box">
+                                <div class="stat-label">今日监控</div>
+                                <div class="stat-value">127</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-label">风险拦截</div>
+                                <div class="stat-value">8</div>
+                            </div>
+                        </div>
+                        <div class="mini-chart">
+                            <div class="mini-bar" style="height: 50%;"></div>
+                            <div class="mini-bar" style="height: 70%;"></div>
+                            <div class="mini-bar" style="height: 40%;"></div>
+                            <div class="mini-bar" style="height: 90%;"></div>
+                            <div class="mini-bar" style="height: 65%;"></div>
                         </div>
                     </div>
-                    <div class="alert-list">
+
+                    <!-- RIGHT: Alerts Panel -->
+                    <div class="alerts-panel">
+                        <h3 class="alerts-header">最新预警</h3>
                         <div class="alert-item">
-                            <div class="alert-icon" style="background: rgba(255, 107, 107, 0.15); color: #ff6b6b;">⚠️</div>
-                            <div class="alert-content">
+                            <div class="alert-icon-new alert-danger">⚠️</div>
+                            <div class="alert-details">
                                 <h4>高风险合同预警</h4>
-                                <p>合同 #2024-0156 存在不合理付款条款，建议修改</p>
+                                <p>合同 #2024-0156 存在不合理付款条款</p>
+                                <span class="alert-time">2 分钟前</span>
                             </div>
                         </div>
                         <div class="alert-item">
-                            <div class="alert-icon" style="background: rgba(255, 217, 61, 0.15); color: #d4a017;">📅</div>
-                            <div class="alert-content">
+                            <div class="alert-icon-new alert-warning">📅</div>
+                            <div class="alert-details">
                                 <h4>履约即将到期</h4>
                                 <p>3 份合同将在 7 天内到期，请及时跟进</p>
+                                <span class="alert-time">1 小时前</span>
                             </div>
                         </div>
                         <div class="alert-item">
-                            <div class="alert-icon" style="background: rgba(92, 107, 80, 0.15); color: var(--color-olive);">✓</div>
-                            <div class="alert-content">
+                            <div class="alert-icon-new alert-success">✓</div>
+                            <div class="alert-details">
                                 <h4>审核已完成</h4>
                                 <p>合同 #2024-0158 已通过审核，可以签署</p>
+                                <span class="alert-time">3 小时前</span>
                             </div>
                         </div>
                     </div>
@@ -1567,20 +1742,30 @@
             playPauseBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>';
             playPauseBtn.title = '暂停';
 
-            autoPlayInterval = setInterval(() => {
-                if (currentScene < totalScenes) {
-                    nextScene();
-                } else {
-                    stopAutoPlay();
-                }
-            }, 4500); // 优化：4.5秒自动播放
+            function scheduleNext() {
+                // Scene 3 (对话) needs more time for typing animations to complete
+                const delay = currentScene === 3 ? 11000 : 4500;
+
+                autoPlayInterval = setTimeout(() => {
+                    if (currentScene < totalScenes) {
+                        nextScene();
+                        if (isPlaying) {
+                            scheduleNext();
+                        }
+                    } else {
+                        stopAutoPlay();
+                    }
+                }, delay);
+            }
+
+            scheduleNext();
         }
 
         function stopAutoPlay() {
             isPlaying = false;
             playPauseBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
             playPauseBtn.title = '自动播放';
-            clearInterval(autoPlayInterval);
+            clearTimeout(autoPlayInterval);
         }
 
         // Event Listeners
