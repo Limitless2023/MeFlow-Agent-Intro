@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业级安全可靠 - MeFlow Agent</title>
+    <meta name="description" content="MeFlow Agent 企业级安全保障 - 数据隔离、人工审批、全程可审计">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Enterprise Security Page Styles */
+
+        .security-page {
+            padding-top: 8rem;
+            padding-bottom: 4rem;
+            background: var(--color-cream);
+        }
+
+        .security-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 0;
+            background: none;
+            border: none;
+            color: var(--color-gray-600);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            margin-bottom: 2rem;
+        }
+
+        .back-button:hover {
+            color: var(--color-olive);
+            text-decoration: underline;
+        }
+
+        .back-button svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Page Header */
+        .security-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .security-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--color-white);
+            border: 1px solid var(--color-olive-light);
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            color: var(--color-olive);
+            margin-bottom: 1.5rem;
+        }
+
+        .security-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 400;
+            color: var(--color-gray-900);
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        .security-title .highlight {
+            color: var(--color-olive);
+            font-style: italic;
+        }
+
+        .security-subtitle {
+            font-size: 1rem;
+            color: var(--color-gray-600);
+            max-width: 900px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+        }
+
+        /* Security Sections - Full Width Alternating Layout */
+        .security-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 6rem;
+            padding: 4rem;
+            background: var(--color-white);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .security-section.reverse {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .security-section.reverse .section-content {
+            order: 2;
+        }
+
+        .security-section.reverse .section-visual {
+            order: 1;
+        }
+
+        .section-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-icon {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--color-olive-light) 0%, var(--color-olive-bg) 100%);
+            border-radius: var(--radius-lg);
+            color: var(--color-olive);
+            flex-shrink: 0;
+        }
+
+        .section-icon svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--color-gray-900);
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .feature-item-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-gray-800);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .feature-item-title::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--color-olive);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .feature-item-desc {
+            font-size: 1rem;
+            color: var(--color-gray-600);
+            line-height: 1.8;
+            padding-left: 1.5rem;
+        }
+
+        /* Visual/Diagram Section */
+        .section-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--color-olive-bg) 0%, var(--color-cream) 100%);
+            border-radius: var(--radius-xl);
+        }
+
+        /* Animation Styles */
+
+        /* Diagram 1: Data Isolation Animation */
+        .diagram-isolation {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            height: 400px;
+        }
+
+        .user-box {
+            position: absolute;
+            width: 100px;
+            height: 80px;
+            background: var(--color-white);
+            border: 2px solid var(--color-olive);
+            border-radius: var(--radius-md);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .user-box-1 {
+            top: 20px;
+            left: 50px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .user-box-2 {
+            top: 160px;
+            right: 50px;
+            animation: pulse 2s ease-in-out infinite 0.5s;
+        }
+
+        .user-box-3 {
+            bottom: 20px;
+            left: 50px;
+            animation: pulse 2s ease-in-out infinite 1s;
+        }
+
+        .shield-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            animation: rotate-shield 4s linear infinite;
+        }
+
+        .data-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--color-olive);
+            border-radius: 50%;
+            animation: float-particle 3s ease-in-out infinite;
+        }
+
+        .particle-1 { top: 30%; left: 20%; animation-delay: 0s; }
+        .particle-2 { top: 50%; right: 20%; animation-delay: 1s; }
+        .particle-3 { bottom: 30%; left: 30%; animation-delay: 2s; }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+            50% { transform: scale(1.05); box-shadow: 0 8px 12px rgba(92, 107, 80, 0.3); }
+        }
+
+        @keyframes rotate-shield {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes float-particle {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
+            50% { transform: translateY(-20px) scale(1.2); opacity: 0.8; }
+        }
+
+        /* Diagram 2: Human in Loop Animation */
+        .diagram-hitl {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            height: 400px;
+        }
+
+        .workflow-step {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: var(--color-white);
+            border: 2px solid var(--color-gray-300);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-gray-700);
+            text-align: center;
+            transition: all 0.5s ease;
+        }
+
+        .workflow-step.active {
+            border-color: var(--color-olive);
+            background: var(--color-olive-light);
+            color: var(--color-olive);
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(92, 107, 80, 0.4);
+        }
+
+        .step-1 { top: 20px; left: 50%; transform: translateX(-50%); }
+        .step-2 { top: 160px; left: 50px; }
+        .step-3 { top: 160px; right: 50px; }
+        .step-4 { bottom: 20px; left: 50%; transform: translateX(-50%); }
+
+        .approval-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 60px;
+            height: 60px;
+            background: var(--color-olive);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            animation: pop-approval 4s ease-in-out infinite;
+        }
+
+        .workflow-line {
+            position: absolute;
+            height: 2px;
+            background: var(--color-gray-300);
+        }
+
+        .line-1 { top: 80px; left: 50%; width: 2px; height: 80px; }
+        .line-2 { top: 200px; left: 100px; width: calc(100% - 200px); }
+        .line-3 { bottom: 80px; right: 50%; width: 2px; height: 80px; }
+
+        @keyframes pop-approval {
+            0%, 20%, 100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+            40%, 80% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+
+        /* Diagram 3: Audit Trail Animation */
+        .diagram-audit {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            height: 400px;
+        }
+
+        .audit-log {
+            position: absolute;
+            left: 20px;
+            right: 20px;
+            height: 60px;
+            background: var(--color-white);
+            border-left: 4px solid var(--color-olive);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            box-shadow: var(--shadow-sm);
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: slide-in 1.5s ease-out infinite;
+        }
+
+        .log-1 { top: 40px; animation-delay: 0s; }
+        .log-2 { top: 130px; animation-delay: 0.5s; }
+        .log-3 { top: 220px; animation-delay: 1s; }
+
+        .log-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+
+        .log-time {
+            color: var(--color-gray-500);
+            font-family: monospace;
+        }
+
+        .log-action {
+            color: var(--color-gray-800);
+            font-weight: 500;
+        }
+
+        .monitor-pulse {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            width: 40px;
+            height: 40px;
+            background: var(--color-olive);
+            border-radius: 50%;
+            animation: monitor-ping 2s ease-out infinite;
+        }
+
+        @keyframes slide-in {
+            0% { opacity: 0; transform: translateX(-30px); }
+            10%, 90% { opacity: 1; transform: translateX(0); }
+            100% { opacity: 0; transform: translateX(30px); }
+        }
+
+        @keyframes monitor-ping {
+            0% { transform: scale(1); opacity: 1; }
+            50%, 100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .security-section {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                padding: 3rem 2rem;
+            }
+
+            .security-section.reverse .section-content {
+                order: 1;
+            }
+
+            .security-section.reverse .section-visual {
+                order: 2;
+            }
+
+            .section-visual {
+                min-height: 350px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .security-section {
+                padding: 2rem 1.5rem;
+                margin-bottom: 3rem;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .section-visual {
+                min-height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="32" rx="8" fill="#5c6b50" />
+                    <path d="M8 16L14 10L20 16L14 22L8 16Z" fill="white" />
+                    <path d="M14 16L20 10L26 16L20 22L14 16Z" fill="white" fill-opacity="0.6" />
+                </svg>
+                <span>MeFlow</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html#product-intro">产品介绍</a>
+                <a href="index.html#capability-matrix">能力矩阵</a>
+                <a href="index.html#tech-advantages">技术优势</a>
+                <a href="index.html#core-value">核心价值</a>
+                <a href="https://meflow3.prod.milvzn.com/dashboard" target="_blank" class="btn btn-primary">开始使用</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Enterprise Security Page -->
+    <section class="security-page">
+        <div class="security-container">
+            <a href="index.html#tech-advantages" class="back-button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                </svg>
+                返回技术优势
+            </a>
+
+            <header class="security-header">
+                <div class="security-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
+                        <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                    企业级安全保障
+                </div>
+                <h1 class="security-title">
+                    <span class="highlight">企业级安全可靠</span>
+                </h1>
+                <p class="security-subtitle">
+                    MeFlow Agent在提供强大智能能力的同时，始终将企业数据安全放在首位。通过严格的权限控制、人工审批机制和全程可审计，确保 Agent 在安全可控的前提下高效运行，为企业构建值得信赖的智能合同管理体系。
+                </p>
+            </header>
+
+            <!-- Section 1: System Data and Function Permissions (Text Left, Visual Right) -->
+            <div class="security-section">
+                <div class="section-content">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            </svg>
+                        </div>
+                        <h2 class="section-title">系统数据和功能权限</h2>
+                    </div>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-item-title">数据隔离机制</div>
+                            <div class="feature-item-desc">
+                                用户级会话隔离，确保对话记录互不可见<br>
+                                Agent 只能访问当前用户权限范围内的数据
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-item-title">最小权限原则</div>
+                            <div class="feature-item-desc">
+                                Agent 仅拥有"读取+分析+编辑"权限，无删除数据库权限
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-visual">
+                    <div class="diagram-isolation">
+                        <!-- User Boxes -->
+                        <div class="user-box user-box-1">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                            <span style="font-size: 0.75rem; margin-top: 0.25rem;">用户A</span>
+                        </div>
+                        <div class="user-box user-box-2">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                            <span style="font-size: 0.75rem; margin-top: 0.25rem;">用户B</span>
+                        </div>
+                        <div class="user-box user-box-3">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                            <span style="font-size: 0.75rem; margin-top: 0.25rem;">用户C</span>
+                        </div>
+                        <!-- Shield -->
+                        <svg class="shield-icon" viewBox="0 0 24 24" fill="none" stroke="#5c6b50" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                        <!-- Data Particles -->
+                        <div class="data-particle particle-1"></div>
+                        <div class="data-particle particle-2"></div>
+                        <div class="data-particle particle-3"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Human in The Loop (Text Right, Visual Left) -->
+            <div class="security-section reverse">
+                <div class="section-content">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                        </div>
+                        <h2 class="section-title">Human in The Loop人工审批</h2>
+                    </div>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-item-title">关键操作人工把关</div>
+                            <div class="feature-item-desc">
+                                关键操作（发起审批、数据导出）强制人工二次确认<br>
+                                风险分级控制：高风险操作人工审批，低风险操作 Agent 自主执行
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-item-title">支持人工干预和纠错</div>
+                            <div class="feature-item-desc">
+                                Agent 执行过程中，用户可随时暂停、修正或取消<br>
+                                支持工作流状态检查点，可从任意节点人工接管
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-visual">
+                    <div class="diagram-hitl">
+                        <!-- Workflow Lines -->
+                        <div class="workflow-line line-1"></div>
+                        <div class="workflow-line line-2"></div>
+                        <div class="workflow-line line-3"></div>
+                        <!-- Workflow Steps -->
+                        <div class="workflow-step step-1" style="animation: step-activate 8s ease-in-out infinite;">
+                            <span>用户<br>输入</span>
+                        </div>
+                        <div class="workflow-step step-2" style="animation: step-activate 8s ease-in-out infinite 2s;">
+                            <span>AI<br>分析</span>
+                        </div>
+                        <div class="workflow-step step-3" style="animation: step-activate 8s ease-in-out infinite 4s;">
+                            <span>人工<br>审批</span>
+                        </div>
+                        <div class="workflow-step step-4" style="animation: step-activate 8s ease-in-out infinite 6s;">
+                            <span>执行<br>操作</span>
+                        </div>
+                        <!-- Approval Icon -->
+                        <div class="approval-icon">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <path d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Observable & Auditable (Text Left, Visual Right) -->
+            <div class="security-section">
+                <div class="section-content">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+                            </svg>
+                        </div>
+                        <h2 class="section-title">可观测<span style="font-family: 'Fraunces', serif; font-style: italic; color: var(--color-olive); margin: 0 0.2rem;">&</span>可审计</h2>
+                    </div>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-item-title">全链路可观测</div>
+                            <div class="feature-item-desc">
+                                基于 OpenTelemetry 标准，实时监控 Agent 运行状态<br>
+                                对话轨迹完整记录：用户输入 → Agent 推理 →工具调用→结果输出
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-item-title">操作全程可审计</div>
+                            <div class="feature-item-desc">
+                                所有对话和操作自动归档，支持按时间、用户、操作类型检索 - 敏感操作（如合同修改、数据导出）生成审计日志
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-visual">
+                    <div class="diagram-audit">
+                        <!-- Audit Logs -->
+                        <div class="audit-log log-1">
+                            <div class="log-content">
+                                <span class="log-time">14:23:15</span>
+                                <span class="log-action">用户登录系统</span>
+                            </div>
+                        </div>
+                        <div class="audit-log log-2">
+                            <div class="log-content">
+                                <span class="log-time">14:25:42</span>
+                                <span class="log-action">执行合同审核</span>
+                            </div>
+                        </div>
+                        <div class="audit-log log-3">
+                            <div class="log-content">
+                                <span class="log-time">14:28:09</span>
+                                <span class="log-action">导出审计报告</span>
+                            </div>
+                        </div>
+                        <!-- Monitor Pulse -->
+                        <div class="monitor-pulse"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <a href="index.html" class="nav-logo">
+                        <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="32" height="32" rx="8" fill="#5c6b50" />
+                            <path d="M8 16L14 10L20 16L14 22L8 16Z" fill="white" />
+                            <path d="M14 16L20 10L26 16L20 22L14 16Z" fill="white" fill-opacity="0.6" />
+                        </svg>
+                        <span>MeFlow</span>
+                    </a>
+                    <p class="footer-tagline">AI原生合同生命周期管理平台</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>产品</h4>
+                        <a href="index.html#product-intro">产品介绍</a>
+                        <a href="index.html#capability-matrix">能力矩阵</a>
+                        <a href="index.html#tech-advantages">技术优势</a>
+                        <a href="index.html#core-value">核心价值</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>技术</h4>
+                        <a href="sota-models.html">SOTA模型</a>
+                        <a href="enterprise-security.html">企业安全</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>公司</h4>
+                        <a href="#">关于我们</a>
+                        <a href="#">联系我们</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>法律</h4>
+                        <a href="#">隐私政策</a>
+                        <a href="#">服务条款</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 幂律智能 PowerLaw.AI. 保留所有权利</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+
+        // Add CSS animation for workflow steps
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes step-activate {
+                0%, 20%, 100% {
+                    border-color: var(--color-gray-300);
+                    background: var(--color-white);
+                    color: var(--color-gray-700);
+                    transform: translateX(-50%) scale(1);
+                    box-shadow: none;
+                }
+                25%, 45% {
+                    border-color: var(--color-olive);
+                    background: var(--color-olive-light);
+                    color: var(--color-olive);
+                    transform: translateX(-50%) scale(1.1);
+                    box-shadow: 0 0 20px rgba(92, 107, 80, 0.4);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+
+</html>

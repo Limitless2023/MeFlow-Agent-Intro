@@ -376,6 +376,8 @@
             transition: all var(--transition-base);
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .tech-module-card::before {
@@ -425,20 +427,23 @@
             font-size: 0.9375rem;
             color: var(--color-gray-600);
             line-height: 1.7;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0;
+            flex: 1;
         }
 
         .tech-module-status {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.375rem 0.875rem;
+            padding: 0.3rem 0.625rem;
             background: var(--color-gray-100);
             border-radius: 9999px;
             font-size: 0.8125rem;
             font-weight: 500;
             color: var(--color-gray-500);
             width: fit-content;
+            margin-top: 1.5rem;
+            align-self: flex-start;
         }
 
         .status-dot {
@@ -929,11 +934,11 @@
         <nav class="tech-nav">
             <div class="tech-nav-container">
                 <div class="tech-nav-item active">全部模块</div>
+                <div class="tech-nav-item">AI原生系统</div>
                 <div class="tech-nav-item">技术架构</div>
                 <div class="tech-nav-item">SOTA模型</div>
-                <div class="tech-nav-item">上下文工程</div>
                 <div class="tech-nav-item">工具生态</div>
-                <div class="tech-nav-item">AI原生系统</div>
+                <div class="tech-nav-item">上下文工程</div>
                 <div class="tech-nav-item">企业安全</div>
             </div>
         </nav>
@@ -941,28 +946,38 @@
         <div class="tech-container">
             <div class="tech-header">
                 <h2 class="section-title">AI原生架构 重新定义合同管理</h2>
-                <p class="section-subtitle">
-                    基于先进的 AI Agent 架构打造，融合大语言模型、向量数据库、智能编排引擎
-                </p>
             </div>
 
             <div class="tech-modules-grid">
-                <!-- Module 1 -->
-                <div class="tech-module-card">
+                <!-- Module 1: AI原生系统 -->
+                <a href="ai-native-system.html" class="tech-module-card" style="text-decoration: none; color: inherit;">
                     <div class="tech-module-number">01</div>
+                    <h3 class="tech-module-title">全新AI原生系统</h3>
+                    <p class="tech-module-desc">
+                        从零重构系统底座，让系统为AI而生
+                    </p>
+                    <span class="tech-module-status" style="background: var(--color-olive-light); color: var(--color-olive);">
+                        <span class="status-dot"></span>
+                        查看详情 →
+                    </span>
+                </a>
+
+                <!-- Module 2: 技术架构 -->
+                <a href="architecture.html" class="tech-module-card" style="text-decoration: none; color: inherit;">
+                    <div class="tech-module-number">02</div>
                     <h3 class="tech-module-title">技术架构</h3>
                     <p class="tech-module-desc">
                         多层Agent协作架构，融合LLM、向量数据库、工作流引擎
                     </p>
-                    <span class="tech-module-status">
+                    <span class="tech-module-status" style="background: var(--color-olive-light); color: var(--color-olive);">
                         <span class="status-dot"></span>
-                        内容待更新
+                        查看详情 →
                     </span>
-                </div>
+                </a>
 
-                <!-- Module 2 -->
+                <!-- Module 3: SOTA模型 -->
                 <a href="sota-models.html" class="tech-module-card" style="text-decoration: none; color: inherit;">
-                    <div class="tech-module-number">02</div>
+                    <div class="tech-module-number">03</div>
                     <h3 class="tech-module-title">支持主流SOTA模型</h3>
                     <p class="tech-module-desc">
                         包括 DeepSeek、GLM、Kimi、Qwen 等顶尖大模型
@@ -973,57 +988,44 @@
                     </span>
                 </a>
 
-                <!-- Module 3 -->
-                <div class="tech-module-card">
-                    <div class="tech-module-number">03</div>
-                    <h3 class="tech-module-title">智能上下文工程</h3>
-                    <p class="tech-module-desc">
-                        RAG检索增强、长上下文处理、知识图谱构建
-                    </p>
-                    <span class="tech-module-status">
-                        <span class="status-dot"></span>
-                        内容待添加
-                    </span>
-                </div>
-
-                <!-- Module 4 -->
-                <div class="tech-module-card">
+                <!-- Module 4: 工具生态 -->
+                <a href="tools-ecosystem.html" class="tech-module-card" style="text-decoration: none; color: inherit;">
                     <div class="tech-module-number">04</div>
                     <h3 class="tech-module-title">丰富且友好的工具</h3>
                     <p class="tech-module-desc">
-                        500+预置工具函数，覆盖合同全生命周期
+                        40+专业工具，为大模型设计，对模型友好
                     </p>
-                    <span class="tech-module-status">
+                    <span class="tech-module-status" style="background: var(--color-olive-light); color: var(--color-olive);">
                         <span class="status-dot"></span>
-                        内容待添加
+                        查看详情 →
                     </span>
-                </div>
+                </a>
 
-                <!-- Module 5 -->
-                <div class="tech-module-card">
+                <!-- Module 5: 上下文工程 -->
+                <a href="context-engineering.html" class="tech-module-card" style="text-decoration: none; color: inherit;">
                     <div class="tech-module-number">05</div>
-                    <h3 class="tech-module-title">全新AI原生系统</h3>
+                    <h3 class="tech-module-title">智能上下文工程</h3>
                     <p class="tech-module-desc">
-                        从零构建的AI-First架构，而非传统系统的AI改造
+                        业务语境感知、多轮对话记忆、智能文档解析
                     </p>
-                    <span class="tech-module-status">
+                    <span class="tech-module-status" style="background: var(--color-olive-light); color: var(--color-olive);">
                         <span class="status-dot"></span>
-                        内容待添加
+                        查看详情 →
                     </span>
-                </div>
+                </a>
 
-                <!-- Module 6 -->
-                <div class="tech-module-card">
+                <!-- Module 6: 企业安全 -->
+                <a href="enterprise-security.html" class="tech-module-card" style="text-decoration: none; color: inherit;">
                     <div class="tech-module-number">06</div>
                     <h3 class="tech-module-title">企业级安全可靠</h3>
                     <p class="tech-module-desc">
-                        符合等保2.0三级标准，数据加密存储传输
+                        严格权限控制、人工审批机制、全程可审计
                     </p>
-                    <span class="tech-module-status">
+                    <span class="tech-module-status" style="background: var(--color-olive-light); color: var(--color-olive);">
                         <span class="status-dot"></span>
-                        内容待添加
+                        查看详情 →
                     </span>
-                </div>
+                </a>
             </div>
         </div>
     </section>
