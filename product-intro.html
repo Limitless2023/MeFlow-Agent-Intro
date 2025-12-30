@@ -60,39 +60,13 @@
             justify-content: center;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 1s ease, visibility 0s 1s;
+            transition: opacity 0.8s ease, visibility 0s 0.8s;
         }
 
         .scene.active {
             opacity: 1;
             visibility: visible;
-            transition: opacity 1s ease, visibility 0s;
-        }
-
-        .scene.slide-out-left {
-            animation: slideOutLeft 0.8s ease forwards;
-        }
-
-        .scene.slide-in-right {
-            animation: slideInRight 0.8s ease forwards;
-        }
-
-        @keyframes slideOutLeft {
-            to {
-                opacity: 0;
-                transform: translateX(-100%);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(100%);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            transition: opacity 0.8s ease, visibility 0s;
         }
 
         .scene-content {
@@ -102,7 +76,7 @@
             text-align: center;
         }
 
-        /* Scene 1: The Chaos - Problem visualization */
+        /* Scene 1: The Chaos - 优化：7个卡片，包括中间区域 */
         .scene-1 {
             background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
         }
@@ -150,28 +124,46 @@
         }
 
         .doc-item:nth-child(1) {
-            top: 10%;
-            left: 10%;
-            animation-delay: 0.2s;
+            top: 8%;
+            left: 8%;
             animation: floatChaos 4s ease-in-out infinite, docFadeIn 0.8s ease 0.2s forwards;
         }
 
         .doc-item:nth-child(2) {
-            top: 20%;
-            right: 15%;
+            top: 15%;
+            right: 12%;
             animation: floatChaos 3.5s ease-in-out infinite, docFadeIn 0.8s ease 0.4s forwards;
         }
 
         .doc-item:nth-child(3) {
-            bottom: 25%;
-            left: 20%;
-            animation: floatChaos 4.5s ease-in-out infinite, docFadeIn 0.8s ease 0.6s forwards;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: floatChaos 4.2s ease-in-out infinite, docFadeIn 0.8s ease 0.6s forwards;
         }
 
         .doc-item:nth-child(4) {
-            bottom: 15%;
-            right: 10%;
+            top: 35%;
+            left: 15%;
             animation: floatChaos 3.8s ease-in-out infinite, docFadeIn 0.8s ease 0.8s forwards;
+        }
+
+        .doc-item:nth-child(5) {
+            top: 40%;
+            right: 18%;
+            animation: floatChaos 4.3s ease-in-out infinite, docFadeIn 0.8s ease 1s forwards;
+        }
+
+        .doc-item:nth-child(6) {
+            bottom: 20%;
+            left: 18%;
+            animation: floatChaos 4.5s ease-in-out infinite, docFadeIn 0.8s ease 1.2s forwards;
+        }
+
+        .doc-item:nth-child(7) {
+            bottom: 12%;
+            right: 10%;
+            animation: floatChaos 3.6s ease-in-out infinite, docFadeIn 0.8s ease 1.4s forwards;
         }
 
         @keyframes floatChaos {
@@ -294,7 +286,7 @@
             }
         }
 
-        /* Scene 3: Live Chat Demo */
+        /* Scene 3: Live Chat Demo - 优化：真实打字效果 + 多轮对话 */
         .scene-3 {
             background: linear-gradient(135deg, var(--color-cream) 0%, var(--color-olive-bg) 100%);
         }
@@ -329,11 +321,11 @@
         }
 
         .chat-message.user {
-            animation: messageSlideInRight 0.6s ease 0.5s forwards;
+            animation: messageSlideInRight 0.6s ease forwards;
         }
 
         .chat-message.ai {
-            animation: messageSlideInLeft 0.6s ease 1.5s forwards;
+            animation: messageSlideInLeft 0.6s ease forwards;
         }
 
         @keyframes messageSlideInRight {
@@ -394,19 +386,39 @@
             background: linear-gradient(135deg, var(--color-olive-light), var(--color-olive-bg));
         }
 
-        .typing-animation {
-            display: inline-block;
-            opacity: 0;
-            animation: typewriter 2s steps(40) 2.5s forwards;
+        .typing-indicator {
+            display: inline-flex;
+            gap: 0.25rem;
+            align-items: center;
+            padding: 0.5rem 0;
         }
 
-        @keyframes typewriter {
-            to {
-                opacity: 1;
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--color-gray-400);
+            border-radius: 50%;
+            animation: typingBounce 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typingBounce {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-10px);
             }
         }
 
-        /* Scene 4: Data Insights Dashboard */
+        /* Scene 4: Data Dashboard - 优化：数字计数动画 */
         .scene-4 {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
@@ -501,12 +513,12 @@
             animation: barGrow 1s ease forwards;
         }
 
-        .chart-bar:nth-child(1) { animation-delay: 1.1s; height: 60%; }
-        .chart-bar:nth-child(2) { animation-delay: 1.2s; height: 80%; }
-        .chart-bar:nth-child(3) { animation-delay: 1.3s; height: 50%; }
-        .chart-bar:nth-child(4) { animation-delay: 1.4s; height: 90%; }
-        .chart-bar:nth-child(5) { animation-delay: 1.5s; height: 75%; }
-        .chart-bar:nth-child(6) { animation-delay: 1.6s; height: 100%; }
+        .chart-bar:nth-child(1) { animation-delay: 1.1s; --target-height: 60%; }
+        .chart-bar:nth-child(2) { animation-delay: 1.2s; --target-height: 80%; }
+        .chart-bar:nth-child(3) { animation-delay: 1.3s; --target-height: 50%; }
+        .chart-bar:nth-child(4) { animation-delay: 1.4s; --target-height: 90%; }
+        .chart-bar:nth-child(5) { animation-delay: 1.5s; --target-height: 75%; }
+        .chart-bar:nth-child(6) { animation-delay: 1.6s; --target-height: 100%; }
 
         .chart-bar:hover {
             transform: scaleY(1.05) translateY(-5px);
@@ -517,34 +529,35 @@
         @keyframes barGrow {
             from {
                 opacity: 0;
-                height: 0 !important;
+                height: 0;
             }
             to {
                 opacity: 1;
+                height: var(--target-height);
             }
         }
 
-        /* Scene 5: Risk Alerts */
+        /* Scene 5: Risk Alerts - 优化：统一为浅色主题 */
         .scene-5 {
-            background: linear-gradient(135deg, #1a1d1f 0%, #2d3236 100%);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
 
         .alert-title {
             font-family: var(--font-serif);
             font-size: 3.5rem;
+            color: var(--color-gray-900);
             margin-bottom: 3rem;
             opacity: 0;
             animation: fadeUp 0.8s ease forwards;
         }
 
         .alert-dashboard {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--color-white);
             border-radius: 24px;
             padding: 3rem;
             max-width: 1000px;
             margin: 0 auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
         }
 
         .alert-header {
@@ -553,7 +566,7 @@
             gap: 2rem;
             margin-bottom: 3rem;
             padding-bottom: 2rem;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 2px solid var(--color-gray-100);
         }
 
         .alert-bell {
@@ -565,7 +578,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            animation: bellPulse 2s ease-in-out infinite;
+            color: var(--color-olive-dark);
             opacity: 0;
             animation: bellPulse 2s ease-in-out infinite, fadeUp 0.8s ease 0.5s forwards;
         }
@@ -573,11 +586,11 @@
         @keyframes bellPulse {
             0%, 100% {
                 transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(232, 235, 229, 0.7);
+                box-shadow: 0 0 0 0 rgba(92, 107, 80, 0.4);
             }
             50% {
                 transform: scale(1.05);
-                box-shadow: 0 0 0 20px rgba(232, 235, 229, 0);
+                box-shadow: 0 0 0 20px rgba(92, 107, 80, 0);
             }
         }
 
@@ -608,12 +621,13 @@
             font-size: 2.5rem;
             font-weight: 800;
             margin-bottom: 0.5rem;
+            color: var(--color-gray-900);
             opacity: 0;
             animation: fadeUp 0.8s ease 0.7s forwards;
         }
 
         .alert-info p {
-            opacity: 0.8;
+            color: var(--color-gray-600);
             font-size: 1.125rem;
             opacity: 0;
             animation: fadeUp 0.8s ease 0.9s forwards;
@@ -626,10 +640,10 @@
         }
 
         .alert-item {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--color-gray-50);
             border-radius: 16px;
             padding: 2rem;
-            border-left: 4px solid var(--color-olive-light);
+            border-left: 4px solid var(--color-olive);
             display: flex;
             gap: 1.5rem;
             align-items: center;
@@ -652,7 +666,7 @@
 
         .alert-item:nth-child(3) {
             animation-delay: 1.6s;
-            border-left-color: var(--color-olive-light);
+            border-left-color: var(--color-olive);
         }
 
         @keyframes alertSlideIn {
@@ -663,9 +677,9 @@
         }
 
         .alert-item:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--color-white);
             transform: translateX(8px);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 40px rgba(92, 107, 80, 0.15);
         }
 
         .alert-icon {
@@ -681,26 +695,29 @@
 
         .alert-content {
             flex: 1;
+            text-align: left;
         }
 
         .alert-content h4 {
             font-size: 1.25rem;
             margin-bottom: 0.5rem;
+            color: var(--color-gray-900);
         }
 
         .alert-content p {
-            opacity: 0.7;
+            color: var(--color-gray-600);
             font-size: 0.9375rem;
         }
 
-        /* Scene 6: Tech Stack */
+        /* Scene 6: Tech Stack - 优化：统一专业风格 */
         .scene-6 {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
 
         .tech-title {
             font-family: var(--font-serif);
             font-size: 3.5rem;
+            color: var(--color-gray-900);
             margin-bottom: 4rem;
             opacity: 0;
             animation: fadeUp 0.8s ease forwards;
@@ -715,14 +732,14 @@
         }
 
         .tech-layer {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--color-white);
+            border: 2px solid var(--color-gray-100);
             border-radius: 20px;
             padding: 2.5rem;
             opacity: 0;
             transform: translateY(50px) scale(0.9);
             animation: techLayerReveal 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            transition: all 0.3s ease;
         }
 
         .tech-layer:nth-child(1) { animation-delay: 0.3s; }
@@ -740,31 +757,37 @@
         }
 
         .tech-layer:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--color-olive-light);
+            background: var(--color-olive-bg);
+            border-color: var(--color-olive);
             transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(92, 107, 80, 0.2);
+            box-shadow: 0 20px 50px rgba(92, 107, 80, 0.15);
         }
 
         .tech-icon {
             width: 64px;
             height: 64px;
-            background: linear-gradient(135deg, var(--color-olive), var(--color-olive-light));
+            background: linear-gradient(135deg, var(--color-olive), var(--color-olive-dark));
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
+            margin: 0 0 1.5rem 0;
+        }
+
+        .tech-icon-text {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--color-white);
         }
 
         .tech-layer h3 {
             font-size: 1.5rem;
             margin-bottom: 0.75rem;
+            color: var(--color-gray-900);
         }
 
         .tech-layer p {
-            opacity: 0.8;
+            color: var(--color-gray-600);
             line-height: 1.6;
         }
 
@@ -903,26 +926,26 @@
             transform: translateY(-8px) scale(1.05);
         }
 
-        /* Navigation Controls */
+        /* Navigation Controls - 优化：缩小尺寸 */
         .nav-controls {
             position: fixed;
-            bottom: 3rem;
+            bottom: 2.5rem;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 1.5rem;
             z-index: 1000;
             background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
+            padding: 0.75rem 1.5rem;
             border-radius: 9999px;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .nav-btn {
-            width: 48px;
-            height: 48px;
+            width: 40px;
+            height: 40px;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 50%;
@@ -946,26 +969,32 @@
 
         .progress-dots {
             display: flex;
-            gap: 0.75rem;
+            gap: 0.5rem;
         }
 
         .dot {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             background: rgba(255, 255, 255, 0.3);
             border-radius: 50%;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
         .dot.active {
             background: var(--color-white);
             transform: scale(1.5);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+        }
+
+        .dot:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(1.2);
         }
 
         .play-pause-btn {
-            width: 56px;
-            height: 56px;
+            width: 48px;
+            height: 48px;
             background: var(--color-olive);
             border: none;
             border-radius: 50%;
@@ -1045,15 +1074,19 @@
             }
 
             .nav-controls {
-                padding: 0.75rem 1.5rem;
+                padding: 0.6rem 1.2rem;
                 gap: 1rem;
+            }
+
+            .doc-item:nth-child(3) {
+                top: 45%;
             }
         }
     </style>
 </head>
 <body>
     <div class="presentation-container">
-        <!-- Scene 1: The Chaos -->
+        <!-- Scene 1: The Chaos - 优化：7个卡片包括中心区域 -->
         <div class="scene scene-1 active" data-scene="1">
             <div class="scene-content">
                 <h2 class="chaos-title">传统合同管理的困境</h2>
@@ -1079,6 +1112,21 @@
                             <div style="font-size: 1.125rem; font-weight: 600;">知识分散</div>
                             <div style="opacity: 0.7; margin-top: 0.5rem;">经验难以沉淀</div>
                         </div>
+                        <div class="doc-item">
+                            <div class="warning-icon">💸</div>
+                            <div style="font-size: 1.125rem; font-weight: 600;">成本高昂</div>
+                            <div style="opacity: 0.7; margin-top: 0.5rem;">人力成本持续上升</div>
+                        </div>
+                        <div class="doc-item">
+                            <div class="warning-icon">🔄</div>
+                            <div style="font-size: 1.125rem; font-weight: 600;">协作困难</div>
+                            <div style="opacity: 0.7; margin-top: 0.5rem;">跨部门沟通低效</div>
+                        </div>
+                        <div class="doc-item">
+                            <div class="warning-icon">📉</div>
+                            <div style="font-size: 1.125rem; font-weight: 600;">数据缺失</div>
+                            <div style="opacity: 0.7; margin-top: 0.5rem;">缺乏分析洞察</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1095,28 +1143,17 @@
             </div>
         </div>
 
-        <!-- Scene 3: Live Chat Demo -->
+        <!-- Scene 3: Live Chat Demo - 优化：真实打字 + 多轮对话 -->
         <div class="scene scene-3" data-scene="3">
             <div class="scene-content">
                 <h2 class="chat-demo-title">对话式智能交互</h2>
-                <div class="chat-window">
-                    <div class="chat-message user">
-                        <div class="chat-avatar user">U</div>
-                        <div class="chat-bubble">
-                            帮我起草一份与供应商的采购合同，金额200万，交付周期3个月
-                        </div>
-                    </div>
-                    <div class="chat-message ai">
-                        <div class="chat-avatar ai">AI</div>
-                        <div class="chat-bubble">
-                            <span class="typing-animation">好的，我已经为您生成了采购合同草稿。合同包含了标准的付款条款、交付时间表、质量保证条款和违约责任。我注意到金额较大，建议增加分期付款条款和履约保证金，以降低风险。是否需要我添加这些条款？</span>
-                        </div>
-                    </div>
+                <div class="chat-window" id="chatWindow">
+                    <!-- Messages will be dynamically added by JavaScript -->
                 </div>
             </div>
         </div>
 
-        <!-- Scene 4: Data Insights Dashboard -->
+        <!-- Scene 4: Data Insights Dashboard - 优化：数字计数动画 -->
         <div class="scene scene-4" data-scene="4">
             <div class="scene-content">
                 <h2 class="dashboard-title">实时数据洞察</h2>
@@ -1124,22 +1161,22 @@
                     <div class="metrics-grid">
                         <div class="metric-card">
                             <div class="metric-label">合同总数</div>
-                            <div class="metric-value">1,247</div>
+                            <div class="metric-value" data-target="1247">0</div>
                             <div class="metric-trend">↑ 23% vs 上月</div>
                         </div>
                         <div class="metric-card">
                             <div class="metric-label">合同总金额</div>
-                            <div class="metric-value">¥8.6M</div>
+                            <div class="metric-value" data-target="8.6" data-suffix="M">¥0</div>
                             <div class="metric-trend">↑ 18% vs 上月</div>
                         </div>
                         <div class="metric-card">
                             <div class="metric-label">履约完成率</div>
-                            <div class="metric-value">94.2%</div>
+                            <div class="metric-value" data-target="94.2" data-suffix="%">0%</div>
                             <div class="metric-trend">↑ 5% vs 上月</div>
                         </div>
                         <div class="metric-card">
                             <div class="metric-label">平均处理周期</div>
-                            <div class="metric-value">2.3天</div>
+                            <div class="metric-value" data-target="2.3" data-suffix="天">0天</div>
                             <div class="metric-trend">↓ 40% vs 上月</div>
                         </div>
                     </div>
@@ -1155,7 +1192,7 @@
             </div>
         </div>
 
-        <!-- Scene 5: Risk Alerts -->
+        <!-- Scene 5: Risk Alerts - 优化：浅色主题统一 -->
         <div class="scene scene-5" data-scene="5">
             <div class="scene-content">
                 <h2 class="alert-title">智能风险预警</h2>
@@ -1174,21 +1211,21 @@
                     </div>
                     <div class="alert-list">
                         <div class="alert-item">
-                            <div class="alert-icon" style="background: rgba(255, 107, 107, 0.2); color: #ff6b6b;">⚠️</div>
+                            <div class="alert-icon" style="background: rgba(255, 107, 107, 0.15); color: #ff6b6b;">⚠️</div>
                             <div class="alert-content">
                                 <h4>高风险合同预警</h4>
                                 <p>合同 #2024-0156 存在不合理付款条款，建议修改</p>
                             </div>
                         </div>
                         <div class="alert-item">
-                            <div class="alert-icon" style="background: rgba(255, 217, 61, 0.2); color: #ffd93d;">📅</div>
+                            <div class="alert-icon" style="background: rgba(255, 217, 61, 0.15); color: #d4a017;">📅</div>
                             <div class="alert-content">
                                 <h4>履约即将到期</h4>
                                 <p>3 份合同将在 7 天内到期，请及时跟进</p>
                             </div>
                         </div>
                         <div class="alert-item">
-                            <div class="alert-icon" style="background: rgba(168, 184, 157, 0.2); color: var(--color-olive-light);">✓</div>
+                            <div class="alert-icon" style="background: rgba(92, 107, 80, 0.15); color: var(--color-olive);">✓</div>
                             <div class="alert-content">
                                 <h4>审核已完成</h4>
                                 <p>合同 #2024-0158 已通过审核，可以签署</p>
@@ -1199,39 +1236,51 @@
             </div>
         </div>
 
-        <!-- Scene 6: Tech Stack -->
+        <!-- Scene 6: Tech Stack - 优化：专业简洁风格 -->
         <div class="scene scene-6" data-scene="6">
             <div class="scene-content">
                 <h2 class="tech-title">领先技术架构</h2>
                 <div class="tech-stack">
                     <div class="tech-layer">
-                        <div class="tech-icon">🤖</div>
+                        <div class="tech-icon">
+                            <div class="tech-icon-text">AI</div>
+                        </div>
                         <h3>AI 原生系统</h3>
                         <p>基于最新大语言模型，深度理解合同语义</p>
                     </div>
                     <div class="tech-layer">
-                        <div class="tech-icon">⚡</div>
+                        <div class="tech-icon">
+                            <div class="tech-icon-text">5s</div>
+                        </div>
                         <h3>极速响应</h3>
                         <p>5秒内完成合同分析，实时提供建议</p>
                     </div>
                     <div class="tech-layer">
-                        <div class="tech-icon">🔐</div>
+                        <div class="tech-icon">
+                            <div class="tech-icon-text">SOC</div>
+                        </div>
                         <h3>企业级安全</h3>
                         <p>SOC2 认证，多层加密保护数据安全</p>
                     </div>
                     <div class="tech-layer">
-                        <div class="tech-icon">📊</div>
+                        <div class="tech-icon">
+                            <div class="tech-icon-text">AP</div>
+                        </div>
                         <h3>智能编排</h3>
                         <p>Agent 自主协作，处理复杂业务场景</p>
                     </div>
                     <div class="tech-layer">
-                        <div class="tech-icon">🔄</div>
-                        <h3>100K+ 上下文</h3>
+                        <div class="tech-icon">
+                            <div class="tech-icon-text">100K</div>
+                        </div>
+                        <h3>超长上下文</h3>
                         <p>处理超长合同，保持完整理解</p>
                     </div>
                     <div class="tech-layer">
-                        <div class="tech-icon">🛠️</div>
-                        <h3>20+ 工具生态</h3>
+                        <div class="tech-icon">
+                            <div class="tech-icon-text">20+</div>
+                        </div>
+                        <h3>工具生态</h3>
                         <p>无缝集成企业现有系统</p>
                     </div>
                 </div>
@@ -1291,7 +1340,7 @@
         <!-- Navigation Controls -->
         <div class="nav-controls">
             <button class="nav-btn" id="prevBtn" title="上一步">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M15 18l-6-6 6-6" />
                 </svg>
             </button>
@@ -1308,13 +1357,13 @@
             </div>
 
             <button class="play-pause-btn" id="playPauseBtn" title="自动播放">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M8 5v14l11-7z" />
                 </svg>
             </button>
 
             <button class="nav-btn" id="nextBtn" title="下一步">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M9 18l6-6-6-6" />
                 </svg>
             </button>
@@ -1333,23 +1382,154 @@
         const nextBtn = document.getElementById('nextBtn');
         const playPauseBtn = document.getElementById('playPauseBtn');
 
+        // Chat typing effect
+        const chatConversation = [
+            {
+                type: 'user',
+                text: '帮我起草一份与供应商的采购合同，金额200万，交付周期3个月',
+                delay: 500
+            },
+            {
+                type: 'ai',
+                text: '好的，我已经为您生成了采购合同草稿。合同包含了标准的付款条款、交付时间表和质量保证条款。我注意到金额较大，建议增加分期付款条款和履约保证金。',
+                delay: 2000,
+                typing: true
+            },
+            {
+                type: 'user',
+                text: '好的，帮我加上分期付款条款',
+                delay: 1500
+            },
+            {
+                type: 'ai',
+                text: '已为您添加分期付款条款：首付30%，验收合格后支付60%，质保期满支付尾款10%。同时建议增加5%履约保证金条款，以降低风险。',
+                delay: 2000,
+                typing: true
+            }
+        ];
+
+        let chatTimeout;
+        let currentMessageIndex = 0;
+
+        function typeWriter(element, text, speed = 30) {
+            let i = 0;
+            element.textContent = '';
+
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+
+            type();
+        }
+
+        function showTypingIndicator(container) {
+            const indicator = document.createElement('div');
+            indicator.className = 'typing-indicator';
+            indicator.innerHTML = `
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+            `;
+            return indicator;
+        }
+
+        function addChatMessage(conversation, index) {
+            if (index >= conversation.length) return;
+
+            const chatWindow = document.getElementById('chatWindow');
+            const msg = conversation[index];
+
+            setTimeout(() => {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `chat-message ${msg.type}`;
+
+                const avatar = document.createElement('div');
+                avatar.className = `chat-avatar ${msg.type}`;
+                avatar.textContent = msg.type === 'user' ? 'U' : 'AI';
+
+                const bubble = document.createElement('div');
+                bubble.className = 'chat-bubble';
+
+                messageDiv.appendChild(avatar);
+                messageDiv.appendChild(bubble);
+                chatWindow.appendChild(messageDiv);
+
+                if (msg.type === 'ai' && msg.typing) {
+                    const typingIndicator = showTypingIndicator(bubble);
+                    bubble.appendChild(typingIndicator);
+
+                    setTimeout(() => {
+                        bubble.removeChild(typingIndicator);
+                        typeWriter(bubble, msg.text, 25);
+                    }, 800);
+                } else {
+                    bubble.textContent = msg.text;
+                }
+
+                setTimeout(() => {
+                    messageDiv.style.animationDelay = '0s';
+                }, 50);
+
+                addChatMessage(conversation, index + 1);
+            }, msg.delay);
+        }
+
+        function initChatScene() {
+            const chatWindow = document.getElementById('chatWindow');
+            chatWindow.innerHTML = '';
+            currentMessageIndex = 0;
+            addChatMessage(chatConversation, 0);
+        }
+
+        // Number counting animation
+        function animateValue(element, start, end, duration, decimals = 0, prefix = '', suffix = '') {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const current = progress * (end - start) + start;
+                const displayValue = decimals > 0 ? current.toFixed(decimals) : Math.floor(current).toLocaleString();
+                element.textContent = prefix + displayValue + suffix;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        function initMetrics() {
+            const metricValues = document.querySelectorAll('.metric-value[data-target]');
+            metricValues.forEach((element, index) => {
+                setTimeout(() => {
+                    const target = parseFloat(element.dataset.target);
+                    const suffix = element.dataset.suffix || '';
+                    const prefix = suffix === 'M' ? '¥' : '';
+                    const decimals = target % 1 !== 0 ? 1 : 0;
+
+                    animateValue(element, 0, target, 1500, decimals, prefix, suffix);
+                }, 300 + (index * 200));
+            });
+        }
+
         function goToScene(sceneNumber, direction = 'next') {
             if (sceneNumber < 1 || sceneNumber > totalScenes) return;
 
-            const currentSceneEl = scenes[currentScene - 1];
-            const nextSceneEl = scenes[sceneNumber - 1];
-
-            // Remove active from all scenes
-            scenes.forEach(scene => {
-                scene.classList.remove('active');
-            });
-
-            // Update dots
+            scenes.forEach(scene => scene.classList.remove('active'));
             dots.forEach(dot => dot.classList.remove('active'));
+
+            scenes[sceneNumber - 1].classList.add('active');
             dots[sceneNumber - 1].classList.add('active');
 
-            // Activate new scene
-            nextSceneEl.classList.add('active');
+            // Trigger animations for specific scenes
+            if (sceneNumber === 3) {
+                setTimeout(() => initChatScene(), 500);
+            } else if (sceneNumber === 4) {
+                setTimeout(() => initMetrics(), 500);
+            }
 
             currentScene = sceneNumber;
             updateButtons();
@@ -1384,7 +1564,7 @@
 
         function startAutoPlay() {
             isPlaying = true;
-            playPauseBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>';
+            playPauseBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>';
             playPauseBtn.title = '暂停';
 
             autoPlayInterval = setInterval(() => {
@@ -1393,12 +1573,12 @@
                 } else {
                     stopAutoPlay();
                 }
-            }, 6000); // 6 seconds per scene
+            }, 4500); // 优化：4.5秒自动播放
         }
 
         function stopAutoPlay() {
             isPlaying = false;
-            playPauseBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+            playPauseBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
             playPauseBtn.title = '自动播放';
             clearInterval(autoPlayInterval);
         }
