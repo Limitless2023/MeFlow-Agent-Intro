@@ -81,6 +81,61 @@
             margin-bottom: 1rem;
         }
 
+        .intro-cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-demo {
+            background: var(--color-olive);
+            color: var(--color-white);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            border-radius: 9999px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid var(--color-olive);
+        }
+
+        .btn-demo:hover {
+            background: var(--color-olive-dark);
+            border-color: var(--color-olive-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(92, 107, 80, 0.3);
+        }
+
+        .btn-demo svg {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-demo:hover svg {
+            transform: scale(1.1);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-olive);
+            display: inline-flex;
+            align-items: center;
+            padding: 0.875rem 1.75rem;
+            border-radius: 9999px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid var(--color-olive-light);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-olive-light);
+            border-color: var(--color-olive);
+        }
+
         .intro-visual {
             background: var(--color-white);
             border-radius: var(--radius-2xl);
@@ -674,6 +729,16 @@
                 grid-template-columns: 1fr;
             }
 
+            .intro-cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn-demo,
+            .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
             .value-card.large {
                 grid-column: span 1;
             }
@@ -733,6 +798,18 @@
                     <p class="intro-description">
                         通过大语言模型、智能Agent编排和深度学习技术，MeFlow Agent 重新定义了企业与合同的交互方式 —— 从起草、审核、谈判到履约，每一个环节都由 AI 驱动，让专业的人专注于专业的决策。
                     </p>
+                    <div class="intro-cta-buttons">
+                        <a href="product-intro.html" class="btn btn-demo">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/>
+                            </svg>
+                            观看产品演示
+                        </a>
+                        <a href="https://meflow3.prod.milvzn.com/dashboard" target="_blank" class="btn btn-secondary">
+                            立即开始使用
+                        </a>
+                    </div>
                 </div>
 
                 <div class="intro-visual">

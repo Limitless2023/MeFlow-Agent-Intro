@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeFlow Agent - 产品演示</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* CSS Variables */
+        :root {
+            --color-olive: #5c6b50;
+            --color-olive-dark: #4a5740;
+            --color-olive-light: #e8ebe5;
+            --color-olive-bg: #f0f2ed;
+            --color-cream: #fdfdf8;
+            --color-white: #ffffff;
+            --color-gray-50: #fafafa;
+            --color-gray-100: #f4f4f5;
+            --color-gray-200: #e4e4e7;
+            --color-gray-300: #d4d4d8;
+            --color-gray-400: #a1a1aa;
+            --color-gray-500: #71717a;
+            --color-gray-600: #52525b;
+            --color-gray-700: #3f3f46;
+            --color-gray-800: #27272a;
+            --color-gray-900: #18181b;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-serif: 'Fraunces', Georgia, serif;
+            --transition-base: 200ms ease;
+            --radius-md: 0.5rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+        }
+
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            overflow: hidden;
+            background: var(--color-cream);
+            color: var(--color-gray-900);
+        }
+
+        /* Container */
+        .presentation-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Scenes */
+        .scene {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            pointer-events: none;
+        }
+
+        .scene.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .scene-content {
+            max-width: 1200px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* Scene 1 - Opening */
+        .scene-1 {
+            background: linear-gradient(135deg, var(--color-cream) 0%, var(--color-olive-bg) 100%);
+        }
+
+        .logo-container {
+            animation: logoFadeIn 1.5s ease forwards;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            background: var(--color-olive);
+            border-radius: var(--radius-2xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            box-shadow: 0 20px 60px rgba(92, 107, 80, 0.3);
+        }
+
+        .logo-text {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--color-white);
+        }
+
+        .brand-name {
+            font-family: var(--font-serif);
+            font-size: 4rem;
+            font-weight: 600;
+            color: var(--color-gray-900);
+            margin-bottom: 1.5rem;
+            animation: textSlideUp 1s ease 0.5s forwards;
+            opacity: 0;
+        }
+
+        .slogan {
+            font-size: 1.75rem;
+            color: var(--color-gray-600);
+            animation: textSlideUp 1s ease 0.8s forwards;
+            opacity: 0;
+        }
+
+        @keyframes logoFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes textSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Scene 2 - Pain Points */
+        .scene-2 {
+            background: linear-gradient(135deg, #f5f3f0 0%, #e8ebe5 100%);
+        }
+
+        .pain-points-title {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            color: var(--color-gray-900);
+            margin-bottom: 3rem;
+        }
+
+        .pain-points-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .pain-point {
+            background: var(--color-white);
+            padding: 2.5rem;
+            border-radius: var(--radius-xl);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            opacity: 0;
+            animation: cardFadeIn 0.6s ease forwards;
+        }
+
+        .pain-point:nth-child(1) { animation-delay: 0.2s; }
+        .pain-point:nth-child(2) { animation-delay: 0.4s; }
+        .pain-point:nth-child(3) { animation-delay: 0.6s; }
+        .pain-point:nth-child(4) { animation-delay: 0.8s; }
+
+        .pain-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        .pain-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-gray-900);
+            margin-bottom: 0.75rem;
+        }
+
+        .pain-description {
+            font-size: 1rem;
+            color: var(--color-gray-600);
+            line-height: 1.6;
+        }
+
+        @keyframes cardFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Scene 3 - Solutions */
+        .scene-3 {
+            background: linear-gradient(135deg, var(--color-olive-bg) 0%, var(--color-cream) 100%);
+        }
+
+        .solutions-title {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            color: var(--color-gray-900);
+            margin-bottom: 3rem;
+        }
+
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .solution-card {
+            background: var(--color-white);
+            padding: 2rem;
+            border-radius: var(--radius-xl);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--color-olive);
+            opacity: 0;
+            animation: cardFlyIn 0.6s ease forwards;
+            transition: transform 0.3s ease;
+        }
+
+        .solution-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .solution-card:nth-child(1) { animation-delay: 0.1s; }
+        .solution-card:nth-child(2) { animation-delay: 0.2s; }
+        .solution-card:nth-child(3) { animation-delay: 0.3s; }
+        .solution-card:nth-child(4) { animation-delay: 0.4s; }
+        .solution-card:nth-child(5) { animation-delay: 0.5s; }
+        .solution-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .solution-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--color-olive), var(--color-olive-dark));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .solution-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-gray-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .solution-desc {
+            font-size: 0.9rem;
+            color: var(--color-gray-600);
+            line-height: 1.5;
+        }
+
+        @keyframes cardFlyIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+
+        /* Scene 4 - Tech Advantages */
+        .scene-4 {
+            background: linear-gradient(135deg, #1a1d1f 0%, #2d3236 100%);
+        }
+
+        .scene-4 .tech-title {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            color: var(--color-white);
+            margin-bottom: 3rem;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .tech-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            animation: techCardFade 0.8s ease forwards;
+        }
+
+        .tech-card:nth-child(1) { animation-delay: 0.1s; }
+        .tech-card:nth-child(2) { animation-delay: 0.2s; }
+        .tech-card:nth-child(3) { animation-delay: 0.3s; }
+        .tech-card:nth-child(4) { animation-delay: 0.4s; }
+        .tech-card:nth-child(5) { animation-delay: 0.5s; }
+        .tech-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .tech-metric {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-olive-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .tech-label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+        }
+
+        .tech-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .tech-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-olive), var(--color-olive-light));
+            border-radius: 999px;
+            animation: barGrow 1.5s ease forwards;
+            width: 0;
+        }
+
+        .tech-card:nth-child(1) .tech-bar-fill { animation-delay: 0.5s; }
+        .tech-card:nth-child(2) .tech-bar-fill { animation-delay: 0.6s; }
+        .tech-card:nth-child(3) .tech-bar-fill { animation-delay: 0.7s; }
+        .tech-card:nth-child(4) .tech-bar-fill { animation-delay: 0.8s; }
+        .tech-card:nth-child(5) .tech-bar-fill { animation-delay: 0.9s; }
+        .tech-card:nth-child(6) .tech-bar-fill { animation-delay: 1s; }
+
+        @keyframes techCardFade {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes barGrow {
+            from {
+                width: 0;
+            }
+            to {
+                width: var(--bar-width);
+            }
+        }
+
+        /* Scene 5 - CTA */
+        .scene-5 {
+            background: linear-gradient(135deg, var(--color-olive) 0%, var(--color-olive-dark) 100%);
+        }
+
+        .cta-container {
+            color: var(--color-white);
+        }
+
+        .cta-title {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            animation: textSlideUp 1s ease forwards;
+        }
+
+        .cta-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            animation: textSlideUp 1s ease 0.3s forwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            animation: textSlideUp 1s ease 0.6s forwards;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2.5rem;
+            border-radius: 9999px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--color-white);
+            color: var(--color-olive-dark);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-white);
+            border: 2px solid var(--color-white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-white);
+            color: var(--color-olive-dark);
+        }
+
+        /* Navigation Controls */
+        .nav-controls {
+            position: fixed;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--color-gray-200);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-btn:hover {
+            background: var(--color-white);
+            transform: scale(1.1);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .nav-btn:disabled:hover {
+            transform: scale(1);
+        }
+
+        .progress-dots {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            border: 2px solid var(--color-gray-400);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--color-olive);
+            border-color: var(--color-olive);
+            transform: scale(1.3);
+        }
+
+        .play-pause-btn {
+            width: 56px;
+            height: 56px;
+            background: var(--color-olive);
+            border: none;
+            border-radius: 50%;
+            color: var(--color-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(92, 107, 80, 0.3);
+        }
+
+        .play-pause-btn:hover {
+            background: var(--color-olive-dark);
+            transform: scale(1.1);
+        }
+
+        /* Close Button */
+        .close-btn {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--color-gray-200);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1001;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: var(--color-white);
+            transform: rotate(90deg);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .pain-points-grid,
+            .solutions-grid,
+            .tech-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .brand-name {
+                font-size: 2.5rem;
+            }
+
+            .slogan {
+                font-size: 1.25rem;
+            }
+
+            .pain-points-title,
+            .solutions-title,
+            .tech-title,
+            .cta-title {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="presentation-container">
+        <!-- Scene 1: Opening -->
+        <div class="scene scene-1 active" data-scene="1">
+            <div class="scene-content">
+                <div class="logo-container">
+                    <div class="logo">
+                        <span class="logo-text">M</span>
+                    </div>
+                    <h1 class="brand-name">MeFlow Agent</h1>
+                    <p class="slogan">像对话一样管理合同</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scene 2: Pain Points -->
+        <div class="scene scene-2" data-scene="2">
+            <div class="scene-content">
+                <h2 class="pain-points-title">传统合同管理的痛点</h2>
+                <div class="pain-points-grid">
+                    <div class="pain-point">
+                        <div class="pain-icon">⏰</div>
+                        <h3 class="pain-title">效率低下</h3>
+                        <p class="pain-description">人工审核合同耗时长，重复性工作占据大量时间</p>
+                    </div>
+                    <div class="pain-point">
+                        <div class="pain-icon">⚠️</div>
+                        <h3 class="pain-title">风险管控难</h3>
+                        <p class="pain-description">关键条款易遗漏，风险预警不及时</p>
+                    </div>
+                    <div class="pain-point">
+                        <div class="pain-icon">📄</div>
+                        <h3 class="pain-title">版本混乱</h3>
+                        <p class="pain-description">多版本并存，难以追溯修改历史</p>
+                    </div>
+                    <div class="pain-point">
+                        <div class="pain-icon">🔍</div>
+                        <h3 class="pain-title">知识分散</h3>
+                        <p class="pain-description">条款库管理困难，经验难以沉淀复用</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scene 3: Solutions -->
+        <div class="scene scene-3" data-scene="3">
+            <div class="scene-content">
+                <h2 class="solutions-title">六大核心能力 · 全面解决</h2>
+                <div class="solutions-grid">
+                    <div class="solution-card">
+                        <div class="solution-icon">✍️</div>
+                        <h3 class="solution-name">智能起草</h3>
+                        <p class="solution-desc">AI辅助快速生成合同草稿，提高起草效率</p>
+                    </div>
+                    <div class="solution-card">
+                        <div class="solution-icon">🔍</div>
+                        <h3 class="solution-name">智能审核</h3>
+                        <p class="solution-desc">自动识别风险条款，提供专业修改建议</p>
+                    </div>
+                    <div class="solution-card">
+                        <div class="solution-icon">⚖️</div>
+                        <h3 class="solution-name">智能谈判</h3>
+                        <p class="solution-desc">智能比对版本差异，辅助谈判决策</p>
+                    </div>
+                    <div class="solution-card">
+                        <div class="solution-icon">📊</div>
+                        <h3 class="solution-name">智能履约</h3>
+                        <p class="solution-desc">全流程履约跟踪，风险实时预警</p>
+                    </div>
+                    <div class="solution-card">
+                        <div class="solution-icon">📈</div>
+                        <h3 class="solution-name">智能分析</h3>
+                        <p class="solution-desc">数据可视化分析，洞察业务趋势</p>
+                    </div>
+                    <div class="solution-card">
+                        <div class="solution-icon">📚</div>
+                        <h3 class="solution-name">知识管理</h3>
+                        <p class="solution-desc">智能条款库，经验持续沉淀</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scene 4: Tech Advantages -->
+        <div class="scene scene-4" data-scene="4">
+            <div class="scene-content">
+                <h2 class="tech-title">六大技术优势 · 行业领先</h2>
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <div class="tech-metric">99.8%</div>
+                        <div class="tech-label">准确率</div>
+                        <div class="tech-bar">
+                            <div class="tech-bar-fill" style="--bar-width: 99.8%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-card">
+                        <div class="tech-metric">5秒</div>
+                        <div class="tech-label">响应速度</div>
+                        <div class="tech-bar">
+                            <div class="tech-bar-fill" style="--bar-width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-card">
+                        <div class="tech-metric">100K+</div>
+                        <div class="tech-label">上下文处理</div>
+                        <div class="tech-bar">
+                            <div class="tech-bar-fill" style="--bar-width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-card">
+                        <div class="tech-metric">SOC2</div>
+                        <div class="tech-label">企业级安全</div>
+                        <div class="tech-bar">
+                            <div class="tech-bar-fill" style="--bar-width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-card">
+                        <div class="tech-metric">20+</div>
+                        <div class="tech-label">工具生态</div>
+                        <div class="tech-bar">
+                            <div class="tech-bar-fill" style="--bar-width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-card">
+                        <div class="tech-metric">Claude</div>
+                        <div class="tech-label">顶尖AI模型</div>
+                        <div class="tech-bar">
+                            <div class="tech-bar-fill" style="--bar-width: 98%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scene 5: CTA -->
+        <div class="scene scene-5" data-scene="5">
+            <div class="scene-content">
+                <div class="cta-container">
+                    <h2 class="cta-title">开启智能合同管理新时代</h2>
+                    <p class="cta-subtitle">立即体验 MeFlow Agent，让合同管理更简单</p>
+                    <div class="cta-buttons">
+                        <a href="index.html" class="btn-primary">开始体验</a>
+                        <a href="index.html#features" class="btn-secondary">了解更多</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Close Button -->
+        <button class="close-btn" onclick="window.location.href='index.html'" title="返回首页">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+        </button>
+
+        <!-- Navigation Controls -->
+        <div class="nav-controls">
+            <button class="nav-btn" id="prevBtn" title="上一步">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+            </button>
+
+            <div class="progress-dots">
+                <span class="dot active" data-scene="1"></span>
+                <span class="dot" data-scene="2"></span>
+                <span class="dot" data-scene="3"></span>
+                <span class="dot" data-scene="4"></span>
+                <span class="dot" data-scene="5"></span>
+            </div>
+
+            <button class="play-pause-btn" id="playPauseBtn" title="自动播放">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+            </button>
+
+            <button class="nav-btn" id="nextBtn" title="下一步">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let currentScene = 1;
+        const totalScenes = 5;
+        let isPlaying = false;
+        let autoPlayInterval;
+
+        const scenes = document.querySelectorAll('.scene');
+        const dots = document.querySelectorAll('.dot');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+
+        function goToScene(sceneNumber) {
+            if (sceneNumber < 1 || sceneNumber > totalScenes) return;
+
+            scenes.forEach(scene => scene.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            scenes[sceneNumber - 1].classList.add('active');
+            dots[sceneNumber - 1].classList.add('active');
+
+            currentScene = sceneNumber;
+            updateButtons();
+        }
+
+        function updateButtons() {
+            prevBtn.disabled = currentScene === 1;
+            nextBtn.disabled = currentScene === totalScenes;
+        }
+
+        function nextScene() {
+            if (currentScene < totalScenes) {
+                goToScene(currentScene + 1);
+            } else if (isPlaying) {
+                stopAutoPlay();
+            }
+        }
+
+        function prevScene() {
+            if (currentScene > 1) {
+                goToScene(currentScene - 1);
+            }
+        }
+
+        function toggleAutoPlay() {
+            if (isPlaying) {
+                stopAutoPlay();
+            } else {
+                startAutoPlay();
+            }
+        }
+
+        function startAutoPlay() {
+            isPlaying = true;
+            playPauseBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>';
+            playPauseBtn.title = '暂停';
+
+            autoPlayInterval = setInterval(() => {
+                if (currentScene < totalScenes) {
+                    nextScene();
+                } else {
+                    stopAutoPlay();
+                }
+            }, 5000);
+        }
+
+        function stopAutoPlay() {
+            isPlaying = false;
+            playPauseBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+            playPauseBtn.title = '自动播放';
+            clearInterval(autoPlayInterval);
+        }
+
+        // Event Listeners
+        prevBtn.addEventListener('click', prevScene);
+        nextBtn.addEventListener('click', nextScene);
+        playPauseBtn.addEventListener('click', toggleAutoPlay);
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                const sceneNum = parseInt(e.target.dataset.scene);
+                goToScene(sceneNum);
+                if (isPlaying) stopAutoPlay();
+            });
+        });
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextScene();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevScene();
+            } else if (e.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Initialize
+        updateButtons();
+    </script>
+</body>
+
+</html>
