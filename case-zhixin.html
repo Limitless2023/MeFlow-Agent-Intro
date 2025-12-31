@@ -3,433 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>质信智购 - 赢单案例 | MeFlow Agent</title>
+    <title>质信智购（新奥阳光易采） - 赢单案例 | MeFlow Agent</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', 'Noto Sans SC', sans-serif;
-            background: linear-gradient(135deg, #f5f5f0 0%, #e8e8de 100%);
-            min-height: 100vh;
-        }
-
-        .back-button {
-            position: fixed;
-            top: 2rem;
-            left: 2rem;
-            background: white;
-            color: var(--color-primary);
-            padding: 0.75rem 1.5rem;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            z-index: 100;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .back-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-            background: var(--color-primary);
-            color: white;
-        }
-
-        .case-hero {
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-            color: white;
-            padding: 6rem 2rem 4rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .case-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
-            background-size: cover;
-            opacity: 0.3;
-        }
-
-        .case-hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .case-badge {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 0.5rem 1.5rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            backdrop-filter: blur(10px);
-        }
-
-        .case-hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .case-hero p {
-            font-size: 1.5rem;
-            opacity: 0.95;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            line-height: 1.6;
-        }
-
-        .case-meta-bar {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-top: 2rem;
-        }
-
-        .meta-item {
-            text-align: center;
-        }
-
-        .meta-label {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            margin-bottom: 0.5rem;
-        }
-
-        .meta-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .case-content {
-            max-width: 1200px;
-            margin: -3rem auto 0;
-            padding: 0 2rem 4rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .content-card {
-            background: white;
-            border-radius: 24px;
-            padding: 3rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            animation: fadeInUp 0.8s ease;
-        }
-
-        .content-card h2 {
-            font-size: 2rem;
-            color: var(--color-dark);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .content-card h2::before {
-            content: '';
-            width: 6px;
-            height: 2rem;
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-            border-radius: 3px;
-        }
-
-        .content-card h3 {
-            font-size: 1.5rem;
-            color: var(--color-primary);
-            margin: 2rem 0 1rem;
-        }
-
-        .content-card p {
-            font-size: 1.1rem;
-            color: #4b5563;
-            line-height: 1.8;
-            margin-bottom: 1rem;
-        }
-
-        .content-card ul, .content-card ol {
-            margin-left: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .content-card li {
-            font-size: 1.05rem;
-            color: #4b5563;
-            line-height: 1.8;
-            margin-bottom: 0.75rem;
-        }
-
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .metric-card {
-            background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
-            padding: 2rem;
-            border-radius: 16px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .metric-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-        }
-
-        .metric-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .metric-value {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-        }
-
-        .metric-label {
-            font-size: 1rem;
-            color: #6b7280;
-            font-weight: 500;
-        }
-
-        .timeline {
-            position: relative;
-            padding-left: 3rem;
-            margin: 2rem 0;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0.75rem;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 2rem;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -2.4rem;
-            top: 0.5rem;
-            width: 1rem;
-            height: 1rem;
-            background: var(--color-primary);
-            border-radius: 50%;
-            border: 3px solid white;
-            box-shadow: 0 0 0 3px var(--color-primary-light);
-        }
-
-        .timeline-date {
-            font-size: 0.9rem;
-            color: var(--color-primary);
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-content h4 {
-            font-size: 1.25rem;
-            color: var(--color-dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-content p {
-            font-size: 1rem;
-            color: #6b7280;
-            line-height: 1.6;
-        }
-
-        .highlight-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-
-        .highlight-tag {
-            padding: 0.75rem 1.5rem;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-            border-radius: 20px;
-            font-size: 1rem;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .quote-block {
-            background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
-            border-left: 6px solid var(--color-primary);
-            padding: 2rem;
-            border-radius: 12px;
-            margin: 2rem 0;
-        }
-
-        .quote-block p {
-            font-size: 1.25rem;
-            font-style: italic;
-            color: var(--color-dark);
-            line-height: 1.8;
-            margin-bottom: 1rem;
-        }
-
-        .quote-author {
-            font-size: 1rem;
-            color: #6b7280;
-            font-weight: 600;
-        }
-
-        .tech-stack {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .tech-item {
-            background: white;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .tech-item:hover {
-            border-color: var(--color-primary);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        }
-
-        .tech-item-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--color-dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .tech-item-desc {
-            font-size: 0.9rem;
-            color: #6b7280;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', 'Noto Sans SC', sans-serif; background: linear-gradient(135deg, #f5f5f0 0%, #e8e8de 100%); min-height: 100vh; }
+        .back-button { position: fixed; top: 2rem; left: 2rem; background: white; color: var(--color-primary); padding: 0.75rem 1.5rem; border-radius: 12px; text-decoration: none; font-weight: 600; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; z-index: 100; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .back-button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); background: var(--color-primary); color: white; }
+        .case-hero { background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%); color: white; padding: 6rem 2rem 4rem; text-align: center; position: relative; overflow: hidden; }
+        .case-hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom; background-size: cover; opacity: 0.3; }
+        .case-hero-content { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+        .case-badge { display: inline-block; background: rgba(255, 255, 255, 0.2); padding: 0.5rem 1.5rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600; margin-bottom: 1.5rem; backdrop-filter: blur(10px); }
+        .case-hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.2; }
+        .case-hero p { font-size: 1.5rem; opacity: 0.95; max-width: 800px; margin: 0 auto 2rem; line-height: 1.6; }
+        .case-meta-bar { display: flex; justify-content: center; gap: 3rem; margin-top: 2rem; }
+        .meta-item { text-align: center; }
+        .meta-label { font-size: 0.9rem; opacity: 0.8; margin-bottom: 0.5rem; }
+        .meta-value { font-size: 1.5rem; font-weight: 700; }
+        .case-content { max-width: 1200px; margin: -3rem auto 0; padding: 0 2rem 4rem; position: relative; z-index: 2; }
+        .content-card { background: white; border-radius: 24px; padding: 3rem; margin-bottom: 2rem; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); animation: fadeInUp 0.8s ease; }
+        .content-card h2 { font-size: 2rem; color: var(--color-dark); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+        .content-card h2::before { content: ''; width: 6px; height: 2rem; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%); border-radius: 3px; }
+        .content-card h3 { font-size: 1.5rem; color: var(--color-primary); margin: 2rem 0 1rem; }
+        .content-card p { font-size: 1.1rem; color: #4b5563; line-height: 1.8; margin-bottom: 1rem; }
+        .content-card ul, .content-card ol { margin-left: 1.5rem; margin-bottom: 1.5rem; }
+        .content-card li { font-size: 1.05rem; color: #4b5563; line-height: 1.8; margin-bottom: 0.75rem; }
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin: 2rem 0; }
+        .metric-card { background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%); padding: 2rem; border-radius: 16px; text-align: center; transition: all 0.3s ease; }
+        .metric-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); }
+        .metric-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .metric-value { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem; }
+        .metric-label { font-size: 1rem; color: #6b7280; font-weight: 500; }
+        .timeline { position: relative; padding-left: 3rem; margin: 2rem 0; }
+        .timeline::before { content: ''; position: absolute; left: 0.75rem; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-light) 100%); }
+        .timeline-item { position: relative; margin-bottom: 2rem; }
+        .timeline-item::before { content: ''; position: absolute; left: -2.4rem; top: 0.5rem; width: 1rem; height: 1rem; background: var(--color-primary); border-radius: 50%; border: 3px solid white; box-shadow: 0 0 0 3px var(--color-primary-light); }
+        .timeline-date { font-size: 0.9rem; color: var(--color-primary); font-weight: 700; margin-bottom: 0.5rem; }
+        .timeline-content h4 { font-size: 1.25rem; color: var(--color-dark); margin-bottom: 0.5rem; }
+        .timeline-content p { font-size: 1rem; color: #6b7280; line-height: 1.6; }
+        .highlight-tags { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1.5rem 0; }
+        .highlight-tag { padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border-radius: 20px; font-size: 1rem; font-weight: 600; }
+        .quote-block { background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%); border-left: 6px solid var(--color-primary); padding: 2rem; border-radius: 12px; margin: 2rem 0; }
+        .quote-block p { font-size: 1.25rem; font-style: italic; color: var(--color-dark); line-height: 1.8; margin-bottom: 1rem; }
+        .quote-author { font-size: 1rem; color: #6b7280; font-weight: 600; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @media (max-width: 768px) {
-            .back-button {
-                top: 1rem;
-                left: 1rem;
-                padding: 0.6rem 1rem;
-                font-size: 0.9rem;
-            }
-
-            .case-hero {
-                padding: 5rem 1.5rem 3rem;
-            }
-
-            .case-hero h1 {
-                font-size: 2rem;
-            }
-
-            .case-hero p {
-                font-size: 1.1rem;
-            }
-
-            .case-meta-bar {
-                flex-direction: column;
-                gap: 1.5rem;
-            }
-
-            .case-content {
-                padding: 0 1.5rem 3rem;
-            }
-
-            .content-card {
-                padding: 2rem;
-            }
-
-            .content-card h2 {
-                font-size: 1.5rem;
-            }
-
-            .metrics-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .timeline {
-                padding-left: 2rem;
-            }
+            .back-button { top: 1rem; left: 1rem; padding: 0.6rem 1rem; font-size: 0.9rem; }
+            .case-hero { padding: 5rem 1.5rem 3rem; }
+            .case-hero h1 { font-size: 2rem; }
+            .case-hero p { font-size: 1.1rem; }
+            .case-meta-bar { flex-direction: column; gap: 1.5rem; }
+            .case-content { padding: 0 1.5rem 3rem; }
+            .content-card { padding: 2rem; }
+            .content-card h2 { font-size: 1.5rem; }
+            .metrics-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .timeline { padding-left: 2rem; }
         }
     </style>
 </head>
 <body>
-    <a href="sales-cases.html" class="back-button">
-        <span>←</span> 返回案例列表
-    </a>
+    <a href="sales-cases.html" class="back-button"><span>←</span> 返回案例列表</a>
 
     <div class="case-hero">
         <div class="case-hero-content">
             <div class="case-badge">🏆 赢单案例</div>
-            <h1>🛒 质信智购</h1>
-            <p>采购平台智能合同审核系统 API 集成</p>
+            <h1>🛒 质信智购（新奥阳光易采）</h1>
+            <p>新奥集团 · 招采平台智能合同全生命周期管理</p>
 
             <div class="case-meta-bar">
-                <div class="meta-item">
-                    <div class="meta-label">项目周期</div>
-                    <div class="meta-value">6 周</div>
-                </div>
-                <div class="meta-item">
-                    <div class="meta-label">合同金额</div>
-                    <div class="meta-value">45 万</div>
-                </div>
-                <div class="meta-item">
-                    <div class="meta-label">项目状态</div>
-                    <div class="meta-value">已上线</div>
-                </div>
+                <div class="meta-item"><div class="meta-label">项目周期</div><div class="meta-value">12 个月</div></div>
+                <div class="meta-item"><div class="meta-label">合同金额</div><div class="meta-value">66 万</div></div>
+                <div class="meta-item"><div class="meta-label">项目状态</div><div class="meta-value">准备入场</div></div>
             </div>
         </div>
     </div>
@@ -437,252 +81,240 @@
     <div class="case-content">
         <div class="content-card">
             <h2>📋 项目背景</h2>
-            <p>
-                质信智购是一家专注于企业采购数字化的 SaaS 平台，服务 2,300+ 家中小企业客户。平台每月处理采购订单 80,000+ 笔，涉及采购合同、
-                框架协议、补充协议等多种合同类型。
-            </p>
-            <p>
-                随着客户规模扩大和合规要求提升，质信智购希望在平台中嵌入智能合同审核能力，为客户提供"采购下单 + 合同审核"的一站式服务，
-                提升平台竞争力和客户粘性。
-            </p>
+            <p>新奥阳光易采科技有限公司是新奥集团旗下的数字化采购平台公司，其核心产品"质信智购"是一个类似电商的招采平台，有新奥集团企业和供应商入驻。平台服务于新奥集团及其分子公司的采购业务，涵盖通用采购、集市交易、联合招采等多种业务模式。</p>
+            <p>在与幂律智能合作之前，客户除审批在线外，其他合同管理工作均在线下进行。随着业务规模扩大和数字化转型需求，客户希望从合同视角与平台深度嵌入绑定，将线下合同管理工作搬到线上，实现统一线上化管理，特别关注智能起草、智能审查等AI能力。</p>
 
             <div class="highlight-tags">
-                <span class="highlight-tag">✨ SaaS 平台增值服务</span>
-                <span class="highlight-tag">✨ API 无缝集成</span>
-                <span class="highlight-tag">✨ 快速部署上线</span>
+                <span class="highlight-tag">✨ 幂律首个 MF3.0+MC3.0 交付项目</span>
+                <span class="highlight-tag">✨ 合同全生命周期管理</span>
+                <span class="highlight-tag">✨ 多租户数据隔离架构</span>
             </div>
         </div>
 
         <div class="content-card">
             <h2>🎯 客户核心需求</h2>
 
-            <h3>1. 快速集成，不影响现有业务</h3>
-            <p>
-                质信智购已有成熟的采购管理系统，不希望大规模改造。要求通过 API 方式快速集成，对现有系统影响最小，部署周期控制在 2 个月以内。
-            </p>
+            <h3>1. 合同管理线上化与平台深度融合</h3>
+            <p>客户希望建立一套独立的覆盖合同全生命周期的合同管理系统，并与质信智购平台及相关子平台深度对接。实现平台全量用户在发生与合同相关的交易场景时，能实时调用合同管理系统中的各项功能。</p>
 
-            <h3>2. 多合同类型支持</h3>
-            <p>
-                平台涉及 15+ 种合同类型，包括采购合同、服务协议、保密协议、质保协议等。需要系统能识别不同类型合同的特定条款和风险点。
-            </p>
+            <h3>2. 多租户数据隔离架构</h3>
+            <p>平台有新奥集团多家企业和供应商入驻，需要实现企业间数据隔离，包括合同模板库、合同数据、履约数据以及后台管理配置权限的隔离。要求建立三级用户权限体系：平台管理员-企业管理员-个人用户。</p>
 
-            <h3>3. 审核速度要求高</h3>
-            <p>
-                客户在平台下单后希望立即获得合同审核结果，要求审核响应时间 < 5 秒，支持高并发（峰值 QPS > 100）。
-            </p>
+            <h3>3. AI 能力全面融合</h3>
+            <p>在合同管理系统中融合现已成熟的各项智能能力，包括：</p>
+            <ul>
+                <li>智能合同文本生成：基于采购活动自动匹配模板，智能生成合同文本</li>
+                <li>智能合同风险审查：对接现有智信查系统，实现多维度风险审查</li>
+                <li>智能合同文本抽取：自动提取合同关键信息，支持结构化数据管理</li>
+                <li>Copilot Agent 功能：在评审、台账、履约等阶段提供智能辅助</li>
+            </ul>
 
-            <h3>4. 灵活的定价模式</h3>
-            <p>
-                质信智购希望将审核服务作为增值功能向客户收费，需要支持按次计费、包月套餐等多种计费模式，系统能提供详细的用量统计。
-            </p>
+            <h3>4. 与现有系统深度集成</h3>
+            <p>需要与多个现有系统深度对接：</p>
+            <ul>
+                <li>用户体系与钉钉对接，实现四方人员（平台、企业、供应商、个人）同步</li>
+                <li>与前置采购系统对接，根据采购活动自动触发合同起草</li>
+                <li>对接现有审批流程引擎，融入企业审批体系</li>
+                <li>与电子签约平台对接，完成合同签署后数据回传</li>
+            </ul>
 
-            <h3>5. 白标化部署</h3>
-            <p>
-                审核功能需要以质信智购的品牌呈现，界面风格与平台统一，用户感知不到第三方服务的存在。
-            </p>
+            <h3>5. 履约保障能力建设</h3>
+            <p>实现关键节点自动通知、履约风险及时预警、履约偏差实时纠正，进而提高合同管理效率、降低业务交易风险。</p>
         </div>
 
         <div class="content-card">
             <h2>💡 MeFlow Agent 解决方案</h2>
 
-            <h3>核心技术架构</h3>
+            <h3>技术方案：MF3.0+MC3.0</h3>
+            <p>这是幂律智能公司第一个 MF3.0+MC3.0 交付的项目，具有重要的战略意义。MF3.0 提供合同全生命周期管理能力，MC3.0 提供 AI 智能能力支撑。</p>
+
+            <h3>核心功能模块</h3>
             <ol>
                 <li>
-                    <strong>RESTful API 服务</strong><br>
-                    提供标准的 RESTful API 接口，支持合同上传、审核、结果查询等完整流程。API 文档完善，集成门槛低，质信智购开发团队 3 天即完成对接。
+                    <strong>用户与权限定制</strong><br>
+                    用户体系与钉钉对接，涉及四方人员（平台管理员、企业管理员、供应商、个人用户）同步改造。实现企业间数据隔离，包括合同模板库、数据等按企业配置。建立灵活的三级权限体系，支持精细化权限控制。
                 </li>
                 <li>
-                    <strong>多模型并发处理</strong><br>
-                    采用 Kimi-K1.5 + Qwen-Turbo 混合架构，Kimi 负责复杂合同深度分析，Qwen 负责简单合同快速审核。系统自动判断合同复杂度，
-                    智能路由到合适的模型，平衡速度和准确性。
+                    <strong>合同起草环节定制</strong><br>
+                    在起草环节使用评审协同功能，根据采购活动自动匹配合同模板。与前置采购系统对接，封装标准接口，实现采购到合同的无缝衔接。支持多种采购模式：通用采购、集市交易、联合招采、非联合招采等。
                 </li>
                 <li>
-                    <strong>合同类型识别引擎</strong><br>
-                    基于文本分类模型，自动识别 15+ 种合同类型，准确率 > 97%。针对每种类型预置了专业的审核模板和风险规则库。
+                    <strong>评审环节二开需求</strong><br>
+                    主流程采用幂律评审功能，涉及协同配置和邀请人员接口二开。支持多方协同评审，包括法务部门、IT 部门、业务部门等不同角色的协同工作。
                 </li>
                 <li>
-                    <strong>弹性伸缩架构</strong><br>
-                    基于 K8s 容器化部署，支持自动扩缩容。平时 3 个实例，高峰期自动扩展至 10+ 个实例，确保服务稳定性和响应速度。
+                    <strong>审批与签署对接</strong><br>
+                    对接客户平台现有审批流程引擎，融入企业现有审批体系。签署在客户平台完成后通过接口对接回幂律系统，实现签署数据的自动同步和台账生成。
+                </li>
+                <li>
+                    <strong>合同台账与履约对接</strong><br>
+                    签署完成后数据自动对接到幂律系统，支持企业间数据隔离。履约环节涉及数据推送和回传，实现关键节点自动通知、履约风险及时预警、履约偏差实时纠正。
+                </li>
+                <li>
+                    <strong>AI 智能能力融合</strong><br>
+                    项目融合了 MF3 的 AI 功能，包括合同生成、抽取和审查。在评审、台账、履约等阶段提供 Copilot Agent 功能，实现智能辅助决策。与现有智信查风险审查系统对接，提供多维度的合同风险识别能力。
                 </li>
             </ol>
 
-            <h3>集成方案</h3>
-            <div class="tech-stack">
-                <div class="tech-item">
-                    <div class="tech-item-title">🔌 API 集成</div>
-                    <div class="tech-item-desc">RESTful API + Webhook 回调</div>
-                </div>
-                <div class="tech-item">
-                    <div class="tech-item-title">🔐 认证鉴权</div>
-                    <div class="tech-item-desc">JWT Token + API Key</div>
-                </div>
-                <div class="tech-item">
-                    <div class="tech-item-title">📊 用量统计</div>
-                    <div class="tech-item-desc">实时计量 + 月度账单</div>
-                </div>
-                <div class="tech-item">
-                    <div class="tech-item-title">🎨 白标定制</div>
-                    <div class="tech-item-desc">iframe 嵌入 + 主题配置</div>
-                </div>
-            </div>
-
-            <h3>核心功能</h3>
+            <h3>多租户数据隔离架构</h3>
+            <p>项目实现了创新的多租户数据隔离架构，为多组织协作场景提供了技术参考：</p>
             <ul>
-                <li>🎯 <strong>智能合同识别</strong>：自动识别合同类型、甲乙方、金额、日期等关键信息</li>
-                <li>🔍 <strong>多维度审核</strong>：覆盖法律风险、商务条款、格式规范等 8 个审核维度</li>
-                <li>⚠️ <strong>风险分级</strong>：高中低风险分级，高风险条款红色标注，便于快速决策</li>
-                <li>📄 <strong>审核报告</strong>：生成专业的 PDF 审核报告，可直接发送给供应商</li>
-                <li>📈 <strong>数据看板</strong>：为质信智购提供后台管理界面，查看用量统计和审核数据</li>
+                <li>合同模板库隔离：不同企业拥有独立的模板库，互不干扰</li>
+                <li>合同数据隔离：企业只能查看和管理本企业的合同数据</li>
+                <li>履约数据隔离：履约监控和预警按企业维度独立运作</li>
+                <li>后台权限隔离：平台管理员、企业管理员、个人用户三级权限精细控制</li>
             </ul>
         </div>
 
         <div class="content-card">
-            <h2>🚀 项目实施时间线</h2>
+            <h2>🚀 项目历程时间线</h2>
 
             <div class="timeline">
                 <div class="timeline-item">
-                    <div class="timeline-date">2024-09-01 ~ 2024-09-05</div>
+                    <div class="timeline-date">2024年初 ~ 2024年7月</div>
                     <div class="timeline-content">
-                        <h4>需求对接与 API 设计</h4>
-                        <p>与质信智购技术团队对接，确定 API 接口规范、数据格式、鉴权方式等技术细节，输出详细 API 文档。</p>
+                        <h4>初期接触与需求沟通</h4>
+                        <p>团队开始接触客户，进行多次需求沟通和引导。项目历经人员和需求变化，客户最初希望做成智能体形式，但不确定性较大。</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-date">2024-09-06 ~ 2024-09-20</div>
+                    <div class="timeline-date">2024年8月</div>
                     <div class="timeline-content">
-                        <h4>系统开发与模型训练</h4>
-                        <p>完成 API 服务开发，使用质信智购提供的 3,000 份历史合同进行模型训练和优化，审核准确率达到 96.8%。</p>
+                        <h4>招标形式调整</h4>
+                        <p>客户内部对招标形式做了重大调整，重点放在通过准备演示环境，用客户提供的测试文本做功能一一展示。团队调整售前策略，聚焦产品演示和实际效果展示。</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-date">2024-09-21 ~ 2024-09-28</div>
+                    <div class="timeline-date">2024年9月</div>
                     <div class="timeline-content">
-                        <h4>联调测试与性能优化</h4>
-                        <p>双方技术团队完成联调测试，优化 API 响应速度至 2.8 秒。完成压力测试，确认系统支持 QPS > 150。</p>
+                        <h4>方案设计与准备</h4>
+                        <p>陈莉娟与李香香沟通后，推荐采用 MF3+MC3 方案，并估算人天工作量。石玏结合客户需求整理方案 PPT，明确了合同全生命周期管理的技术路线。</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-date">2024-09-29 ~ 2024-10-10</div>
+                    <div class="timeline-date">2024年10月</div>
                     <div class="timeline-content">
-                        <h4>灰度上线与监控</h4>
-                        <p>选取 100 家客户进行灰度测试，处理 2,000+ 份合同，收集用户反馈并快速优化。</p>
+                        <h4>需求确认与招标准备</h4>
+                        <p>客户确认最终需求说明书，要求在 6 个月内完成建设并参与采购活动。团队开始准备投标文件，包括技术方案、报价方案、项目计划等。</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-date">2024-10-11 至今</div>
+                    <div class="timeline-date">2024年11月</div>
                     <div class="timeline-content">
-                        <h4>全量上线与运营</h4>
-                        <p>功能向全平台客户开放，已服务 800+ 企业，月均处理合同 15,000+ 份，系统稳定性 99.9%。</p>
+                        <h4>POC 测试与投标</h4>
+                        <p>客户调整招采方式，分成产品详细测评+报价两个阶段。11 位产品测评官参与测评，测试时间 2-3 小时。幂律团队配置环境、现场带领测评官完成测试，会后直接评分。11月24日，成功中标！</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2024年12月</div>
+                    <div class="timeline-content">
+                        <h4>项目组建与交底</h4>
+                        <p>客户完成项目组组建，确定项目经理为朱洪伟、副项目经理为常鹏阳。12月16日召开项目交底会，明确整体排期计划、SOW、调研准备等事项。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2025年1月起</div>
+                    <div class="timeline-content">
+                        <h4>项目实施与上线</h4>
+                        <p>元旦前入场进行调研，春节前完成蓝图方案。整体项目周期 6 个月上线，试运行期 3 个月。后续在新奥阳光一彩稳定运行后，推广到新奥集团其他业务板块。</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="content-card">
-            <h2>🎯 项目成果与价值</h2>
+            <h2>🎯 项目价值与意义</h2>
 
             <div class="metrics-grid">
-                <div class="metric-card">
-                    <div class="metric-icon">⚡</div>
-                    <div class="metric-value">2.8s</div>
-                    <div class="metric-label">平均审核速度</div>
-                </div>
-
-                <div class="metric-card">
-                    <div class="metric-icon">🎯</div>
-                    <div class="metric-value">97%</div>
-                    <div class="metric-label">合同识别准确率</div>
-                </div>
-
-                <div class="metric-card">
-                    <div class="metric-icon">📊</div>
-                    <div class="metric-value">15K+</div>
-                    <div class="metric-label">月均处理合同</div>
-                </div>
-
-                <div class="metric-card">
-                    <div class="metric-icon">💰</div>
-                    <div class="metric-value">35%</div>
-                    <div class="metric-label">客户付费转化率</div>
-                </div>
+                <div class="metric-card"><div class="metric-icon">⏱️</div><div class="metric-value">1年</div><div class="metric-label">售前跟进周期</div></div>
+                <div class="metric-card"><div class="metric-icon">👥</div><div class="metric-value">11位</div><div class="metric-label">POC 测评官</div></div>
+                <div class="metric-card"><div class="metric-icon">💰</div><div class="metric-value">66万</div><div class="metric-label">项目合同金额</div></div>
+                <div class="metric-card"><div class="metric-icon">📅</div><div class="metric-value">6个月</div><div class="metric-label">实施周期</div></div>
             </div>
 
-            <h3>对质信智购的价值</h3>
+            <h3>对客户的价值</h3>
             <ul>
-                <li>成功打造差异化竞争优势，平台客户留存率提升 22%</li>
-                <li>智能审核作为增值服务，月均新增收入 18 万元，投资回报周期 < 3 个月</li>
-                <li>客户满意度显著提升，NPS（净推荐值）从 42 提升至 68</li>
-                <li>800+ 企业开通审核服务，付费转化率达到 35%</li>
+                <li><strong>合同管理线上化</strong>：将线下合同管理工作搬到线上，实现统一线上化管理，提升管理效率</li>
+                <li><strong>智能能力融合</strong>：融合智能生成、智能审查、智能抽取等 AI 能力，实现合同管理的自动化和智能化</li>
+                <li><strong>履约保障能力建设</strong>：实现关键节点自动通知、履约风险及时预警、履约偏差实时纠正，降低业务交易风险</li>
+                <li><strong>平台深度融合</strong>：实现合同管理系统与质信智购平台的深度对接，提升平台用户体验和粘性</li>
+                <li><strong>集团推广价值</strong>：新奥集团董事长赵海超希望先在质信智购做出成果后推广到新奥其他业务板块，具有巨大的推广潜力</li>
             </ul>
 
-            <h3>对最终用户的价值</h3>
+            <h3>对幂律的战略意义</h3>
             <ul>
-                <li>采购合同审核时间从 2 天缩短至 2 小时，效率提升 90%+</li>
-                <li>无需单独购买合同管理系统，降低企业 IT 成本</li>
-                <li>专业的风险提示帮助规避合同陷阱，已帮助用户发现 300+ 起潜在风险</li>
-                <li>审核报告可直接用于内部审批流程，提升采购规范性</li>
+                <li>这是幂律智能公司第一个 MF3.0+MC3.0 交付的项目，验证了新一代产品架构的可行性</li>
+                <li>多租户数据隔离架构为后续平台型客户提供了技术参考</li>
+                <li>与新奥集团建立合作关系，打开了集团型客户的市场空间</li>
+                <li>项目成功实施后，可作为标杆案例推广到其他招采平台和集团企业</li>
             </ul>
 
             <div class="quote-block">
-                <p>
-                    "MeFlow Agent 的 API 集成非常顺畅，文档清晰，接口设计合理。我们的开发团队 3 天就完成了对接，整个项目只用了 6 周就上线了。
-                    更重要的是，这个功能显著提升了我们平台的竞争力，客户非常认可！"
-                </p>
-                <div class="quote-author">—— 质信智购 CTO 李先生</div>
+                <p>"幂律团队在这个项目中展现了极高的专业性和韧性。从 2024 年初开始接触，历时一年的跟进，经历了需求变更、人员调整、竞争激烈等多重挑战，最终成功中标。这种客户第一、责任担当的精神值得所有人学习。"</p>
+                <div class="quote-author">—— 幂律智能 项目总结</div>
             </div>
         </div>
 
         <div class="content-card">
             <h2>🔑 关键成功因素</h2>
 
-            <h3>1. SaaS 化产品思维</h3>
-            <p>
-                我们不是简单卖软件，而是提供"审核即服务"。标准化的 API 接口、灵活的定价模式、完善的监控运维，都体现了 SaaS 产品思维。
-            </p>
+            <h3>1. 超长周期的客户跟进</h3>
+            <p>从 2024 年初开始接触到 2024 年11月中标，历时整整一年。项目历程十分波折，经历了多次需求变更、对接人员变动、竞争对手变化、项目确定性调整。团队始终保持耐心和专业，持续跟进，最终赢得客户信任。</p>
 
-            <h3>2. 快速响应与交付</h3>
-            <p>
-                质信智购是快速成长的创业公司，时间窗口很重要。我们 6 周完成交付，比竞争对手快了 2 个月，成功抢占市场先机。
-            </p>
+            <h3>2. 专业的需求沟通与引导</h3>
+            <p>陈莉娟作为售前支持核心成员，进行了超常规的项目投入以及非常专业的需求沟通和引导。团队深入理解客户业务场景，从最初"做成智能体"的模糊需求，逐步明确为"合同全生命周期管理+AI 能力融合"的清晰方案。</p>
 
-            <h3>3. 以客户成功为导向</h3>
-            <p>
-                不仅关注技术集成，更关注质信智购如何通过这个功能实现商业成功。协助设计定价策略、提供用户运营建议，真正成为客户的合作伙伴。
-            </p>
+            <h3>3. 充分的 POC 准备与演示</h3>
+            <p>在 POC 阶段，团队进行了充分准备和专业讲解。11 位产品测评官参与 2-3 小时的测试，团队配置环境、初始化工作，现场带领测评官完成测试内容，让客户充分体验产品能力。刘宇、冯浩、鲜雨竹在 POC 过程中提供了有力配合。</p>
 
-            <h3>4. 优秀的技术支持</h3>
-            <p>
-                上线初期每周召开技术对接会，快速响应问题。提供 7×24 技术支持，平均响应时间 < 15 分钟，确保系统稳定运行。
-            </p>
+            <h3>4. 优秀的团队协作</h3>
+            <p>项目成功离不开团队的通力合作：</p>
+            <ul>
+                <li>谷雨：前期打好坚实的客户基础</li>
+                <li>陈莉娟：超常规项目投入、专业需求沟通、POC 准备和讲解</li>
+                <li>刘宇、冯浩、鲜雨竹：POC 过程中的配合</li>
+                <li>鲜雨竹、彭震、常鹏阳：投标过程中的支持</li>
+                <li>石玏：提供高层对话和支持</li>
+            </ul>
+
+            <h3>5. 灵活的方案调整能力</h3>
+            <p>2024 年 8 月客户调整招标形式时，团队快速调整策略，从方案讲解转向产品演示和实际效果展示。这种灵活应变能力确保了项目始终朝着正确方向推进。</p>
+
+            <h3>6. 高层的战略支持</h3>
+            <p>石玏提供的高层对话和支持，帮助团队在关键时刻获得客户决策层的认可，为项目最终中标奠定了基础。</p>
         </div>
 
         <div class="content-card">
-            <h2>💡 经验总结与复用</h2>
+            <h2>💡 经验总结与复用价值</h2>
 
             <h3>可复用的成功经验</h3>
             <ol>
-                <li><strong>API 优先策略</strong>：形成了标准的 API 集成方案，可快速复制到其他 SaaS 平台客户</li>
-                <li><strong>白标化能力</strong>：建立了完善的白标定制流程，支持快速品牌化部署</li>
-                <li><strong>计费系统</strong>：开发了灵活的计费引擎，支持多种定价模式，可服务更多 SaaS 客户</li>
-                <li><strong>合作伙伴模式</strong>：与质信智购建立了深度合作关系，为后续渠道合作奠定基础</li>
+                <li><strong>多租户数据隔离架构</strong>：该项目实现的企业间数据隔离方案，可作为其他集团型企业或平台型业务的技术架构参考</li>
+                <li><strong>系统深度耦合与集成经验</strong>：与采购平台系统的深度耦合经验，可应用到其他需要与现有业务系统深度融合的项目</li>
+                <li><strong>AI 能力应用实践</strong>：智能生成、智能审查、智能抽取等 AI 能力的应用经验，可为其他合同管理项目提供参考</li>
+                <li><strong>长周期售前跟进方法论</strong>：一年的售前跟进经验，为其他复杂项目的客户关系管理提供了参考</li>
+                <li><strong>POC 标准化流程</strong>：形成了偏业务场景演示的 POC 方法，可作为其他项目售前工作的参考</li>
             </ol>
 
             <h3>行业拓展机会</h3>
             <ul>
-                <li>质信智购案例可复用到其他采购平台，如京东企业购、阿里企业采购等</li>
-                <li>API 集成模式可拓展到 ERP、OA、电子签约等其他企业服务平台</li>
-                <li>已与质信智购达成战略合作，联合拓展其平台的大客户</li>
+                <li><strong>新奥集团内部推广</strong>：董事长赵海超希望在质信智购做出成果后推广到新奥其他业务板块，具有巨大的二期项目潜力</li>
+                <li><strong>其他招采平台</strong>：质信智购案例可复用到其他招采平台和采购管理系统</li>
+                <li><strong>集团型企业</strong>：多租户架构和集团级部署经验，可服务其他大型集团企业</li>
+                <li><strong>平台型业务</strong>：系统集成经验可拓展到其他平台型业务，如电商平台、供应链平台等</li>
             </ul>
 
             <h3>待优化的方面</h3>
             <ul>
-                <li>合同类型识别模型仍有优化空间，小众合同类型准确率偏低</li>
-                <li>API 文档可以更详细，增加更多集成示例代码</li>
-                <li>可考虑开发 SDK，进一步降低客户集成成本</li>
+                <li>项目前期需求不够明确，导致售前周期过长，后续应加强需求引导能力</li>
+                <li>系统集成复杂度较高，需要更多提前规划和技术预研</li>
+                <li>多租户架构的实现需要更多测试和验证，确保数据隔离的安全性</li>
             </ul>
         </div>
     </div>
