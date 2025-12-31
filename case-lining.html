@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>李宁二期 - 赢单案例 | MeFlow Agent</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #f5f5f0 0%, #e8e8de 100%);
+            min-height: 100vh;
+        }
+
+        /* 返回按钮 */
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: white;
+            color: var(--color-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            z-index: 100;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            background: var(--color-primary);
+            color: white;
+        }
+
+        /* 案例头部 */
+        .case-hero {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            color: white;
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .case-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        .case-hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .case-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .case-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .case-hero p {
+            font-size: 1.5rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .case-meta-bar {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .meta-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* 主要内容区 */
+        .case-content {
+            max-width: 1200px;
+            margin: -3rem auto 0;
+            padding: 0 2rem 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 内容卡片 */
+        .content-card {
+            background: white;
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .content-card h2 {
+            font-size: 2rem;
+            color: var(--color-dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .content-card h2::before {
+            content: '';
+            width: 6px;
+            height: 2rem;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            border-radius: 3px;
+        }
+
+        .content-card h3 {
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            margin: 2rem 0 1rem;
+        }
+
+        .content-card p {
+            font-size: 1.1rem;
+            color: #4b5563;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .content-card ul, .content-card ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-card li {
+            font-size: 1.05rem;
+            color: #4b5563;
+            line-height: 1.8;
+            margin-bottom: 0.75rem;
+        }
+
+        /* 关键指标网格 */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .metric-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 1rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        /* 时间线 */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+            margin: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.75rem;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.4rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background: var(--color-primary);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--color-primary-light);
+        }
+
+        .timeline-date {
+            font-size: 0.9rem;
+            color: var(--color-primary);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content h4 {
+            font-size: 1.25rem;
+            color: var(--color-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content p {
+            font-size: 1rem;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* 亮点标签 */
+        .highlight-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-tag {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* 引用块 */
+        .quote-block {
+            background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+            border-left: 6px solid var(--color-primary);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .quote-block p {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--color-dark);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .quote-author {
+            font-size: 1rem;
+            color: #6b7280;
+            font-weight: 600;
+        }
+
+        /* 动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .back-button {
+                top: 1rem;
+                left: 1rem;
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .case-hero {
+                padding: 5rem 1.5rem 3rem;
+            }
+
+            .case-hero h1 {
+                font-size: 2rem;
+            }
+
+            .case-hero p {
+                font-size: 1.1rem;
+            }
+
+            .case-meta-bar {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .case-content {
+                padding: 0 1.5rem 3rem;
+            }
+
+            .content-card {
+                padding: 2rem;
+            }
+
+            .content-card h2 {
+                font-size: 1.5rem;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .timeline {
+                padding-left: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回按钮 -->
+    <a href="sales-cases.html" class="back-button">
+        <span>←</span> 返回案例列表
+    </a>
+
+    <!-- 案例头部 -->
+    <div class="case-hero">
+        <div class="case-hero-content">
+            <div class="case-badge">🏆 赢单案例</div>
+            <h1>👟 李宁二期</h1>
+            <p>国际运动品牌供应链合同管理数字化升级</p>
+
+            <div class="case-meta-bar">
+                <div class="meta-item">
+                    <div class="meta-label">项目周期</div>
+                    <div class="meta-value">4 个月</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">合同金额</div>
+                    <div class="meta-value">180 万</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">项目状态</div>
+                    <div class="meta-value">已上线</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主要内容 -->
+    <div class="case-content">
+        <!-- 项目背景 -->
+        <div class="content-card">
+            <h2>📋 项目背景</h2>
+            <p>
+                李宁集团作为中国领先的运动品牌，在全球拥有庞大的供应链网络。随着业务规模不断扩大，供应商数量从 2022 年的 350 家增长至 2024 年的 580 家，
+                每年需处理的各类供应链合同超过 12,000 份。
+            </p>
+            <p>
+                一期项目虽然实现了基础的合同管理功能，但在智能化审核、风险预警、数据分析等方面仍存在明显短板。特别是面对快速变化的市场环境和日益复杂的
+                供应链条款，传统的人工审核方式已无法满足业务发展需求。
+            </p>
+
+            <div class="highlight-tags">
+                <span class="highlight-tag">✨ 供应链管理升级</span>
+                <span class="highlight-tag">✨ AI 智能化改造</span>
+                <span class="highlight-tag">✨ 风险管控强化</span>
+            </div>
+        </div>
+
+        <!-- 客户痛点 -->
+        <div class="content-card">
+            <h2>🎯 客户核心痛点</h2>
+
+            <h3>1. 审核效率低下</h3>
+            <p>
+                法务团队每天需人工审核 40-50 份合同，每份平均耗时 1.5 小时。高峰期（如双十一备货）审核周期延长至 5-7 天，严重影响供应链响应速度。
+            </p>
+
+            <h3>2. 风险识别不足</h3>
+            <p>
+                2023 年因合同条款疏漏导致的供应商纠纷达 23 起，造成直接经济损失约 450 万元。人工审核难以覆盖所有风险点，尤其是跨区域、多币种的复杂合同。
+            </p>
+
+            <h3>3. 数据孤岛严重</h3>
+            <p>
+                合同数据分散在 ERP、OA、邮件等多个系统，无法形成统一的数据视图。管理层难以获得供应商绩效、合同履约等关键洞察，决策缺乏数据支撑。
+            </p>
+
+            <h3>4. 知识沉淀缺失</h3>
+            <p>
+                资深法务的审核经验难以传承，新员工上手周期长达 3-6 个月。行业条款、谈判策略等知识散落在个人笔记中，未形成企业级知识资产。
+            </p>
+        </div>
+
+        <!-- 解决方案 -->
+        <div class="content-card">
+            <h2>💡 MeFlow Agent 解决方案</h2>
+
+            <h3>核心功能模块</h3>
+            <ol>
+                <li>
+                    <strong>智能审核引擎</strong><br>
+                    基于 DeepSeek-V3 和 GLM-4 的混合模型，针对供应链合同训练了 15,000+ 份真实案例。支持自动识别 120+ 类风险条款，包括价格锁定、
+                    质量标准、交付时效、违约责任等关键维度。
+                </li>
+                <li>
+                    <strong>供应商知识图谱</strong><br>
+                    构建了覆盖 580 家供应商的动态知识图谱，包含历史合同、履约记录、风险事件、财务状况等 23 个维度数据。系统能自动关联供应商历史表现，
+                    为审核提供上下文参考。
+                </li>
+                <li>
+                    <strong>风险预警系统</strong><br>
+                    7×24 小时监控合同执行状态，自动识别交付延迟、质量问题、价格异常等 15 类风险。关键节点提前 7 天预警，风险事件实时推送至相关负责人。
+                </li>
+                <li>
+                    <strong>智能分析平台</strong><br>
+                    提供供应商绩效、成本分析、合同趋势等 8 类可视化报表。支持自定义维度钻取，管理层可随时查看供应链健康度、风险分布等关键指标。
+                </li>
+            </ol>
+
+            <h3>技术亮点</h3>
+            <ul>
+                <li>🎯 <strong>混合模型架构</strong>：DeepSeek 负责深度理解，GLM 负责快速响应，平均审核时间 < 3 分钟</li>
+                <li>🔍 <strong>RAG 检索增强</strong>：向量化了 15,000+ 份历史合同，检索准确率 > 95%</li>
+                <li>🔗 <strong>无缝集成</strong>：与李宁 SAP ERP、OA 系统深度对接，数据自动同步</li>
+                <li>🌍 <strong>多语言支持</strong>：支持中英文合同，覆盖国内外供应商</li>
+            </ul>
+        </div>
+
+        <!-- 实施过程 -->
+        <div class="content-card">
+            <h2>🚀 项目实施时间线</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2024-07-15 ~ 2024-07-30</div>
+                    <div class="timeline-content">
+                        <h4>需求调研与方案设计</h4>
+                        <p>深入访谈法务、采购、供应链等 6 个部门，梳理 47 个业务场景，输出详细设计方案。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2024-08-01 ~ 2024-08-31</div>
+                    <div class="timeline-content">
+                        <h4>系统开发与模型训练</h4>
+                        <p>完成核心功能开发，使用李宁提供的 8,000 份历史合同进行模型精调，审核准确率达到 98.2%。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2024-09-01 ~ 2024-09-20</div>
+                    <div class="timeline-content">
+                        <h4>系统集成与数据迁移</h4>
+                        <p>与 SAP ERP、OA 系统完成 API 对接，迁移历史合同数据 12,000+ 份，构建供应商知识图谱。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2024-09-21 ~ 2024-10-15</div>
+                    <div class="timeline-content">
+                        <h4>灰度测试与优化</h4>
+                        <p>选取 5 个重点供应商进行灰度测试，处理 200+ 份真实合同，根据反馈优化 36 项功能细节。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2024-10-16 ~ 2024-11-15</div>
+                    <div class="timeline-content">
+                        <h4>全面上线与培训</h4>
+                        <p>完成全量上线，对 120+ 名用户进行系统培训，制作操作手册和视频教程。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2024-11-16 至今</div>
+                    <div class="timeline-content">
+                        <h4>持续运营与优化</h4>
+                        <p>系统稳定运行，每月处理合同 1,000+ 份，持续收集用户反馈，迭代优化模型和功能。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 项目成果 -->
+        <div class="content-card">
+            <h2>🎯 项目成果与价值</h2>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon">⚡</div>
+                    <div class="metric-value">70%</div>
+                    <div class="metric-label">审核效率提升</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-icon">💰</div>
+                    <div class="metric-value">40%</div>
+                    <div class="metric-label">管理成本降低</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-icon">🎯</div>
+                    <div class="metric-value">98%</div>
+                    <div class="metric-label">风险识别准确率</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-icon">📊</div>
+                    <div class="metric-value">12K+</div>
+                    <div class="metric-label">累计处理合同</div>
+                </div>
+            </div>
+
+            <h3>定量收益</h3>
+            <ul>
+                <li>平均审核时间从 1.5 小时降至 25 分钟，效率提升 70%</li>
+                <li>高峰期审核周期从 5-7 天缩短至 1-2 天，供应链响应速度显著提升</li>
+                <li>法务团队人力投入减少 40%，可聚焦更高价值的战略工作</li>
+                <li>合同纠纷率从 1.8% 下降至 0.4%，预计年度减损 300+ 万元</li>
+            </ul>
+
+            <h3>定性价值</h3>
+            <ul>
+                <li>建立了企业级供应链合同知识库，沉淀行业最佳实践</li>
+                <li>新员工上手周期从 3-6 个月缩短至 2 周，培训成本大幅降低</li>
+                <li>管理层能实时查看供应链健康度，决策效率和质量显著提升</li>
+                <li>系统 7×24 运行，合同履约监控无死角，风险防控能力全面增强</li>
+            </ul>
+
+            <div class="quote-block">
+                <p>
+                    "MeFlow Agent 不仅仅是一个工具，更是我们供应链管理的智能大脑。它让我们从繁琐的审核工作中解放出来，真正聚焦战略决策。
+                    系统上线 3 个月，已帮我们避免了 5 起重大风险，价值难以估量。"
+                </p>
+                <div class="quote-author">—— 李宁集团 法务总监 王女士</div>
+            </div>
+        </div>
+
+        <!-- 关键成功因素 -->
+        <div class="content-card">
+            <h2>🔑 关键成功因素</h2>
+
+            <h3>1. 深度业务理解</h3>
+            <p>
+                售前团队在需求调研阶段投入 2 周时间，深入李宁供应链一线，理解真实业务场景。这种深度理解确保了方案的针对性和落地性。
+            </p>
+
+            <h3>2. 快速 POC 验证</h3>
+            <p>
+                在商务谈判期间，我们用 3 天时间完成了一个快速 POC，使用李宁提供的 50 份真实合同进行测试。准确率达到 96%，让客户建立了强大信心。
+            </p>
+
+            <h3>3. 高管层强力支持</h3>
+            <p>
+                成功获得李宁 CFO 的直接支持，将项目定位为"供应链数字化转型标杆"。高层重视确保了跨部门协作顺畅，资源投入充足。
+            </p>
+
+            <h3>4. 灵活的交付模式</h3>
+            <p>
+                采用"核心功能先上线，高级功能迭代优化"的策略。第一期快速上线审核和预警功能，让用户尽早感受价值；分析平台在第二期持续完善。
+            </p>
+
+            <h3>5. 优秀的售后服务</h3>
+            <p>
+                配备 7×24 技术支持团队，上线第一个月响应时间 < 30 分钟。定期回访收集反馈，快速迭代优化，赢得客户高度认可。
+            </p>
+        </div>
+
+        <!-- 经验总结 -->
+        <div class="content-card">
+            <h2>💡 经验总结与复用</h2>
+
+            <h3>可复用的售前策略</h3>
+            <ol>
+                <li><strong>行业深耕</strong>：李宁案例为我们积累了丰富的供应链行业经验，可快速复制到安踏、特步等同类客户</li>
+                <li><strong>POC 标准化</strong>：形成了供应链场景的标准 POC 方案，3 天即可完成客户验证</li>
+                <li><strong>ROI 测算模型</strong>：建立了详细的 ROI 测算模型，可快速为客户量化投资回报</li>
+                <li><strong>成功案例复用</strong>：李宁的成功为后续品牌客户提供了有力背书，显著提升签单率</li>
+            </ol>
+
+            <h3>待优化的方面</h3>
+            <ul>
+                <li>系统集成复杂度高，下次应提前评估客户 IT 环境，预留充足集成时间</li>
+                <li>数据迁移遇到质量问题，后续项目应加强数据清洗和标准化工作</li>
+                <li>用户培训可以更系统化，考虑开发在线培训平台和认证体系</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

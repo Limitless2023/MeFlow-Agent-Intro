@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>质信智购 - 赢单案例 | MeFlow Agent</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #f5f5f0 0%, #e8e8de 100%);
+            min-height: 100vh;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: white;
+            color: var(--color-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            z-index: 100;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .case-hero {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            color: white;
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .case-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        .case-hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .case-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .case-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .case-hero p {
+            font-size: 1.5rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .case-meta-bar {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .meta-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .case-content {
+            max-width: 1200px;
+            margin: -3rem auto 0;
+            padding: 0 2rem 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .content-card h2 {
+            font-size: 2rem;
+            color: var(--color-dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .content-card h2::before {
+            content: '';
+            width: 6px;
+            height: 2rem;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            border-radius: 3px;
+        }
+
+        .content-card h3 {
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            margin: 2rem 0 1rem;
+        }
+
+        .content-card p {
+            font-size: 1.1rem;
+            color: #4b5563;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .content-card ul, .content-card ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-card li {
+            font-size: 1.05rem;
+            color: #4b5563;
+            line-height: 1.8;
+            margin-bottom: 0.75rem;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .metric-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 1rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+            margin: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.75rem;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.4rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background: var(--color-primary);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--color-primary-light);
+        }
+
+        .timeline-date {
+            font-size: 0.9rem;
+            color: var(--color-primary);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content h4 {
+            font-size: 1.25rem;
+            color: var(--color-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content p {
+            font-size: 1rem;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .highlight-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-tag {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quote-block {
+            background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+            border-left: 6px solid var(--color-primary);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .quote-block p {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--color-dark);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .quote-author {
+            font-size: 1rem;
+            color: #6b7280;
+            font-weight: 600;
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .tech-item {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .tech-item-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .tech-item-desc {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .back-button {
+                top: 1rem;
+                left: 1rem;
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .case-hero {
+                padding: 5rem 1.5rem 3rem;
+            }
+
+            .case-hero h1 {
+                font-size: 2rem;
+            }
+
+            .case-hero p {
+                font-size: 1.1rem;
+            }
+
+            .case-meta-bar {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .case-content {
+                padding: 0 1.5rem 3rem;
+            }
+
+            .content-card {
+                padding: 2rem;
+            }
+
+            .content-card h2 {
+                font-size: 1.5rem;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .timeline {
+                padding-left: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="sales-cases.html" class="back-button">
+        <span>←</span> 返回案例列表
+    </a>
+
+    <div class="case-hero">
+        <div class="case-hero-content">
+            <div class="case-badge">🏆 赢单案例</div>
+            <h1>🛒 质信智购</h1>
+            <p>采购平台智能合同审核系统 API 集成</p>
+
+            <div class="case-meta-bar">
+                <div class="meta-item">
+                    <div class="meta-label">项目周期</div>
+                    <div class="meta-value">6 周</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">合同金额</div>
+                    <div class="meta-value">45 万</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">项目状态</div>
+                    <div class="meta-value">已上线</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="case-content">
+        <div class="content-card">
+            <h2>📋 项目背景</h2>
+            <p>
+                质信智购是一家专注于企业采购数字化的 SaaS 平台，服务 2,300+ 家中小企业客户。平台每月处理采购订单 80,000+ 笔，涉及采购合同、
+                框架协议、补充协议等多种合同类型。
+            </p>
+            <p>
+                随着客户规模扩大和合规要求提升，质信智购希望在平台中嵌入智能合同审核能力，为客户提供"采购下单 + 合同审核"的一站式服务，
+                提升平台竞争力和客户粘性。
+            </p>
+
+            <div class="highlight-tags">
+                <span class="highlight-tag">✨ SaaS 平台增值服务</span>
+                <span class="highlight-tag">✨ API 无缝集成</span>
+                <span class="highlight-tag">✨ 快速部署上线</span>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>🎯 客户核心需求</h2>
+
+            <h3>1. 快速集成，不影响现有业务</h3>
+            <p>
+                质信智购已有成熟的采购管理系统，不希望大规模改造。要求通过 API 方式快速集成，对现有系统影响最小，部署周期控制在 2 个月以内。
+            </p>
+
+            <h3>2. 多合同类型支持</h3>
+            <p>
+                平台涉及 15+ 种合同类型，包括采购合同、服务协议、保密协议、质保协议等。需要系统能识别不同类型合同的特定条款和风险点。
+            </p>
+
+            <h3>3. 审核速度要求高</h3>
+            <p>
+                客户在平台下单后希望立即获得合同审核结果，要求审核响应时间 < 5 秒，支持高并发（峰值 QPS > 100）。
+            </p>
+
+            <h3>4. 灵活的定价模式</h3>
+            <p>
+                质信智购希望将审核服务作为增值功能向客户收费，需要支持按次计费、包月套餐等多种计费模式，系统能提供详细的用量统计。
+            </p>
+
+            <h3>5. 白标化部署</h3>
+            <p>
+                审核功能需要以质信智购的品牌呈现，界面风格与平台统一，用户感知不到第三方服务的存在。
+            </p>
+        </div>
+
+        <div class="content-card">
+            <h2>💡 MeFlow Agent 解决方案</h2>
+
+            <h3>核心技术架构</h3>
+            <ol>
+                <li>
+                    <strong>RESTful API 服务</strong><br>
+                    提供标准的 RESTful API 接口，支持合同上传、审核、结果查询等完整流程。API 文档完善，集成门槛低，质信智购开发团队 3 天即完成对接。
+                </li>
+                <li>
+                    <strong>多模型并发处理</strong><br>
+                    采用 Kimi-K1.5 + Qwen-Turbo 混合架构，Kimi 负责复杂合同深度分析，Qwen 负责简单合同快速审核。系统自动判断合同复杂度，
+                    智能路由到合适的模型，平衡速度和准确性。
+                </li>
+                <li>
+                    <strong>合同类型识别引擎</strong><br>
+                    基于文本分类模型，自动识别 15+ 种合同类型，准确率 > 97%。针对每种类型预置了专业的审核模板和风险规则库。
+                </li>
+                <li>
+                    <strong>弹性伸缩架构</strong><br>
+                    基于 K8s 容器化部署，支持自动扩缩容。平时 3 个实例，高峰期自动扩展至 10+ 个实例，确保服务稳定性和响应速度。
+                </li>
+            </ol>
+
+            <h3>集成方案</h3>
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <div class="tech-item-title">🔌 API 集成</div>
+                    <div class="tech-item-desc">RESTful API + Webhook 回调</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-item-title">🔐 认证鉴权</div>
+                    <div class="tech-item-desc">JWT Token + API Key</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-item-title">📊 用量统计</div>
+                    <div class="tech-item-desc">实时计量 + 月度账单</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-item-title">🎨 白标定制</div>
+                    <div class="tech-item-desc">iframe 嵌入 + 主题配置</div>
+                </div>
+            </div>
+
+            <h3>核心功能</h3>
+            <ul>
+                <li>🎯 <strong>智能合同识别</strong>：自动识别合同类型、甲乙方、金额、日期等关键信息</li>
+                <li>🔍 <strong>多维度审核</strong>：覆盖法律风险、商务条款、格式规范等 8 个审核维度</li>
+                <li>⚠️ <strong>风险分级</strong>：高中低风险分级，高风险条款红色标注，便于快速决策</li>
+                <li>📄 <strong>审核报告</strong>：生成专业的 PDF 审核报告，可直接发送给供应商</li>
+                <li>📈 <strong>数据看板</strong>：为质信智购提供后台管理界面，查看用量统计和审核数据</li>
+            </ul>
+        </div>
+
+        <div class="content-card">
+            <h2>🚀 项目实施时间线</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2024-09-01 ~ 2024-09-05</div>
+                    <div class="timeline-content">
+                        <h4>需求对接与 API 设计</h4>
+                        <p>与质信智购技术团队对接，确定 API 接口规范、数据格式、鉴权方式等技术细节，输出详细 API 文档。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2024-09-06 ~ 2024-09-20</div>
+                    <div class="timeline-content">
+                        <h4>系统开发与模型训练</h4>
+                        <p>完成 API 服务开发，使用质信智购提供的 3,000 份历史合同进行模型训练和优化，审核准确率达到 96.8%。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2024-09-21 ~ 2024-09-28</div>
+                    <div class="timeline-content">
+                        <h4>联调测试与性能优化</h4>
+                        <p>双方技术团队完成联调测试，优化 API 响应速度至 2.8 秒。完成压力测试，确认系统支持 QPS > 150。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2024-09-29 ~ 2024-10-10</div>
+                    <div class="timeline-content">
+                        <h4>灰度上线与监控</h4>
+                        <p>选取 100 家客户进行灰度测试，处理 2,000+ 份合同，收集用户反馈并快速优化。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2024-10-11 至今</div>
+                    <div class="timeline-content">
+                        <h4>全量上线与运营</h4>
+                        <p>功能向全平台客户开放，已服务 800+ 企业，月均处理合同 15,000+ 份，系统稳定性 99.9%。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>🎯 项目成果与价值</h2>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon">⚡</div>
+                    <div class="metric-value">2.8s</div>
+                    <div class="metric-label">平均审核速度</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-icon">🎯</div>
+                    <div class="metric-value">97%</div>
+                    <div class="metric-label">合同识别准确率</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-icon">📊</div>
+                    <div class="metric-value">15K+</div>
+                    <div class="metric-label">月均处理合同</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-icon">💰</div>
+                    <div class="metric-value">35%</div>
+                    <div class="metric-label">客户付费转化率</div>
+                </div>
+            </div>
+
+            <h3>对质信智购的价值</h3>
+            <ul>
+                <li>成功打造差异化竞争优势，平台客户留存率提升 22%</li>
+                <li>智能审核作为增值服务，月均新增收入 18 万元，投资回报周期 < 3 个月</li>
+                <li>客户满意度显著提升，NPS（净推荐值）从 42 提升至 68</li>
+                <li>800+ 企业开通审核服务，付费转化率达到 35%</li>
+            </ul>
+
+            <h3>对最终用户的价值</h3>
+            <ul>
+                <li>采购合同审核时间从 2 天缩短至 2 小时，效率提升 90%+</li>
+                <li>无需单独购买合同管理系统，降低企业 IT 成本</li>
+                <li>专业的风险提示帮助规避合同陷阱，已帮助用户发现 300+ 起潜在风险</li>
+                <li>审核报告可直接用于内部审批流程，提升采购规范性</li>
+            </ul>
+
+            <div class="quote-block">
+                <p>
+                    "MeFlow Agent 的 API 集成非常顺畅，文档清晰，接口设计合理。我们的开发团队 3 天就完成了对接，整个项目只用了 6 周就上线了。
+                    更重要的是，这个功能显著提升了我们平台的竞争力，客户非常认可！"
+                </p>
+                <div class="quote-author">—— 质信智购 CTO 李先生</div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>🔑 关键成功因素</h2>
+
+            <h3>1. SaaS 化产品思维</h3>
+            <p>
+                我们不是简单卖软件，而是提供"审核即服务"。标准化的 API 接口、灵活的定价模式、完善的监控运维，都体现了 SaaS 产品思维。
+            </p>
+
+            <h3>2. 快速响应与交付</h3>
+            <p>
+                质信智购是快速成长的创业公司，时间窗口很重要。我们 6 周完成交付，比竞争对手快了 2 个月，成功抢占市场先机。
+            </p>
+
+            <h3>3. 以客户成功为导向</h3>
+            <p>
+                不仅关注技术集成，更关注质信智购如何通过这个功能实现商业成功。协助设计定价策略、提供用户运营建议，真正成为客户的合作伙伴。
+            </p>
+
+            <h3>4. 优秀的技术支持</h3>
+            <p>
+                上线初期每周召开技术对接会，快速响应问题。提供 7×24 技术支持，平均响应时间 < 15 分钟，确保系统稳定运行。
+            </p>
+        </div>
+
+        <div class="content-card">
+            <h2>💡 经验总结与复用</h2>
+
+            <h3>可复用的成功经验</h3>
+            <ol>
+                <li><strong>API 优先策略</strong>：形成了标准的 API 集成方案，可快速复制到其他 SaaS 平台客户</li>
+                <li><strong>白标化能力</strong>：建立了完善的白标定制流程，支持快速品牌化部署</li>
+                <li><strong>计费系统</strong>：开发了灵活的计费引擎，支持多种定价模式，可服务更多 SaaS 客户</li>
+                <li><strong>合作伙伴模式</strong>：与质信智购建立了深度合作关系，为后续渠道合作奠定基础</li>
+            </ol>
+
+            <h3>行业拓展机会</h3>
+            <ul>
+                <li>质信智购案例可复用到其他采购平台，如京东企业购、阿里企业采购等</li>
+                <li>API 集成模式可拓展到 ERP、OA、电子签约等其他企业服务平台</li>
+                <li>已与质信智购达成战略合作，联合拓展其平台的大客户</li>
+            </ul>
+
+            <h3>待优化的方面</h3>
+            <ul>
+                <li>合同类型识别模型仍有优化空间，小众合同类型准确率偏低</li>
+                <li>API 文档可以更详细，增加更多集成示例代码</li>
+                <li>可考虑开发 SDK，进一步降低客户集成成本</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

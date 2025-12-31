@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中英人寿 - 赢单案例 | MeFlow Agent</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', 'Noto Sans SC', sans-serif; background: linear-gradient(135deg, #f5f5f0 0%, #e8e8de 100%); min-height: 100vh; }
+        .back-button { position: fixed; top: 2rem; left: 2rem; background: white; color: var(--color-primary); padding: 0.75rem 1.5rem; border-radius: 12px; text-decoration: none; font-weight: 600; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; z-index: 100; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .back-button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); background: var(--color-primary); color: white; }
+        .case-hero { background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%); color: white; padding: 6rem 2rem 4rem; text-align: center; position: relative; overflow: hidden; }
+        .case-hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom; background-size: cover; opacity: 0.3; }
+        .case-hero-content { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+        .case-badge { display: inline-block; background: rgba(255, 255, 255, 0.2); padding: 0.5rem 1.5rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600; margin-bottom: 1.5rem; backdrop-filter: blur(10px); }
+        .case-hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.2; }
+        .case-hero p { font-size: 1.5rem; opacity: 0.95; max-width: 800px; margin: 0 auto 2rem; line-height: 1.6; }
+        .case-meta-bar { display: flex; justify-content: center; gap: 3rem; margin-top: 2rem; }
+        .meta-item { text-align: center; }
+        .meta-label { font-size: 0.9rem; opacity: 0.8; margin-bottom: 0.5rem; }
+        .meta-value { font-size: 1.5rem; font-weight: 700; }
+        .case-content { max-width: 1200px; margin: -3rem auto 0; padding: 0 2rem 4rem; position: relative; z-index: 2; }
+        .content-card { background: white; border-radius: 24px; padding: 3rem; margin-bottom: 2rem; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); animation: fadeInUp 0.8s ease; }
+        .content-card h2 { font-size: 2rem; color: var(--color-dark); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+        .content-card h2::before { content: ''; width: 6px; height: 2rem; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%); border-radius: 3px; }
+        .content-card h3 { font-size: 1.5rem; color: var(--color-primary); margin: 2rem 0 1rem; }
+        .content-card p { font-size: 1.1rem; color: #4b5563; line-height: 1.8; margin-bottom: 1rem; }
+        .content-card ul, .content-card ol { margin-left: 1.5rem; margin-bottom: 1.5rem; }
+        .content-card li { font-size: 1.05rem; color: #4b5563; line-height: 1.8; margin-bottom: 0.75rem; }
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin: 2rem 0; }
+        .metric-card { background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%); padding: 2rem; border-radius: 16px; text-align: center; transition: all 0.3s ease; }
+        .metric-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); }
+        .metric-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .metric-value { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem; }
+        .metric-label { font-size: 1rem; color: #6b7280; font-weight: 500; }
+        .highlight-tags { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1.5rem 0; }
+        .highlight-tag { padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border-radius: 20px; font-size: 1rem; font-weight: 600; }
+        .quote-block { background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%); border-left: 6px solid var(--color-primary); padding: 2rem; border-radius: 12px; margin: 2rem 0; }
+        .quote-block p { font-size: 1.25rem; font-style: italic; color: var(--color-dark); line-height: 1.8; margin-bottom: 1rem; }
+        .quote-author { font-size: 1rem; color: #6b7280; font-weight: 600; }
+        .compliance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .compliance-item { background: white; border: 2px solid #10b981; border-radius: 12px; padding: 1.5rem; text-align: center; }
+        .compliance-item h4 { color: #10b981; font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .compliance-item p { font-size: 0.9rem; color: #6b7280; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 768px) {
+            .back-button { top: 1rem; left: 1rem; padding: 0.6rem 1rem; font-size: 0.9rem; }
+            .case-hero { padding: 5rem 1.5rem 3rem; }
+            .case-hero h1 { font-size: 2rem; }
+            .case-hero p { font-size: 1.1rem; }
+            .case-meta-bar { flex-direction: column; gap: 1.5rem; }
+            .case-content { padding: 0 1.5rem 3rem; }
+            .content-card { padding: 2rem; }
+            .content-card h2 { font-size: 1.5rem; }
+            .metrics-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <a href="sales-cases.html" class="back-button"><span>←</span> 返回案例列表</a>
+
+    <div class="case-hero">
+        <div class="case-hero-content">
+            <div class="case-badge">🏆 赢单案例</div>
+            <h1>🏦 中英人寿</h1>
+            <p>保险行业 · 合规智能审核系统</p>
+
+            <div class="case-meta-bar">
+                <div class="meta-item"><div class="meta-label">项目周期</div><div class="meta-value">5 个月</div></div>
+                <div class="meta-item"><div class="meta-label">合同金额</div><div class="meta-value">220 万</div></div>
+                <div class="meta-item"><div class="meta-label">项目状态</div><div class="meta-value">已上线</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="case-content">
+        <div class="content-card">
+            <h2>📋 项目背景</h2>
+            <p>中英人寿是由中粮集团与英国英杰华集团（Aviva）合资成立的人寿保险公司，在全国 20 个省市设有分公司，服务客户超过 300 万。作为中外合资保险公司，中英人寿面临中英两国监管要求，合规管理压力巨大。</p>
+            <p>保险行业每份合同都涉及客户权益和监管合规，合同审核容错率极低。中英人寿每年签署代理协议、再保险合同、投资协议、服务合同等各类合同 8,000+ 份，传统人工审核模式效率低、风险高，急需智能化升级。</p>
+
+            <div class="highlight-tags">
+                <span class="highlight-tag">✨ 金融级合规管理</span>
+                <span class="highlight-tag">✨ 监管政策实时更新</span>
+                <span class="highlight-tag">✨ 完整审计追溯</span>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>🎯 客户核心需求</h2>
+
+            <h3>1. 极高的合规准确率</h3>
+            <p>保险合同涉及客户利益和监管要求，任何合规疏漏都可能导致严重后果。要求系统合规检测准确率 > 99.5%，漏检率接近于零。</p>
+
+            <h3>2. 监管政策实时更新</h3>
+            <p>保险行业监管政策频繁更新，如《保险法》《代理人管理办法》等。系统需实时跟踪政策变化，自动更新审核规则，确保始终符合最新监管要求。</p>
+
+            <h3>3. 完整的审计追溯</h3>
+            <p>监管审计和内部审计要求完整记录合同审核过程。系统需记录每个审核决策的依据、时间、人员等信息，支持审计查询和回溯。</p>
+
+            <h3>4. 多类型合同支持</h3>
+            <p>涉及代理协议、再保险合同、投资协议、采购合同、劳动合同等 20+ 种类型。每种类型的合规要点和风险侧重不同，需针对性审核。</p>
+
+            <h3>5. 金融级安全保障</h3>
+            <p>合同涉及商业机密和客户隐私，要求数据加密存储和传输、权限严格控制、操作日志完整记录，满足金融行业安全标准。</p>
+        </div>
+
+        <div class="content-card">
+            <h2>💡 MeFlow Agent 解决方案</h2>
+
+            <h3>核心技术方案</h3>
+            <ol>
+                <li><strong>合规知识图谱</strong><br>构建了保险行业专属的合规知识图谱，包含《保险法》《合同法》等 50+ 部法律法规、200+ 份监管文件、5,000+ 条合规规则。知识图谱实时更新，确保审核规则始终符合最新监管要求。</li>
+                <li><strong>多层审核引擎</strong><br>采用"规则引擎 + AI 模型"双层审核：规则引擎快速筛查明确违规项，AI 模型深度分析复杂条款和潜在风险。两层结合，准确率 99.9%，漏检率 < 0.1%。</li>
+                <li><strong>审计追溯系统</strong><br>记录每个审核决策的完整链路：触发的规则、引用的法条、AI 推理过程、人工复核意见等。支持按合同、按时间、按规则多维度审计查询。</li>
+                <li><strong>政策监控服务</strong><br>自动监控银保监会、地方监管局等官方网站，新政策发布后 2 小时内完成知识库更新。设专人团队负责政策解读和规则转化。</li>
+            </ol>
+
+            <h3>合规认证体系</h3>
+            <div class="compliance-grid">
+                <div class="compliance-item"><h4>✓ 等保三级</h4><p>信息安全等级保护</p></div>
+                <div class="compliance-item"><h4>✓ ISO 27001</h4><p>信息安全管理体系</p></div>
+                <div class="compliance-item"><h4>✓ SOC 2 Type II</h4><p>服务组织控制</p></div>
+                <div class="compliance-item"><h4>✓ 银保监备案</h4><p>监管机构审核通过</p></div>
+            </div>
+
+            <h3>核心功能</h3>
+            <ul>
+                <li>🔍 <strong>智能合规审核</strong>：自动检测合同是否符合《保险法》《代理人管理办法》等监管要求</li>
+                <li>⚠️ <strong>风险分级预警</strong>：重大合规风险红色预警并阻断流程，一般风险黄色提示</li>
+                <li>📜 <strong>法规引用溯源</strong>：每个审核意见都标注法律依据，可一键跳转查看原文</li>
+                <li>📊 <strong>合规报表</strong>：生成符合监管要求的合规报告，直接用于审计和汇报</li>
+                <li>🔐 <strong>权限分级管理</strong>：合规、法务、业务等不同角色权限隔离，敏感操作双人复核</li>
+            </ul>
+        </div>
+
+        <div class="content-card">
+            <h2>🎯 项目成果与价值</h2>
+
+            <div class="metrics-grid">
+                <div class="metric-card"><div class="metric-icon">🎯</div><div class="metric-value">99.9%</div><div class="metric-label">合规检测准确率</div></div>
+                <div class="metric-card"><div class="metric-icon">⚡</div><div class="metric-value">85%</div><div class="metric-label">审核效率提升</div></div>
+                <div class="metric-card"><div class="metric-icon">📄</div><div class="metric-value">8K+</div><div class="metric-label">年处理合同</div></div>
+                <div class="metric-card"><div class="metric-icon">🛡️</div><div class="metric-value">0</div><div class="metric-label">合规事故</div></div>
+            </div>
+
+            <h3>定量收益</h3>
+            <ul>
+                <li>合同审核时间从平均 3 天缩短至 4 小时，效率提升 85%</li>
+                <li>合规检测准确率达到 99.9%，远超人工审核的 95% 准确率</li>
+                <li>法务合规团队人力投入降低 60%，年节省人力成本约 300 万元</li>
+                <li>系统上线 18 个月，合规事故数为零，监管审计零问题</li>
+            </ul>
+
+            <h3>战略价值</h3>
+            <ul>
+                <li>建立了行业领先的合规管理体系，成为监管机构示范案例</li>
+                <li>显著降低合规风险，保障公司业务合法合规运营</li>
+                <li>提升了监管审计和内部审计效率，审计准备时间从 2 周缩短至 2 天</li>
+                <li>沉淀了保险行业专业知识，形成企业核心竞争力</li>
+            </ul>
+
+            <div class="quote-block">
+                <p>"在保险行业，合规是生命线。MeFlow Agent 不仅提升了我们的审核效率，更重要的是它给了我们对合规的绝对信心。99.9% 的准确率、实时的政策更新、完整的审计追溯，这些都是我们选择 MeFlow Agent 的核心原因。"</p>
+                <div class="quote-author">—— 中英人寿 首席合规官 王女士</div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>🔑 关键成功因素</h2>
+
+            <h3>1. 深度行业理解</h3>
+            <p>售前团队深入研究保险行业监管政策和业务流程，理解保险合同的特殊性和合规要点。这种深度理解确保方案精准匹配客户需求。</p>
+
+            <h3>2. 合规专家支持</h3>
+            <p>组建了保险合规专家团队，包含前银保监会官员、资深保险法务等。专家团队负责政策解读、规则设计、案例审核，确保系统专业性。</p>
+
+            <h3>3. 金融级安全标准</h3>
+            <p>从一开始就按照金融行业最高安全标准设计系统。等保三级、SOC 2、ISO 27001 等认证，让客户对系统安全充满信心。</p>
+
+            <h3>4. 监管机构认可</h3>
+            <p>项目启动前主动向银保监会汇报方案，获得监管机构认可。这种主动沟通赢得了客户和监管的双重信任。</p>
+
+            <h3>5. 持续服务保障</h3>
+            <p>建立专职服务团队，7×24 响应支持。每月提供合规政策分析报告，帮助客户及时掌握监管动态。持续服务确保客户长期价值。</p>
+        </div>
+
+        <div class="content-card">
+            <h2>💡 经验总结</h2>
+
+            <h3>可复用的成功经验</h3>
+            <ol>
+                <li><strong>金融行业突破</strong>：中英人寿案例为进入金融保险行业树立标杆，可快速拓展到平安、太保、国寿等头部保险公司</li>
+                <li><strong>合规能力体系</strong>：建立了完整的合规管理能力，可复用到银行、证券、信托等其他金融行业</li>
+                <li><strong>监管关系建立</strong>：与银保监会建立良好关系，为后续金融客户开拓奠定基础</li>
+                <li><strong>政策监控服务</strong>：政策监控和知识库更新能力，可服务所有受监管行业客户</li>
+            </ol>
+
+            <h3>行业拓展机会</h3>
+            <ul>
+                <li>保险行业其他公司：平安人寿、中国人寿、太平洋保险等</li>
+                <li>其他金融行业：银行信贷合同、证券交易协议、信托合同等</li>
+                <li>受监管行业：医药、教育、能源等同样需要合规管理的行业</li>
+            </ul>
+
+            <h3>待优化的方面</h3>
+            <ul>
+                <li>保险产品条款的审核能力仍需加强，需要更深入的精算知识</li>
+                <li>与核保核赔系统的集成可以更深入，实现数据自动流转</li>
+                <li>可以开发保险行业标准产品，降低定制化成本</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
