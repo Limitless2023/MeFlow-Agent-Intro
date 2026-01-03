@@ -1,542 +1,141 @@
-# MeFlow Agent - 产品官网
+# MeFlow Agent - Product Site
 
-> AI原生合同生命周期管理平台 - 像对话一样管理合同
-<!--\n  文档说明：本 README 面向初学者，包含项目结构与运行方式。\n-->
+> AI native contract lifecycle management platform.
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-success)](https://limitless2023.github.io/MeFlow-Agent-Intro/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Pages](https://img.shields.io/badge/Pages-13-blue)](.)
-[![Documentation](https://img.shields.io/badge/Docs-Complete-green)](agents.md)
 
 ---
 
-## ✨ 项目亮点
+## Project Overview
 
-🎬 **全新产品演示** - 沉浸式 8 场景动画展示
-📚 **完整文档体系** - Agent 系统架构详细文档
-🎯 **深度内容** - 13 个专业页面全面介绍产品能力
-🎨 **精致设计** - 统一的橄榄绿主题和现代化 UI
-⚡ **极致性能** - 纯静态页面，秒开体验
+This repository is a React + Vite single-page app that renders the original HTML pages as content, while keeping routing and shared UI logic in React. It supports both Chinese and English routes.
 
----
-
-## 🌐 在线访问
-
-### 核心页面
-- **🏠 主页**: https://limitless2023.github.io/MeFlow-Agent-Intro/
-- **🎬 产品演示**: https://limitless2023.github.io/MeFlow-Agent-Intro/product-intro.html
-- **📖 系统架构文档**: [agents.md](agents.md)
-
-### 能力详情
-- **✍️ 智能起草**: https://limitless2023.github.io/MeFlow-Agent-Intro/intelligent-drafting.html
-- **✅ 智能审核**: https://limitless2023.github.io/MeFlow-Agent-Intro/intelligent-review.html
-- **🤝 智能谈判**: https://limitless2023.github.io/MeFlow-Agent-Intro/intelligent-negotiation.html
-- **📋 智能履约**: https://limitless2023.github.io/MeFlow-Agent-Intro/intelligent-performance.html
-- **📊 智能分析**: https://limitless2023.github.io/MeFlow-Agent-Intro/intelligent-analytics.html
-- **📚 知识管理**: https://limitless2023.github.io/MeFlow-Agent-Intro/knowledge-management.html
-
-### 技术详情
-- **🏗️ 技术架构**: https://limitless2023.github.io/MeFlow-Agent-Intro/architecture.html
-- **🧠 SOTA模型**: https://limitless2023.github.io/MeFlow-Agent-Intro/sota-models.html
-- **🤖 AI原生系统**: https://limitless2023.github.io/MeFlow-Agent-Intro/ai-native-system.html
-- **🔍 上下文工程**: https://limitless2023.github.io/MeFlow-Agent-Intro/context-engineering.html
-- **🔧 工具生态**: https://limitless2023.github.io/MeFlow-Agent-Intro/tools-ecosystem.html
-- **🔒 企业安全**: https://limitless2023.github.io/MeFlow-Agent-Intro/enterprise-security.html
+Key goals:
+- Preserve existing HTML content while migrating to a modern frontend build pipeline.
+- Provide clean client-side routing for all pages.
+- Keep design tokens and styles in one place for easier iteration.
 
 ---
 
-## 📖 项目简介
+## Live Pages
 
-MeFlow Agent 产品官网是一个**全面的多页面展示平台**，通过精心设计的 13 个专业页面，完整呈现产品的核心价值和技术实力。
+Base URL: https://limitless2023.github.io/MeFlow-Agent-Intro/
 
-### 核心内容模块
+Chinese routes:
+- `/`
+- `/ai-native-system`
+- `/architecture`
+- `/context-engineering`
+- `/enterprise-security`
+- `/intelligent-analytics`
+- `/intelligent-drafting`
+- `/intelligent-negotiation`
+- `/intelligent-performance`
+- `/intelligent-review`
+- `/knowledge-management`
+- `/sales-cases`
+- `/sota-models`
+- `/tools-ecosystem`
 
-#### 🎬 产品演示 (product-intro.html)
-**沉浸式 8 场景动画展示**，灵感来自 Apple、Tesla 等顶级产品发布：
-1. **传统困境** - 7 个问题卡片展现痛点
-2. **品牌揭幕** - 3D Logo 动画
-3. **对话交互** - 真实打字效果演示
-4. **数据洞察** - 数字动画 + 柱状图增长
-5. **风险预警** - 左右分屏双动画
-6. **技术架构** - 统一图标设计
-7. **真实成果** - 渐变数字展示
-8. **行动号召** - 戏剧性结尾
-
-#### 📚 六大核心能力 (详情页)
-- **智能起草** - 基于场景自动生成专业合同
-- **智能审核** - 99.7% 准确率风险识别
-- **智能谈判** - AI 策略预测和方案推荐
-- **智能履约** - 7×24 自动监控执行
-- **智能分析** - 深度数据挖掘和商业洞察
-- **知识管理** - 企业知识资产沉淀
-
-#### 🔧 六大技术优势 (详情页)
-- **技术架构** - 多层 Agent 协作体系
-- **SOTA模型** - DeepSeek、GLM、Kimi、Qwen
-- **AI原生系统** - 从零构建的 AI 驱动平台
-- **上下文工程** - RAG 检索增强生成
-- **工具生态** - 500+ 预置工具集成
-- **企业安全** - 等保 2.0、SOC 2 认证
-
-#### 📖 技术文档 (agents.md)
-**454 行完整系统架构文档**，包含：
-- 整体架构设计和分层说明
-- 六大 Agent 详细技术实现
-- 支撑技术体系（模型、RAG、工具、编排）
-- 安全合规和性能指标
-- 使用指南和应用场景
+English routes:
+- `/en`
+- `/en/ai-native-system`
+- `/en/architecture`
+- `/en/context-engineering`
+- `/en/enterprise-security`
+- `/en/intelligent-analytics`
+- `/en/intelligent-drafting`
+- `/en/intelligent-negotiation`
+- `/en/intelligent-performance`
+- `/en/intelligent-review`
+- `/en/knowledge-management`
+- `/en/sales-cases`
+- `/en/sota-models`
+- `/en/tools-ecosystem`
 
 ---
 
-## 📁 项目结构（React + Vite）
+## Tech Stack
 
-如需快速理解目录结构，请先阅读 `STRUCTURE.md`。
+- React 18 + React Router
+- Vite 7
+- Tailwind CSS (design tokens + future utility migration)
+- PostCSS + Autoprefixer
+
+---
+
+## Project Structure
+
+For a detailed map, see `STRUCTURE.md`.
 
 ```
 MeFlow-Agent-Intro/
-├── index.html                  # Vite 入口文件（挂载 React）
-├── package.json                # 项目依赖与脚本
-├── vite.config.js              # Vite 配置
+├── index.html                  # Vite entry
+├── package.json                # Scripts and dependencies
+├── vite.config.js              # Dev/preview ports and Vite config
 ├── src/
-│   ├── App.jsx                 # 路由入口
-│   ├── main.jsx                # React 启动文件
-│   ├── routes.jsx              # 页面路由配置
+│   ├── App.jsx                 # Router entry
+│   ├── main.jsx                # React bootstrap
+│   ├── routes.jsx              # Route registry and link map
 │   ├── components/
-│   │   └── PageRenderer.jsx    # HTML 渲染器（保留原文案）
+│   │   └── PageRenderer.jsx    # Raw HTML renderer
 │   ├── hooks/
-│   │   ├── usePageMeta.js       # 标题/描述更新
-│   │   └── usePageInteractions.js # 菜单与锚点交互
+│   │   ├── usePageMeta.js       # Title/description updates
+│   │   └── usePageInteractions.js # Menu and anchor interactions
 │   ├── styles/
-│   │   ├── base.css            # 原全局样式（迁移）
-│   │   └── app.css             # React 容器样式
+│   │   ├── base.css            # Migrated global styles
+│   │   ├── components.css      # Page component styles
+│   │   └── app.css             # React container styles
 │   └── content/
-│       ├── index.html          # 原主页内容（保留）
-│       ├── intelligent-*.html  # 能力详情页内容
-│       └── *.html              # 技术详情页内容
+│       ├── *.html              # Chinese pages
+│       └── en/*.html           # English pages
 ├── public/
-│   └── assets/models/           # AI 模型 logo 资源
-├── agents.md                    # Agent 系统架构文档
-├── assets/                      # 旧版资源（保留）
-├── backup/                      # 备份文件
-├── original-pages/              # 原始参考页面
-└── _old_meflow_website/         # 旧版本存档
+│   └── assets/models/          # Model logos
+└── agents.md                   # System architecture document
 ```
 
-### 页面统计
-- **总页面数**: 13 个 HTML 页面
-- **技术文档**: 1 个 Markdown 文档（454 行）
-- **代码量**: ~25,000+ 行（含 HTML/CSS/JS）
-
 ---
 
-## 🎨 设计规范
-
-当前设计系统已迁移到 Tailwind 配置层，主题色与字体在 `tailwind.config.js` 统一维护；基础样式在 `src/styles/base.css`，组件/布局样式集中在 `src/styles/components.css`，后续可以逐步用 `@apply`/工具类替换。
-
-### 配色方案
-
-- **主色调：** Oatmeal Olive（橄榄绿）
-  - 主色：`#5c6b50`
-  - 浅色：`#8a9a7e`
-  - 背景：`#f5f5f0`
-- **辅助色：**
-  - 奶油色：`#fdfdf8`
-  - 深灰：`#1a1a1a`
-  - 浅灰：`#6b7280`
-
-### 字体系统
-
-- **西文：** Inter (Sans-serif)
-- **中文：** Noto Sans SC
-- **标题：** Fraunces (Serif)
-
-### 响应式断点
-
-- 桌面端：≥ 1024px
-- 平板：768px - 1023px
-- 移动端：< 768px
-
----
-
-## 🚀 快速开始（React + Vite）
-
-### 本地开发
+## Local Development
 
 ```bash
-# 进入目录
-cd MeFlow-Agent-Intro
-
-# 安装依赖
+# Install deps
 npm install
 
-# 启动本地开发服务器
+# Start dev server (default: http://127.0.0.1:5174)
 npm run dev
 ```
 
-### 构建与预览
+Build and preview:
 
 ```bash
-# 生产构建
 npm run build
-
-# 本地预览构建产物
 npm run preview
 ```
 
-### 重要说明
+---
 
-- 页面 HTML 内容已保留在 `src/content`，通过 `?raw` 加载并渲染。
-- 全站公共样式在 `src/styles/base.css`，页面自带样式仍保持原样。
-- 页面路由配置集中在 `src/routes.jsx`，方便后续新增页面。
+## Content Workflow
+
+- Page HTML lives in `src/content` and is imported with `?raw`.
+- Routing is centralized in `src/routes.jsx`.
+- Internal HTML links are rewritten to match SPA routes via the route map.
+
+Add a new page:
+1. Add the HTML file under `src/content` (and `src/content/en` if needed).
+2. Register the route in `src/routes.jsx`.
+3. Add/update any links inside the HTML to match the route path (no `.html`).
 
 ---
 
-## 📄 页面内容详解
+## Design Notes
 
-### 🏠 主页 (index.html)
-
-首页采用单页滚动设计，包含以下核心模块：
-
-#### 1. 产品介绍区 (#product-intro)
-- 🎯 核心理念：像对话一样管理合同
-- 💬 对话式交互演示
-- 📊 关键数据指标（95% 时间节省、99.7% 准确率）
-- 🎬 **产品演示入口** - 进入沉浸式动画展示
-
-#### 2. 能力矩阵 (#capability-matrix)
-六大智能化能力，每个都可点击进入详情页：
-- ✍️ **智能起草** → intelligent-drafting.html
-- ✅ **智能审核** → intelligent-review.html
-- 🤝 **智能谈判** → intelligent-negotiation.html
-- 📋 **智能履约** → intelligent-performance.html
-- 📊 **智能分析** → intelligent-analytics.html
-- 📚 **知识管理** → knowledge-management.html
-
-#### 3. 技术优势 (#tech-advantages)
-六大技术优势，每个都可点击进入详情页：
-- 🏗️ **技术架构** → architecture.html
-- 🧠 **SOTA模型** → sota-models.html
-- 🤖 **AI原生系统** → ai-native-system.html
-- 🔍 **上下文工程** → context-engineering.html
-- 🔧 **工具生态** → tools-ecosystem.html
-- 🔒 **企业安全** → enterprise-security.html
-
-#### 4. 核心价值 (#core-value)
-- ⚡ 效率革命 - 95% 时间节省
-- 🛡️ 风险管控 - 99.7% 准确率
-- 💰 成本优化 - 显著降低开销
-- 💡 决策支持 - AI 商业洞察
-- ✅ 合规保障 - 实时政策跟踪
-- 📖 知识沉淀 - 企业知识资产
-
-#### 5. 客户案例
-- 🏢 头部互联网企业案例
-- 🏭 大型制造企业案例
-- 🌍 跨国供应链公司案例
+- Theme tokens live in `tailwind.config.js`.
+- Shared styles are in `src/styles/base.css` and `src/styles/components.css`.
 
 ---
 
-### 🎬 产品演示 (product-intro.html)
+## License
 
-**全新打造的沉浸式产品展示页**，灵感来自 Apple、Tesla 等顶级产品发布会。
-
-#### 8 个精心设计的场景：
-
-1. **场景 1 - 传统困境** 🌪️
-   - 7 个问题卡片（包括中心区域）
-   - 浮动动画展现合同管理痛点
-
-2. **场景 2 - 品牌揭幕** ✨
-   - 3D Logo 旋转动画
-   - 品牌名称和标语渐显
-
-3. **场景 3 - 对话交互** 💬
-   - 真实打字效果（逐字显示）
-   - 2 轮完整对话演示
-   - 打字指示器动画
-
-4. **场景 4 - 数据洞察** 📊
-   - 数字从 0 开始计数动画
-   - 柱状图从底部向上增长
-
-5. **场景 5 - 风险预警** 🚨
-   - 左右分屏布局
-   - 监控面板 + 预警列表
-   - 双向滑入动画
-
-6. **场景 6 - 技术架构** 🔧
-   - 统一的橄榄绿图标设计
-   - 6 大技术能力展示
-
-7. **场景 7 - 真实成果** 🎯
-   - 渐变数字特效
-   - 3 个核心指标
-
-8. **场景 8 - 行动号召** 🚀
-   - 戏剧性结尾
-   - 清晰的 CTA 按钮
-
-#### 交互功能：
-- ⏯️ 自动播放（可暂停/播放）
-- ⬅️➡️ 手动切换场景
-- 🔘 进度点导航（8 个场景）
-- ❌ 关闭返回首页
-- ⏱️ 智能停留时间（场景 3 为 11 秒，其他 4.5 秒）
-
----
-
-### 📚 能力详情页（6 个）
-
-每个能力详情页采用统一的左右布局设计：
-
-#### intelligent-drafting.html - 智能起草
-- 📝 场景理解和需求分析
-- 🤖 自动生成合同文本
-- 🎨 风格定制和多轮优化
-- ⚡ 从数小时到数分钟
-
-#### intelligent-review.html - 智能审核
-- 🔍 全文深度分析
-- ⚠️ 风险识别（99.7% 准确率）
-- ✅ 五大审核维度
-- 📋 详细审核报告
-
-#### intelligent-negotiation.html - 智能谈判
-- 🎯 策略预测
-- 💬 话术建议
-- 📊 数据支撑
-- 🤝 双赢方案推荐
-
-#### intelligent-performance.html - 智能履约
-- 🔔 7×24 自动监控
-- ⏰ 关键节点提醒
-- 📈 履约进度跟踪
-- 🚨 异常风险预警
-
-#### intelligent-analytics.html - 智能分析
-- 📊 多维度数据分析
-- 📈 趋势识别
-- 💡 商业洞察
-- 📋 智能报告生成
-
-#### knowledge-management.html - 知识管理
-- 🔍 智能索引和检索
-- 📚 五大知识库体系
-- 💡 上下文推荐
-- 🎓 持续学习优化
-
----
-
-### 🔧 技术详情页（6 个）
-
-每个技术详情页深度展示核心技术能力：
-
-#### architecture.html - 技术架构
-- 🏗️ 多层 Agent 协作体系
-- 🔄 智能编排引擎
-- 📡 分布式架构设计
-
-#### sota-models.html - SOTA模型
-- 🧠 DeepSeek 系列
-- 🤖 GLM 系列（智谱 AI）
-- 🌙 Kimi 系列（Moonshot AI）
-- ☁️ Qwen 系列（阿里云）
-
-#### ai-native-system.html - AI原生系统
-- 🚀 从零构建的 AI 驱动平台
-- 🎯 专为 AI 优化的架构
-- ⚡ 5 秒极速响应
-
-#### context-engineering.html - 上下文工程
-- 🔍 RAG 检索增强生成
-- 📚 向量化知识库
-- 🎯 混合检索策略
-- 🛡️ 幻觉抑制技术
-
-#### tools-ecosystem.html - 工具生态
-- 🔧 500+ 预置工具
-- 🔌 企业系统集成
-- 📄 文档处理能力
-- 🌐 第三方 API 对接
-
-#### enterprise-security.html - 企业安全
-- 🔐 多层加密保护
-- ✅ 等保 2.0 三级认证
-- 🏆 SOC 2 Type II 认证
-- 🌍 GDPR 合规
-
----
-
-### 📖 技术文档 (agents.md)
-
-**454 行完整的 Agent 系统架构文档**，内容包括：
-
-#### 核心内容
-- 📐 **系统架构**: 整体设计和分层说明
-- 🤖 **六大 Agent**: 每个 Agent 的详细技术实现
-  - 功能定位和核心能力
-  - 技术实现流程
-  - 应用场景和价值
-- 🔧 **技术支撑**: 模型、RAG、工具、编排
-- 🔒 **安全合规**: 认证和数据保护
-- 📊 **性能指标**: 核心业务和技术指标
-- 🚀 **使用指南**: 快速开始和示例对话
-- 🎯 **应用场景**: 企业和行业应用案例
-
----
-
-## 🛠️ 技术栈
-
-- **HTML5** - 语义化标签，无障碍设计
-- **CSS3** - Grid + Flexbox 现代布局
-- **CSS Animations** - 丰富的动画效果（keyframes、transform、transition）
-- **Vanilla JavaScript** - 原生 JS，无框架依赖
-- **响应式设计** - 移动优先，多端适配
-- **GitHub Pages** - 静态网站托管，自动部署
-
-### 动画技术
-- ⚡ **CSS Keyframes**: 场景转场和元素动画
-- 🎯 **Transform 3D**: Logo 3D 旋转效果
-- 💬 **打字机效果**: 逐字符文本动画
-- 📊 **数字计数**: requestAnimationFrame 平滑动画
-- 🎨 **渐变特效**: background-clip 文字渐变
-- 🌊 **粒子动画**: particles.js 背景特效
-
----
-
-## 🎉 阶段性成果
-
-### ✅ 已完成的里程碑
-
-#### 第一阶段：基础建设 ✓
-- ✅ 搭建项目基础架构
-- ✅ 确定设计规范（橄榄绿主题）
-- ✅ 创建首页单页应用
-- ✅ 实现响应式布局
-
-#### 第二阶段：内容扩充 ✓
-- ✅ 创建 6 个能力详情页
-- ✅ 创建 6 个技术详情页
-- ✅ 统一页面设计风格
-- ✅ 完善导航和交互
-
-#### 第三阶段：产品演示 ✓
-- ✅ 设计 8 场景动画脚本
-- ✅ 实现沉浸式全屏展示
-- ✅ 添加丰富的动画效果
-- ✅ 优化自动播放逻辑
-- ✅ 集成到首页入口
-
-#### 第四阶段：文档完善 ✓
-- ✅ 编写 Agent 系统架构文档
-- ✅ 更新 README 项目文档
-- ✅ 完善技术说明
-- ✅ 整理项目结构
-
-### 📊 项目数据
-
-| 指标 | 数值 | 说明 |
-|------|------|------|
-| **总页面数** | 13 | HTML 展示页面 |
-| **技术文档** | 1 | agents.md（454 行）|
-| **代码总量** | 25,000+ 行 | HTML + CSS + JS |
-| **能力模块** | 6 个 | 完整的能力详情页 |
-| **技术模块** | 6 个 | 完整的技术详情页 |
-| **动画场景** | 8 个 | 产品演示动画 |
-| **设计资产** | 4 个 | AI 模型 Logo |
-
-### 🎯 核心特色
-
-1. **🎬 沉浸式产品演示**
-   - 行业领先的动画展示效果
-   - 8 个精心设计的场景
-   - 自动播放 + 手动控制
-
-2. **📚 完整的内容体系**
-   - 6 大能力 × 6 大技术
-   - 每个模块独立详情页
-   - 统一的设计语言
-
-3. **📖 专业的技术文档**
-   - 454 行架构文档
-   - 详细的实现说明
-   - 丰富的使用示例
-
-4. **🎨 精致的视觉设计**
-   - 统一的橄榄绿主题
-   - 现代化 UI 风格
-   - 流畅的交互体验
-
----
-
-## 📝 开发说明
-
-### 修改内容
-
-1. **更新文案**：直接编辑 `index.html` 或 `sota-models.html`
-2. **调整样式**：修改 `styles.css` 或页面内的 `<style>` 标签
-3. **添加logo**：将图片放入 `assets/models/` 并更新HTML引用
-
-### 提交规范
-
-```bash
-# 修改文件后
-git add .
-git commit -m "描述修改内容"
-git push origin main
-```
-
-### 分支说明
-
-- `main` - 生产分支，用于GitHub Pages部署
-- `claude/upload-meflow-website-*` - 开发分支
-
----
-
-## 🔗 相关链接
-
-- **产品官网：** https://limitless2023.github.io/MeFlow-Agent-Intro/
-- **产品后台：** https://meflow3.prod.milvzn.com/dashboard
-- **公司官网：** PowerLaw.AI (幂律智能)
-
----
-
-## 📄 版权信息
-
-© 2024 幂律智能 PowerLaw.AI. 保留所有权利
-
----
-
-## 🤝 贡献
-
-欢迎提交 Issue 和 Pull Request！
-
-### 贡献指南
-1. Fork 本仓库
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 开启 Pull Request
-
----
-
-## 📈 版本历史
-
-### v2.0.0 (2024-12-30) - 重大更新 🎉
-- ✨ 新增沉浸式产品演示页（8 场景动画）
-- 📚 完成 Agent 系统架构文档（454 行）
-- 🎨 创建 12 个能力和技术详情页
-- 📝 全面更新项目 README
-- 🔧 优化动画效果和交互体验
-
-### v1.0.0 (2024-12-28) - 初始版本
-- 🎉 项目初始化
-- 🏠 创建首页单页应用
-- 🎨 确定设计规范
-- 🚀 部署到 GitHub Pages
-
----
-
-**当前版本：** v2.0.0
-**最后更新：** 2024-12-30
-**维护状态：** 🟢 Active Development
+MIT
