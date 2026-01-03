@@ -1,0 +1,371 @@
+<!--
+  Page source file (English edition):
+  - Preserves the original HTML structure while translating copy to English.
+  - Loaded and rendered by React via ?raw.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supported SOTA Models - MeFlow Agent</title>
+    <meta name="description" content="MeFlow Agent supports top SOTA large language models with flexible model selection.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="fixed inset-x-0 top-0 z-[1000] border-b border-gray-200/80 bg-cream/90 backdrop-blur-[10px]">
+        <div class="relative mx-auto flex max-w-[1200px] items-center justify-between px-6 py-4">
+            <a href="en/index.html" class="flex items-center gap-3 text-[1.25rem] font-semibold text-gray-900">
+                <svg class="h-8 w-8" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="32" rx="8" fill="#5c6b50" />
+                    <path d="M8 16L14 10L20 16L14 22L8 16Z" fill="white" />
+                    <path d="M14 16L20 10L26 16L20 22L14 16Z" fill="white" fill-opacity="0.6" />
+                </svg>
+                <span>MeFlow</span>
+            </a>
+            <div class="nav-links absolute left-0 right-0 top-full hidden flex-col items-stretch gap-4 border-b border-gray-200 bg-white p-6 shadow-lg md:static md:flex md:flex-row md:items-center md:gap-8 md:border-0 md:bg-transparent md:p-0 md:shadow-none">
+                <a href="en/index.html#product-intro" class="text-[0.9375rem] text-gray-600 transition-colors hover:text-gray-900">Product</a>
+                <a href="en/index.html#capability-matrix" class="text-[0.9375rem] text-gray-600 transition-colors hover:text-gray-900">Capabilities</a>
+                <a href="en/index.html#tech-advantages" class="text-[0.9375rem] text-gray-600 transition-colors hover:text-gray-900">Tech Advantage</a>
+                <a href="en/index.html#core-value" class="text-[0.9375rem] text-gray-600 transition-colors hover:text-gray-900">Core Value</a>
+                <a href="sota-models.html" class="text-[0.9375rem] text-gray-600 transition-colors hover:text-gray-900">中文</a>
+                <a href="https://meflow3.prod.milvzn.com/dashboard" target="_blank" class="btn inline-flex items-center justify-center rounded-md border border-transparent bg-olive px-5 py-2.5 text-[0.9375rem] font-medium text-white transition hover:bg-olive-dark">Get Started</a>
+            </div>
+            <button class="mobile-menu-btn rounded-md p-2 text-gray-700 md:hidden" aria-label="Menu">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- SOTA Models Page -->
+    <section class="bg-[linear-gradient(180deg,var(--color-cream)_0%,var(--color-olive-bg)_100%)] pb-16 pt-32">
+        <div class="mx-auto max-w-[1200px] px-6">
+            <a href="en/index.html#tech-advantages" class="mb-8 inline-flex items-center gap-2 text-[0.9375rem] font-medium text-gray-600 transition hover:text-olive hover:underline">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                </svg>
+                Back
+            </a>
+
+            <header class="mb-12 text-center">
+                <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-olive-light px-4 py-2 text-sm font-medium text-olive">
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                    Mainstream SOTA Models
+                </div>
+                <h1 class="font-serif text-[clamp(2rem,3vw,2.75rem)] font-medium mb-4 leading-[1.3] text-gray-900">
+                    MeFlow Agent supports <span class="text-olive italic">top-tier LLMs</span>
+                </h1>
+                <p class="mx-auto mt-4 max-w-[800px] text-[1.0625rem] text-gray-600 leading-[1.8]">
+                    Including DeepSeek, GLM, Kimi, Qwen, and more - unlocking limitless possibilities.
+                </p>
+
+                <!-- Provider Logos -->
+                <div class="mb-12 flex flex-wrap items-center justify-center gap-16 rounded-xl border border-gray-200 bg-white p-8">
+                    <div class="flex flex-col items-center gap-2 opacity-85 transition hover:-translate-y-0.5 hover:opacity-100">
+                        <img class="h-24 w-auto max-w-[200px] object-contain transition hover:scale-[1.05]" src="assets/models/deepseek-logo.png" alt="DeepSeek">
+                    </div>
+                    <div class="flex flex-col items-center gap-2 opacity-85 transition hover:-translate-y-0.5 hover:opacity-100">
+                        <img class="h-[75px] w-[75px] object-contain transition hover:scale-[1.05]" src="assets/models/智谱logo.png" alt="Zhipu AI">
+                    </div>
+                    <div class="flex flex-col items-center gap-2 opacity-85 transition hover:-translate-y-0.5 hover:opacity-100">
+                        <img class="h-24 w-auto max-w-[200px] object-contain transition hover:scale-[1.05]" src="assets/models/kimi-logo.png" alt="Moonshot AI">
+                    </div>
+                    <div class="flex flex-col items-center gap-2 opacity-85 transition hover:-translate-y-0.5 hover:opacity-100">
+                        <img class="h-24 w-auto max-w-[200px] object-contain transition hover:scale-[1.05]" src="assets/models/qwen-logo.png" alt="Qwen">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Row 1: DeepSeek & GLM -->
+            <div class="mb-4 grid gap-4 lg:grid-cols-2">
+                <!-- DeepSeek Models -->
+                <div class="rounded-xl border border-gray-200 bg-white p-8">
+                    <h2 class="mb-4 flex items-center gap-3 text-[1.5rem] font-semibold text-gray-900">
+                        DeepSeek Series
+                    </h2>
+                    <div class="grid gap-4 md:grid-cols-2">
+                        <div class="rounded-lg border border-olive/40 bg-olive-bg p-5 transition hover:-translate-y-0.5 hover:border-olive hover:shadow-md flex flex-col gap-3">
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="text-base font-semibold text-gray-900">DeepSeek-3.2</span>
+                                <span class="rounded-full bg-olive px-2.5 py-1 text-[0.75rem] font-semibold text-white">Recommended</span>
+                            </div>
+                            <p class="text-sm text-gray-600">Open-source model with strong reasoning and excellent code generation.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="rounded-full border border-gray-200 bg-white px-2.5 py-1 text-[0.75rem] text-gray-600">Reasoning optimized</span>
+                                <span class="rounded-full border border-gray-200 bg-white px-2.5 py-1 text-[0.75rem] text-gray-600">Code generation</span>
+                            </div>
+                        </div>
+                        <div class="rounded-lg border border-gray-200 bg-gray-50 p-5 transition hover:-translate-y-0.5 hover:border-olive hover:shadow-md flex flex-col gap-3">
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="text-base font-semibold text-gray-900">DeepSeek-3.2-Thinking</span>
+                                <span class="rounded-full bg-gray-200 px-2.5 py-1 text-[0.75rem] font-semibold text-gray-700">New</span>
+                            </div>
+                            <p class="text-sm text-gray-600">Enhanced chain-of-thought reasoning for complex logic analysis.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="rounded-full border border-gray-200 bg-white px-2.5 py-1 text-[0.75rem] text-gray-600">Chain of thought</span>
+                                <span class="rounded-full border border-gray-200 bg-white px-2.5 py-1 text-[0.75rem] text-gray-600">Logical reasoning</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GLM Models -->
+                <div class="rounded-xl border border-gray-200 bg-white p-8">
+                    <h2 class="mb-4 flex items-center gap-3 text-[1.5rem] font-semibold text-gray-900">
+                        GLM Series - Zhipu AI
+                    </h2>
+                    <div class="grid gap-4 md:grid-cols-2">
+                        <div class="rounded-lg border border-olive/40 bg-olive-bg p-5 transition hover:-translate-y-0.5 hover:border-olive hover:shadow-md flex flex-col gap-3">
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="text-base font-semibold text-gray-900">GLM-4.7</span>
+                                <span class="rounded-full bg-olive px-2.5 py-1 text-[0.75rem] font-semibold text-white">Recommended</span>
+                            </div>
+                            <p class="text-sm text-gray-600">Flagship Zhipu model with excellent Chinese performance.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="rounded-full border border-gray-200 bg-white px-2.5 py-1 text-[0.75rem] text-gray-600">Chinese optimized</span>
+                                <span class="rounded-full border border-gray-200 bg-white px-2.5 py-1 text-[0.75rem] text-gray-600">Multi-turn</span>
+                            </div>
+                        </div>
+                        <div class="rounded-lg border border-gray-200 bg-gray-50 p-5 transition hover:-translate-y-0.5 hover:border-olive hover:shadow-md flex flex-col gap-3">
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="text-base font-semibold text-gray-900">GLM-4.6</span>
+                            </div>
+                            <p class="text-sm text-gray-600">Efficient, balanced model for everyday business scenarios.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="rounded-full border border-gray-200 bg-white px-2.5 py-1 text-[0.75rem] text-gray-600">Efficient</span>
+                                <span class="rounded-full border border-gray-200 bg-white px-2.5 py-1 text-[0.75rem] text-gray-600">Balanced performance</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 2: Kimi & Qwen -->
+            <div class="mb-4 grid gap-4 lg:grid-cols-2">
+                <!-- Kimi Models -->
+                <div class="rounded-xl border border-gray-200 bg-white p-8">
+                    <h2 class="mb-4 flex items-center gap-3 text-[1.5rem] font-semibold text-gray-900">
+                        Kimi Series - Moonshot AI
+                    </h2>
+                    <div class="grid gap-4 md:grid-cols-2">
+                        <div class="rounded-lg border border-olive/40 bg-olive-bg p-5 transition hover:-translate-y-0.5 hover:border-olive hover:shadow-md flex flex-col gap-3">
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="text-base font-semibold text-gray-900">Kimi-K2</span>
+                                <span class="rounded-full bg-olive px-2.5 py-1 text-[0.75rem] font-semibold text-white">Recommended</span>
+                            </div>
+                            <p class="text-sm text-gray-600">Outstanding long-context performance with 200k token support.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="rounded-full border border-gray-200 bg-white px-2.5 py-1 text-[0.75rem] text-gray-600">Long context</span>
+                                <span class="rounded-full border border-gray-200 bg-white px-2.5 py-1 text-[0.75rem] text-gray-600">High accuracy</span>
+                            </div>
+                        </div>
+                        <div class="rounded-lg border border-gray-200 bg-gray-50 p-5 transition hover:-translate-y-0.5 hover:border-olive hover:shadow-md flex flex-col gap-3">
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="text-base font-semibold text-gray-900">Kimi-K2-Thinking</span>
+                            </div>
+                            <p class="text-sm text-gray-600">Enhanced reasoning for complex analysis tasks.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="rounded-full border border-gray-200 bg-white px-2.5 py-1 text-[0.75rem] text-gray-600">Chain of thought</span>
+                                <span class="rounded-full border border-gray-200 bg-white px-2.5 py-1 text-[0.75rem] text-gray-600">Deep analysis</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Qwen Models -->
+                <div class="rounded-xl border border-gray-200 bg-white p-8">
+                    <h2 class="mb-4 flex items-center gap-3 text-[1.5rem] font-semibold text-gray-900">
+                        Qwen Series - Alibaba Cloud
+                    </h2>
+                    <div class="grid gap-4 md:grid-cols-2">
+                        <div class="rounded-lg border border-olive/40 bg-olive-bg p-5 transition hover:-translate-y-0.5 hover:border-olive hover:shadow-md flex flex-col gap-3">
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="text-base font-semibold text-gray-900">Qwen3-Max</span>
+                                <span class="rounded-full bg-olive px-2.5 py-1 text-[0.75rem] font-semibold text-white">Recommended</span>
+                            </div>
+                            <p class="text-sm text-gray-600">Alibaba's most powerful model with strong all-around capability.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="rounded-full border border-gray-200 bg-white px-2.5 py-1 text-[0.75rem] text-gray-600">General purpose</span>
+                                <span class="rounded-full border border-gray-200 bg-white px-2.5 py-1 text-[0.75rem] text-gray-600">High performance</span>
+                            </div>
+                        </div>
+                        <div class="rounded-lg border border-gray-200 bg-gray-50 p-5 transition hover:-translate-y-0.5 hover:border-olive hover:shadow-md flex flex-col gap-3">
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="text-base font-semibold text-gray-900">Qwen3-Next-80b-Instruct</span>
+                            </div>
+                            <p class="text-sm text-gray-600">80B parameter instruction-tuned model.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="rounded-full border border-gray-200 bg-white px-2.5 py-1 text-[0.75rem] text-gray-600">Instruction tuned</span>
+                            </div>
+                        </div>
+                        <details class="mt-4 rounded-lg border border-gray-200 bg-white/60 p-4 md:col-span-2">
+                            <summary class="flex cursor-pointer items-center justify-between text-sm font-medium text-gray-700">
+                                <span>Show more models (3)</span>
+                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </summary>
+                            <div class="mt-4 grid gap-4 md:grid-cols-2">
+                                <div class="rounded-lg border border-gray-200 bg-gray-50 p-5 transition hover:-translate-y-0.5 hover:border-olive hover:shadow-md flex flex-col gap-3">
+                                    <div class="flex items-center justify-between gap-2">
+                                        <span class="text-base font-semibold text-gray-900">Qwen3-Next-80b-Thinking</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600">Chain-of-thought enhanced model for complex reasoning.</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="rounded-full border border-gray-200 bg-white px-2.5 py-1 text-[0.75rem] text-gray-600">Chain of thought</span>
+                                    </div>
+                                </div>
+                                <div class="rounded-lg border border-gray-200 bg-gray-50 p-5 transition hover:-translate-y-0.5 hover:border-olive hover:shadow-md flex flex-col gap-3">
+                                    <div class="flex items-center justify-between gap-2">
+                                        <span class="text-base font-semibold text-gray-900">Qwen3-32b</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600">Cost-effective mid-size model.</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="rounded-full border border-gray-200 bg-white px-2.5 py-1 text-[0.75rem] text-gray-600">Cost effective</span>
+                                    </div>
+                                </div>
+                                <div class="rounded-lg border border-gray-200 bg-gray-50 p-5 transition hover:-translate-y-0.5 hover:border-olive hover:shadow-md flex flex-col gap-3">
+                                    <div class="flex items-center justify-between gap-2">
+                                        <span class="text-base font-semibold text-gray-900">Qwen3-30b-thinking</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600">30B parameter chain-of-thought model.</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="rounded-full border border-gray-200 bg-white px-2.5 py-1 text-[0.75rem] text-gray-600">Reasoning optimized</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reference Links -->
+            <div class="mt-16 rounded-2xl border border-gray-200 bg-white p-8">
+                <h2 class="mb-4 flex items-center gap-3 text-[1.5rem] font-semibold text-gray-900">
+                    <div class="flex h-10 w-10 items-center justify-center rounded-md bg-olive-light text-olive">
+                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                        </svg>
+                    </div>
+                    Model capability references
+                </h2>
+                <div class="grid gap-4 md:grid-cols-2">
+                    <a href="https://artificialanalysis.ai/models/" target="_blank" class="group rounded-xl border border-gray-200 bg-gray-50 p-6 transition hover:-translate-y-0.5 hover:border-olive hover:shadow-md">
+                        <div class="mb-3 flex items-center justify-between">
+                            <h3 class="flex items-center gap-2 text-base font-semibold text-gray-900">
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                </svg>
+                                Artificial Analysis
+                            </h3>
+                            <svg class="h-5 w-5 text-gray-400 transition group-hover:text-olive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
+                        </div>
+                        <p class="mb-3 text-sm text-gray-600">
+                            Comprehensive AI model analysis with intelligence indexes, performance comparisons, and cost benchmarks.
+                        </p>
+                        <code class="text-xs text-gray-500">artificialanalysis.ai/models/</code>
+                    </a>
+
+                    <a href="https://lmarena.ai/leaderboard" target="_blank" class="group rounded-xl border border-gray-200 bg-gray-50 p-6 transition hover:-translate-y-0.5 hover:border-olive hover:shadow-md">
+                        <div class="mb-3 flex items-center justify-between">
+                            <h3 class="flex items-center gap-2 text-base font-semibold text-gray-900">
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                                </svg>
+                                LM Arena Leaderboard
+                            </h3>
+                            <svg class="h-5 w-5 text-gray-400 transition group-hover:text-olive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
+                        </div>
+                        <p class="mb-3 text-sm text-gray-600">
+                            A leaderboard based on real user evaluations, showing how models perform in practical use.
+                        </p>
+                        <code class="text-xs text-gray-500">lmarena.ai/leaderboard</code>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-olive-bg py-24 text-center">
+        <div class="mx-auto max-w-[700px] px-6">
+            <h2 class="mb-4 font-serif text-[clamp(1.75rem,3.5vw,2.5rem)] font-normal leading-[1.3] text-gray-900">Choose the best-fit AI model with flexibility</h2>
+            <p class="mb-8 text-lg text-gray-600">
+                MeFlow Agent supports one-click model switching for the optimal reasoning engine by scenario.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="https://meflow3.prod.milvzn.com/dashboard" target="_blank" class="inline-flex items-center justify-center rounded-md border border-transparent bg-olive px-7 py-3.5 text-base font-medium text-white transition hover:bg-olive-dark hover:border-olive-dark">Get Started</a>
+                <a href="en/index.html" class="inline-flex items-center justify-center rounded-md border border-gray-300 bg-transparent px-7 py-3.5 text-base font-medium text-gray-700 transition hover:bg-gray-100 hover:border-gray-400">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 bg-white py-16">
+        <div class="mx-auto max-w-[1200px] px-6">
+            <div class="mb-12 grid gap-12 lg:grid-cols-[1.5fr_3fr]">
+                <div class="max-w-[280px]">
+                    <a href="en/index.html" class="mb-4 flex items-center gap-3 text-[1.25rem] font-semibold text-gray-900">
+                        <svg class="h-8 w-8" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="32" height="32" rx="8" fill="#5c6b50" />
+                            <path d="M8 16L14 10L20 16L14 22L8 16Z" fill="white" />
+                            <path d="M14 16L20 10L26 16L20 22L14 16Z" fill="white" fill-opacity="0.6" />
+                        </svg>
+                        <span>MeFlow</span>
+                    </a>
+                    <p class="text-sm text-gray-500">AI-native contract lifecycle management platform</p>
+                </div>
+                <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
+                    <div>
+                        <h4 class="mb-4 text-sm font-semibold text-gray-900">Product</h4>
+                        <a href="en/index.html#product-intro" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">Product</a>
+                        <a href="en/index.html#capability-matrix" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">Capabilities</a>
+                        <a href="en/index.html#tech-advantages" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">Tech Advantage</a>
+                        <a href="en/index.html#core-value" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">Core Value</a>
+                    </div>
+                    <div>
+                        <h4 class="mb-4 text-sm font-semibold text-gray-900">Technology</h4>
+                        <a href="en/ai-native-system.html" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">AI-native System</a>
+                        <a href="en/architecture.html" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">Architecture</a>
+                        <a href="en/sota-models.html" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">SOTA Models</a>
+                        <a href="en/tools-ecosystem.html" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">Tooling Ecosystem</a>
+                        <a href="en/context-engineering.html" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">Context Engineering</a>
+                        <a href="en/enterprise-security.html" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">Enterprise Security</a>
+                    </div>
+                    <div>
+                        <h4 class="mb-4 text-sm font-semibold text-gray-900">Company</h4>
+                        <a href="#" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">About</a>
+                        <a href="#" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">Contact</a>
+                    </div>
+                    <div>
+                        <h4 class="mb-4 text-sm font-semibold text-gray-900">Legal</h4>
+                        <a href="#" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">Privacy</a>
+                        <a href="#" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">Terms</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-sm text-gray-400">
+                <p>&copy; 2024 PowerLaw.AI. All rights reserved</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

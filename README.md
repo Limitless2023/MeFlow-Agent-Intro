@@ -1,6 +1,7 @@
 # MeFlow Agent - 产品官网
 
 > AI原生合同生命周期管理平台 - 像对话一样管理合同
+<!--\n  文档说明：本 README 面向初学者，包含项目结构与运行方式。\n-->
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-success)](https://limitless2023.github.io/MeFlow-Agent-Intro/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -87,45 +88,38 @@ MeFlow Agent 产品官网是一个**全面的多页面展示平台**，通过精
 
 ---
 
-## 📁 项目结构
+## 📁 项目结构（React + Vite）
+
+如需快速理解目录结构，请先阅读 `STRUCTURE.md`。
 
 ```
 MeFlow-Agent-Intro/
-├── index.html                      # 🏠 主页（产品介绍）
-├── product-intro.html              # 🎬 产品演示动画页
-├── agents.md                       # 📖 Agent系统架构文档
-│
-├── 能力详情页/
-│   ├── intelligent-drafting.html       # ✍️ 智能起草
-│   ├── intelligent-review.html         # ✅ 智能审核
-│   ├── intelligent-negotiation.html    # 🤝 智能谈判
-│   ├── intelligent-performance.html    # 📋 智能履约
-│   ├── intelligent-analytics.html      # 📊 智能分析
-│   └── knowledge-management.html       # 📚 知识管理
-│
-├── 技术详情页/
-│   ├── architecture.html               # 🏗️ 技术架构
-│   ├── sota-models.html                # 🧠 SOTA模型
-│   ├── ai-native-system.html           # 🤖 AI原生系统
-│   ├── context-engineering.html        # 🔍 上下文工程
-│   ├── tools-ecosystem.html            # 🔧 工具生态
-│   └── enterprise-security.html        # 🔒 企业安全
-│
-├── 核心资源/
-│   ├── styles.css                  # 全局样式文件
-│   ├── particles.js                # 粒子动画库
-│   └── .nojekyll                   # GitHub Pages配置
-│
-├── assets/                         # 素材资源
-│   └── models/                     # AI模型logo
-│       ├── deepseek-logo.png
-│       ├── kimi-logo.png
-│       ├── qwen-logo.png
-│       └── 智谱logo.png
-│
-├── backup/                         # 备份文件
-├── original-pages/                 # 原始参考页面
-└── _old_meflow_website/            # 旧版本存档
+├── index.html                  # Vite 入口文件（挂载 React）
+├── package.json                # 项目依赖与脚本
+├── vite.config.js              # Vite 配置
+├── src/
+│   ├── App.jsx                 # 路由入口
+│   ├── main.jsx                # React 启动文件
+│   ├── routes.jsx              # 页面路由配置
+│   ├── components/
+│   │   └── PageRenderer.jsx    # HTML 渲染器（保留原文案）
+│   ├── hooks/
+│   │   ├── usePageMeta.js       # 标题/描述更新
+│   │   └── usePageInteractions.js # 菜单与锚点交互
+│   ├── styles/
+│   │   ├── base.css            # 原全局样式（迁移）
+│   │   └── app.css             # React 容器样式
+│   └── content/
+│       ├── index.html          # 原主页内容（保留）
+│       ├── intelligent-*.html  # 能力详情页内容
+│       └── *.html              # 技术详情页内容
+├── public/
+│   └── assets/models/           # AI 模型 logo 资源
+├── agents.md                    # Agent 系统架构文档
+├── assets/                      # 旧版资源（保留）
+├── backup/                      # 备份文件
+├── original-pages/              # 原始参考页面
+└── _old_meflow_website/         # 旧版本存档
 ```
 
 ### 页面统计
@@ -136,6 +130,8 @@ MeFlow-Agent-Intro/
 ---
 
 ## 🎨 设计规范
+
+当前设计系统已迁移到 Tailwind 配置层，主题色与字体在 `tailwind.config.js` 统一维护；基础样式在 `src/styles/base.css`，组件/布局样式集中在 `src/styles/components.css`，后续可以逐步用 `@apply`/工具类替换。
 
 ### 配色方案
 
@@ -162,31 +158,36 @@ MeFlow-Agent-Intro/
 
 ---
 
-## 🚀 快速开始
+## 🚀 快速开始（React + Vite）
 
-### 本地预览
+### 本地开发
 
 ```bash
-# 克隆仓库
-git clone https://github.com/Limitless2023/MeFlow-Agent-Intro.git
-
 # 进入目录
 cd MeFlow-Agent-Intro
 
-# 使用浏览器打开
-open index.html
-# 或
-python -m http.server 8000
-# 然后访问 http://localhost:8000
+# 安装依赖
+npm install
+
+# 启动本地开发服务器
+npm run dev
 ```
 
-### 部署到 GitHub Pages
+### 构建与预览
 
-项目已配置 GitHub Pages 自动部署：
+```bash
+# 生产构建
+npm run build
 
-1. 推送到 `main` 分支
-2. GitHub Actions 自动构建
-3. 访问 https://limitless2023.github.io/MeFlow-Agent-Intro/
+# 本地预览构建产物
+npm run preview
+```
+
+### 重要说明
+
+- 页面 HTML 内容已保留在 `src/content`，通过 `?raw` 加载并渲染。
+- 全站公共样式在 `src/styles/base.css`，页面自带样式仍保持原样。
+- 页面路由配置集中在 `src/routes.jsx`，方便后续新增页面。
 
 ---
 

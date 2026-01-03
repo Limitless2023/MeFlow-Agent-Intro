@@ -1,0 +1,316 @@
+<!--
+  页面内容源文件：
+  - 仅保留原始 HTML 结构与文案
+  - 由 React 通过 ?raw 加载并渲染
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全新AI原生系统 - MeFlow Agent</title>
+    <meta name="description" content="MeFlow Agent AI原生架构 - 从零重构系统底座，让系统为AI而生">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="fixed inset-x-0 top-0 z-[1000] border-b border-gray-200/80 bg-cream/90 backdrop-blur-[10px]">
+        <div class="relative mx-auto flex max-w-[1200px] items-center justify-between px-6 py-4">
+            <a href="index.html" class="flex items-center gap-3 text-[1.25rem] font-semibold text-gray-900">
+                <svg class="h-8 w-8" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="32" rx="8" fill="#5c6b50" />
+                    <path d="M8 16L14 10L20 16L14 22L8 16Z" fill="white" />
+                    <path d="M14 16L20 10L26 16L20 22L14 16Z" fill="white" fill-opacity="0.6" />
+                </svg>
+                <span>MeFlow</span>
+            </a>
+            <div class="nav-links absolute left-0 right-0 top-full hidden flex-col items-stretch gap-4 border-b border-gray-200 bg-white p-6 shadow-lg md:static md:flex md:flex-row md:items-center md:gap-8 md:border-0 md:bg-transparent md:p-0 md:shadow-none">
+                <a href="index.html#product-intro" class="text-[0.9375rem] text-gray-600 transition-colors hover:text-gray-900">产品介绍</a>
+                <a href="index.html#capability-matrix" class="text-[0.9375rem] text-gray-600 transition-colors hover:text-gray-900">能力矩阵</a>
+                <a href="index.html#tech-advantages" class="text-[0.9375rem] text-gray-600 transition-colors hover:text-gray-900">技术优势</a>
+                <a href="index.html#core-value" class="text-[0.9375rem] text-gray-600 transition-colors hover:text-gray-900">核心价值</a>
+                <a href="en/ai-native-system.html" class="text-[0.9375rem] text-gray-600 transition-colors hover:text-gray-900">EN</a>
+                <a href="https://meflow3.prod.milvzn.com/dashboard" target="_blank" class="btn inline-flex items-center justify-center rounded-md border border-transparent bg-olive px-5 py-2.5 text-[0.9375rem] font-medium text-white transition hover:bg-olive-dark">开始使用</a>
+            </div>
+            <button class="mobile-menu-btn rounded-md p-2 text-gray-700 md:hidden" aria-label="Menu">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- AI Native System Page -->
+    <section class="bg-cream pb-16 pt-32">
+        <div class="mx-auto max-w-[1200px] px-6">
+            <a href="index.html#tech-advantages" class="mb-8 inline-flex items-center gap-2 text-[0.9375rem] font-medium text-gray-600 transition hover:text-olive hover:underline">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                </svg>
+                返回
+            </a>
+
+            <header class="mb-12 text-center">
+                <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-olive-light px-4 py-2 text-sm font-medium text-olive">
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+                    </svg>
+                    AI原生架构
+                </div>
+                <h1 class="font-serif text-[clamp(2rem,3vw,2.75rem)] font-medium mb-4 leading-[1.3] text-gray-900">
+                    <span class="text-olive italic">全新AI原生系统</span>
+                </h1>
+                <p class="mx-auto mt-4 max-w-[900px] text-[1.0625rem] text-gray-600 leading-[1.8]">
+                    从零重构系统底座，让系统原生支持<strong>上下文可读</strong>、<strong>规则可解析</strong>、<strong>动作可执行</strong>。不是在旧系统上打补丁，而是为AI而生的全新架构。
+                </p>
+            </header>
+
+            <!-- Section 1: 传统系统的封闭困境 (Text Left, Visual Right) -->
+            <div class="mb-16 grid grid-cols-1 items-center gap-8 rounded-xl border border-gray-200 bg-white p-8 shadow-lg md:grid-cols-2 md:p-8">
+                <div class="section-content flex flex-col gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="flex h-14 w-14 items-center justify-center rounded-lg bg-[linear-gradient(135deg,var(--color-olive-light)_0%,var(--color-olive-bg)_100%)] text-olive">
+                            <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            </svg>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-900">传统系统的封闭困境</h2>
+                    </div>
+                    <div class="flex flex-col gap-4">
+                        <div class="flex flex-col gap-3">
+                            <div class="flex items-center gap-3 text-[1.125rem] font-semibold text-gray-800 before:h-2 before:w-2 before:rounded-full before:bg-olive before:content-['']">插件式AI有其价值</div>
+                            <div class="pl-6 text-[0.9375rem] leading-[1.7] text-gray-600">
+                                对于已有系统，通过AI插件可以获得一定AI能力<br>
+                                适合系统积重难返、无法大规模重构的场景
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <div class="flex items-center gap-3 text-[1.125rem] font-semibold text-gray-800 before:h-2 before:w-2 before:rounded-full before:bg-olive before:content-['']">但受限于系统架构</div>
+                            <div class="pl-6 text-[0.9375rem] leading-[1.7] text-gray-600">
+                                AI无法深入理解系统上下文、业务规则和数据结构<br>
+                                只能在表层提供辅助，难以真正参与核心业务流程
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <div class="flex items-center gap-3 text-[1.125rem] font-semibold text-gray-800 before:h-2 before:w-2 before:rounded-full before:bg-olive before:content-['']">难以突破能力天花板</div>
+                            <div class="pl-6 text-[0.9375rem] leading-[1.7] text-gray-600">
+                                插件方式治标不治本，系统底层不支持AI原生能力<br>
+                                无法实现深度自动化和智能化，AI能力始终受限
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-visual flex min-h-[400px] items-center justify-center rounded-xl bg-[linear-gradient(135deg,var(--color-olive-bg)_0%,var(--color-cream)_100%)] p-8">
+                    <div class="relative h-[400px] w-full max-w-[500px]">
+                        <!-- System Box -->
+                        <div class="absolute left-1/2 top-1/2 z-[2] flex h-[200px] w-[200px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-lg border-[3px] border-gray-500 bg-[linear-gradient(135deg,var(--color-gray-300)_0%,var(--color-gray-400)_100%)] shadow-[0_8px_24px_rgba(0,0,0,0.15)]">
+                            <div class="absolute right-2 top-2 rounded bg-gray-500 px-2 py-1 text-[0.625rem] font-semibold text-white opacity-80">单点智能</div>
+                            <svg class="h-12 w-12 text-gray-600 animate-lock-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            </svg>
+                            <div class="mt-2 text-[0.875rem] font-semibold text-gray-700">传统系统</div>
+                        </div>
+
+                        <!-- Connection Lines -->
+                        <div class="absolute left-[20%] top-[40%] h-0.5 w-[25%] bg-[linear-gradient(to_right,var(--color-olive-light),transparent)] opacity-40 animate-connection-pulse"></div>
+                        <div class="absolute right-[20%] top-[70%] h-0.5 w-[25%] bg-[linear-gradient(to_right,var(--color-olive-light),transparent)] opacity-40 animate-connection-pulse [animation-delay:0.5s]"></div>
+
+                        <!-- AI Plugin 1: 智能助手 -->
+                        <div class="absolute left-[-5%] top-[25%] flex h-[90px] w-[90px] flex-col items-center justify-center gap-1 rounded-md border-2 border-dashed border-olive bg-[linear-gradient(135deg,var(--color-olive-light)_0%,var(--color-olive-bg)_100%)] shadow-[0_2px_8px_rgba(92,107,80,0.15)] animate-plugin-float-1">
+                            <div class="absolute -right-2 -top-2 rounded bg-olive-light px-2 py-1 text-[0.625rem] font-semibold text-olive animate-button-pulse">AI插件</div>
+                            <svg class="h-8 w-8 text-olive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+                            </svg>
+                            <div class="text-center text-[0.75rem] font-semibold leading-[1.2] text-olive">智能助手</div>
+                        </div>
+
+                        <!-- AI Plugin 2: 文档分析 -->
+                        <div class="absolute right-[-5%] top-[60%] flex h-[90px] w-[90px] flex-col items-center justify-center gap-1 rounded-md border-2 border-dashed border-olive bg-[linear-gradient(135deg,var(--color-olive-light)_0%,var(--color-olive-bg)_100%)] shadow-[0_2px_8px_rgba(92,107,80,0.15)] animate-plugin-float-2">
+                            <div class="absolute -right-2 -top-2 rounded bg-olive-light px-2 py-1 text-[0.625rem] font-semibold text-olive animate-button-pulse">AI插件</div>
+                            <svg class="h-8 w-8 text-olive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                            <div class="text-center text-[0.75rem] font-semibold leading-[1.2] text-olive">文档分析</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: AI原生架构 (Text Right, Visual Left) -->
+            <div class="mb-16 grid grid-cols-1 items-center gap-8 rounded-xl border border-gray-200 bg-white p-8 shadow-lg md:grid-cols-2 md:p-8 md:[&>.section-content]:order-2 md:[&>.section-visual]:order-1">
+                <div class="section-content flex flex-col gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="flex h-14 w-14 items-center justify-center rounded-lg bg-[linear-gradient(135deg,var(--color-olive-light)_0%,var(--color-olive-bg)_100%)] text-olive">
+                            <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+                            </svg>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-900">AI原生架构 — 让系统为AI而生</h2>
+                    </div>
+                    <div class="flex flex-col gap-4">
+                        <div class="flex flex-col gap-3">
+                            <div class="flex items-center gap-3 text-[1.125rem] font-semibold text-gray-800 before:h-2 before:w-2 before:rounded-full before:bg-olive before:content-['']">系统可读 — 让AI能理解</div>
+                            <div class="pl-6 text-[0.9375rem] leading-[1.7] text-gray-600">
+                                页面、表单、流程、制度等均可文档化<br>
+                                纳入AI上下文，让Agent真正理解业务场景
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <div class="flex items-center gap-3 text-[1.125rem] font-semibold text-gray-800 before:h-2 before:w-2 before:rounded-full before:bg-olive before:content-['']">系统可调用 — 让AI能执行</div>
+                            <div class="pl-6 text-[0.9375rem] leading-[1.7] text-gray-600">
+                                系统功能封装为40+可调用工具<br>
+                                Agent可自主执行业务操作，真正参与工作流程
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <div class="flex items-center gap-3 text-[1.125rem] font-semibold text-gray-800 before:h-2 before:w-2 before:rounded-full before:bg-olive before:content-['']">系统可监控 — 让AI可管控</div>
+                            <div class="pl-6 text-[0.9375rem] leading-[1.7] text-gray-600">
+                                异常自动触发风险处理机制<br>
+                                全程可观测、可审计、可回溯，确保安全可控
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-visual flex min-h-[400px] items-center justify-center rounded-xl bg-[linear-gradient(135deg,var(--color-olive-bg)_0%,var(--color-cream)_100%)] p-8">
+                    <div class="relative h-[400px] w-full max-w-[500px]">
+                        <!-- AI Agent Center -->
+                        <div class="absolute left-1/2 top-[6%] z-10 flex h-[110px] w-[110px] -translate-x-1/2 items-center justify-center rounded-full bg-[linear-gradient(135deg,var(--color-olive)_0%,#4a5a40_100%)] text-center text-[0.875rem] font-semibold leading-[1.3] text-white shadow-[0_0_40px_rgba(92,107,80,0.6),0_0_80px_rgba(92,107,80,0.3)] animate-energy-pulse before:absolute before:h-[140%] before:w-[140%] before:rounded-full before:bg-[radial-gradient(circle,rgba(92,107,80,0.3)_0%,transparent_70%)] before:content-[''] before:animate-glow-expand">
+                            AI<br>Agent
+                        </div>
+
+                        <!-- Energy Beams from AI to Layers -->
+                        <div class="absolute left-1/2 top-[12%] z-[1] h-[88%] w-[3px] -translate-x-1/2 bg-[linear-gradient(to_bottom,rgba(92,107,80,0.8)_0%,rgba(92,107,80,0.5)_30%,rgba(92,107,80,0.4)_60%,rgba(92,107,80,0.2)_90%,rgba(92,107,80,0.1)_100%)] opacity-0 animate-beam-shoot [animation-delay:0.5s]"></div>
+                        <div class="absolute left-1/2 top-[12%] z-[1] h-[88%] w-[3px] -translate-x-1/2 bg-[linear-gradient(to_bottom,rgba(92,107,80,0.8)_0%,rgba(92,107,80,0.5)_30%,rgba(92,107,80,0.4)_60%,rgba(92,107,80,0.2)_90%,rgba(92,107,80,0.1)_100%)] opacity-0 animate-beam-shoot [animation-delay:1.5s]"></div>
+                        <div class="absolute left-1/2 top-[12%] z-[1] h-[88%] w-[3px] -translate-x-1/2 bg-[linear-gradient(to_bottom,rgba(92,107,80,0.8)_0%,rgba(92,107,80,0.5)_30%,rgba(92,107,80,0.4)_60%,rgba(92,107,80,0.2)_90%,rgba(92,107,80,0.1)_100%)] opacity-0 animate-beam-shoot [animation-delay:2.5s]"></div>
+
+                        <!-- Energy Particles flowing along beams -->
+                        <div class="absolute left-1/2 z-[2] h-2 w-2 -translate-x-1/2 rounded-full bg-olive opacity-0 animate-particle-flow [animation-delay:1s]"></div>
+                        <div class="absolute left-1/2 z-[2] h-2 w-2 -translate-x-1/2 rounded-full bg-olive opacity-0 animate-particle-flow [animation-delay:2s]"></div>
+                        <div class="absolute left-1/2 z-[2] h-2 w-2 -translate-x-1/2 rounded-full bg-olive opacity-0 animate-particle-flow [animation-delay:3s]"></div>
+
+                        <!-- Layer 1: 系统可读 -->
+                        <div class="absolute left-1/2 top-[32%] flex h-[70px] w-[85%] -translate-x-1/2 items-center justify-around rounded-lg border-2 border-gray-300 bg-[linear-gradient(135deg,var(--color-gray-100)_0%,var(--color-white)_100%)] px-6 transition-all duration-700 animate-layer-energize [animation-delay:1s]">
+                            <svg class="h-9 w-9 animate-icon-glow [animation-delay:1s]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                            </svg>
+                            <span class="text-[0.875rem] font-semibold animate-label-glow [animation-delay:1s]">系统可读</span>
+                            <svg class="h-9 w-9 animate-icon-glow [animation-delay:1s]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                            <svg class="h-9 w-9 animate-icon-glow [animation-delay:1s]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                            </svg>
+                        </div>
+
+                        <!-- Layer 2: 系统可调用 -->
+                        <div class="absolute left-1/2 top-[50%] flex h-[70px] w-[85%] -translate-x-1/2 items-center justify-around rounded-lg border-2 border-gray-300 bg-[linear-gradient(135deg,var(--color-gray-100)_0%,var(--color-white)_100%)] px-6 transition-all duration-700 animate-layer-energize [animation-delay:2s]">
+                            <svg class="h-9 w-9 animate-icon-glow [animation-delay:2s]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
+                            </svg>
+                            <span class="text-[0.875rem] font-semibold animate-label-glow [animation-delay:2s]">系统可调用</span>
+                            <svg class="h-9 w-9 animate-icon-glow [animation-delay:2s]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            <svg class="h-9 w-9 animate-icon-glow [animation-delay:2s]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+
+                        <!-- Layer 3: 系统可监控 -->
+                        <div class="absolute left-1/2 top-[68%] flex h-[70px] w-[85%] -translate-x-1/2 items-center justify-around rounded-lg border-2 border-gray-300 bg-[linear-gradient(135deg,var(--color-gray-100)_0%,var(--color-white)_100%)] px-6 transition-all duration-700 animate-layer-energize [animation-delay:3s]">
+                            <svg class="h-9 w-9 animate-icon-glow [animation-delay:3s]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                            </svg>
+                            <span class="text-[0.875rem] font-semibold animate-label-glow [animation-delay:3s]">系统可监控</span>
+                            <svg class="h-9 w-9 animate-icon-glow [animation-delay:3s]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                            <svg class="h-9 w-9 animate-icon-glow [animation-delay:3s]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                        </div>
+
+                        <!-- MeFlow System Foundation -->
+                        <div class="absolute left-1/2 bottom-[-3%] z-[5] -translate-x-1/2 rounded-lg border-2 border-olive bg-[linear-gradient(135deg,var(--color-olive)_0%,#4a5a40_100%)] px-8 py-3 text-[1rem] font-semibold tracking-[0.5px] text-white shadow-[0_4px_12px_rgba(92,107,80,0.3),0_0_30px_rgba(92,107,80,0.2)] animate-foundation-glow">
+                            MeFlow AI原生系统
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-olive-bg py-24 text-center">
+        <div class="mx-auto max-w-[700px] px-6">
+            <h2 class="mb-4 font-serif text-[clamp(1.75rem,3.5vw,2.5rem)] font-normal leading-[1.3] text-gray-900">体验AI原生系统的强大能力</h2>
+            <p class="mb-8 text-lg text-gray-600">
+                从零重构的系统底座，让AI真正参与业务流程
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="https://meflow3.prod.milvzn.com/dashboard" target="_blank" class="inline-flex items-center justify-center rounded-md border border-transparent bg-olive px-7 py-3.5 text-base font-medium text-white transition hover:bg-olive-dark hover:border-olive-dark">立即体验</a>
+                <a href="index.html" class="inline-flex items-center justify-center rounded-md border border-gray-300 bg-transparent px-7 py-3.5 text-base font-medium text-gray-700 transition hover:bg-gray-100 hover:border-gray-400">了解更多</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 bg-white py-16">
+        <div class="mx-auto max-w-[1200px] px-6">
+            <div class="mb-12 grid gap-8 lg:grid-cols-[1.5fr_3fr]">
+                <div class="max-w-[280px]">
+                    <a href="index.html" class="mb-4 flex items-center gap-3 text-[1.25rem] font-semibold text-gray-900">
+                        <svg class="h-8 w-8" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="32" height="32" rx="8" fill="#5c6b50" />
+                            <path d="M8 16L14 10L20 16L14 22L8 16Z" fill="white" />
+                            <path d="M14 16L20 10L26 16L20 22L14 16Z" fill="white" fill-opacity="0.6" />
+                        </svg>
+                        <span>MeFlow</span>
+                    </a>
+                    <p class="text-sm text-gray-500">AI原生合同生命周期管理平台</p>
+                </div>
+                <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
+                    <div>
+                        <h4 class="mb-4 text-sm font-semibold text-gray-900">产品</h4>
+                        <a href="index.html#product-intro" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">产品介绍</a>
+                        <a href="index.html#capability-matrix" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">能力矩阵</a>
+                        <a href="index.html#tech-advantages" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">技术优势</a>
+                        <a href="index.html#core-value" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">核心价值</a>
+                    </div>
+                    <div>
+                        <h4 class="mb-4 text-sm font-semibold text-gray-900">技术</h4>
+                        <a href="sota-models.html" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">SOTA模型</a>
+                        <a href="context-engineering.html" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">智能上下文</a>
+                        <a href="tools-ecosystem.html" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">工具生态</a>
+                        <a href="ai-native-system.html" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">AI原生系统</a>
+                        <a href="enterprise-security.html" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">企业安全</a>
+                    </div>
+                    <div>
+                        <h4 class="mb-4 text-sm font-semibold text-gray-900">公司</h4>
+                        <a href="#" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">关于我们</a>
+                        <a href="#" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">联系我们</a>
+                    </div>
+                    <div>
+                        <h4 class="mb-4 text-sm font-semibold text-gray-900">法律</h4>
+                        <a href="#" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">隐私政策</a>
+                        <a href="#" class="block py-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900">服务条款</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-sm text-gray-400">
+                <p>&copy; 2024 幂律智能 PowerLaw.AI. 保留所有权利</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

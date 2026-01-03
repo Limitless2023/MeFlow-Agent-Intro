@@ -1,0 +1,12 @@
+/*
+  应用级别样式：用于 React 容器本身的轻量调整。
+  站点主体视觉仍由 base.css 和各页面内联样式控制。
+*/
+
+#root {
+  min-height: 100vh;
+}
+
+.page-shell {
+  min-height: 100vh;
+}
